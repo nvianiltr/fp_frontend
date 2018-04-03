@@ -1,10 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SignupComponent } from './signup/signup.component';
@@ -17,29 +12,19 @@ import { RecipesComponent } from './recipes/recipes.component';
 import { ArticlesComponent } from './articles/articles.component';
 
 
+const routes: Routes = [
+  	{ path: '', component: HomeComponent },
+	{ path: 'login', component: LoginComponent },
+	{ path: 'signup', component: SignupComponent },
+  	{ path: 'search', component: SearchComponent },
+  	{ path: 'articles', component: ArticlesComponent },
+  	{ path: 'article/:id', component: ArticleDetailComponent },
+  	{ path: 'recipes', component: RecipesComponent },
+   	{ path: 'recipe/:id', component: RecipeDetailComponent }
+]
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    NavbarComponent,
-    SignupComponent,
-    HomeComponent,
-    FooterComponent,
-    SearchComponent,
-    RecipeDetailComponent,
-    ArticleDetailComponent,
-    RecipesComponent,
-    ArticlesComponent
-  ],
-  imports: [
-    NgbModule.forRoot(),
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	imports: [ RouterModule.forRoot(routes) ],
+	exports: [ RouterModule ]
 })
-export class AppModule { }
-
-
+export class AppRoutingModule { }
