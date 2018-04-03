@@ -14,13 +14,13 @@ import { ArticlesComponent } from './articles/articles.component';
 
 const routes: Routes = [
   	{ path: '', component: HomeComponent },
-	{ path: 'login', component: LoginComponent },
-	{ path: 'signup', component: SignupComponent },
+	  { path: 'login', component: LoginComponent },
+	  { path: 'signup', component: SignupComponent },
   	{ path: 'search', component: SearchComponent },
   	{ path: 'articles', component: ArticlesComponent },
-  	{ path: 'article/:id', component: ArticleDetailComponent },
+  	{ path: 'article/1', component: ArticleDetailComponent },
   	{ path: 'recipes', component: RecipesComponent },
-   	{ path: 'recipe/:id', component: RecipeDetailComponent }
+   	{ path: 'recipe/1', component: RecipeDetailComponent }
 ]
 
 @NgModule({

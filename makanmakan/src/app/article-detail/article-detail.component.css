@@ -1,0 +1,36 @@
+*{
+	font-family: 'Montserrat', sans-serif
+}
+
+/*Article*/
+
+#article{
+	margin-top:100px;
+}
+
+#article h1{
+	font-weight: 700;
+}
+
+#article h6 span{
+	color: #ff6200;
+}
+
+#article img{
+	max-width: 52vw;
+	height: auto;
+}
+
+#article .images{
+	background-image:url(../../assets/pic1.jpg);
+	background-size: 120vh;
+	background-position: center;
+	background-repeat: no-repeat;
+
+	min-height: 50vh;
+}
+
+.tags span:hover{
+	color:#ff6200;
+	cursor: pointer;
+}

@@ -1,0 +1,74 @@
+*{
+	font-family: 'Montserrat', sans-serif
+}
+
+.navbar {
+   background-color: #ff6200 !important;
+}
+
+.navbar-brand{
+	font-family: 'Righteous', cursive;
+	color: white;
+}
+
+.nav-link{
+	font-size:20px;
+	margin: 0 5px;
+	font-weight: 500;
+}
+
+.container{
+	margin-top:10vh; 
+}
+
+form button{
+	background-color: #FF6200 !important;
+	width: 7.5vw;
+	font-weight: 700 !important;
+	color: white !important;
+	border: 2px solid white;
+}
+
+form button:hover{
+	color: #FF6200 !important;
+	background-color: white !important;
+}
+
+
+
+.dropdown-menu.columns-3 {
+	min-width: 600px;
+}
+.dropdown-menu li a {
+	padding: 5px 15px;
+	font-weight: 300;
+}
+.multi-column-dropdown {
+	list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+.multi-column-dropdown li a {
+	display: block;
+	clear: both;
+	line-height: 1.428571429;
+	color: #333;
+	white-space: normal;
+}
+.multi-column-dropdown li a:hover {
+	text-decoration: none;
+	color: white;
+	background-color: #ff6200;
+}
+
+.topic{
+	color: #ff6200;
+}
+ 
+@media (max-width: 767px) {
+	.dropdown-menu.multi-column {
+		min-width: 240px !important;
+		overflow-x: hidden;
+	}
+}
+

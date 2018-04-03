@@ -1,0 +1,63 @@
+*{
+	font-family: 'Montserrat', sans-serif
+}
+
+/*Part 1*/
+.jumbotron{
+	background-image:linear-gradient(rgba(255,98,0,.5), rgba(255,98,0,.5)),url(../../assets/pic1.jpg);
+	background-size: cover;
+	min-height: 100vh;
+	background-position: center;
+	padding-top: 20vh;
+	margin-bottom: 0;
+}
+
+#sign-up{
+	padding-top: 10vh;
+}
+
+.jumbotron .container-fluid{
+	text-align: center;
+}
+
+.jumbotron h1{
+	font-family: 'Righteous', cursive;
+	color: white;
+	font-size: 100px;
+}
+
+.form-group, .form-row{
+	text-align: left;
+}
+
+.form-row{
+	margin-bottom: 1vh;
+}
+
+.form-group label,.form-row .col label{
+	text-align:left;
+	color: white;
+}
+
+.form-group input{
+	width: 45vw;
+}
+
+form button{
+	background-color: #ff6200 !important;
+	color: white !important;
+	border: none !important;
+}
+
+form button:hover{
+	color:#ff6200 !important;
+}
+
+p{
+	margin-top: 2.5vh;
+	color: white;
+}
+
+p span{
+	font-weight: 700;
+}
