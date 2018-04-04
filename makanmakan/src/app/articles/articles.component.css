@@ -14,6 +14,16 @@
 	text-align: center;
 }
 
+
+ul {
+	list-style:none;
+  
+}
+img {
+	width: 25vh;
+	height: 15vh;
+}
+
 .article-food .article-food-write{
 	margin: 0 10px !important;
 	padding: 0;
