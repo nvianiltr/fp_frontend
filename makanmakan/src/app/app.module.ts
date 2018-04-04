@@ -17,6 +17,8 @@ import { ArticleDetailComponent } from './article-detail/article-detail.componen
 import { RecipesComponent } from './recipes/recipes.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { ArticleService } from './article.service';
+import { CreateArticleComponent } from './create-article/create-article.component';
+import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { ArticleService } from './article.service';
     RecipeDetailComponent,
     ArticleDetailComponent,
     RecipesComponent,
-    ArticlesComponent
+    ArticlesComponent,
+    CreateArticleComponent,
+    CreateRecipeComponent
   ],
   imports: [
     NgbModule.forRoot(),

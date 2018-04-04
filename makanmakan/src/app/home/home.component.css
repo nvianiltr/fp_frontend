@@ -10,9 +10,10 @@
 .jumbotron{
 	background-image:linear-gradient(rgba(255,98,0,.5), rgba(255,98,0,.5)),url(../../assets/pic1.jpg);
 	background-size: cover;
-	height: 75vh;
+	height: 95.5vh;
 	background-position: center;
-	padding-top: 20vh;
+	padding-top: 30vh;
+	margin-bottom: 0;
 }
 
 .jumbotron .container-fluid{
@@ -55,7 +56,7 @@ form button:hover{
 
 
 
-/*Part 2*/
+/*Part 2
 #trending-container div div h2{
 	color:#FF6200;
 	font-weight: 700;
@@ -93,8 +94,8 @@ form button:hover{
 	color: black;
 	font-weight: 700;
 }
-
-/*Part 3*/
+/*
+/*Part 3
 #newest-container div div h2{
 	color:#FF6200;
 	font-weight: 700;
@@ -131,9 +132,9 @@ form button:hover{
 	text-align: center;
 	color: black;
 	font-weight: 700;
-}
+}*/
 
-/*Part 4*/
+/*Part 4
 #article-container div div h2{
 	color:#FF6200;
 	font-weight: 700;
@@ -171,4 +172,4 @@ form button:hover{
 	color: black;
 	font-weight: 700;
 	padding: 0 10px;
-}
+}*/

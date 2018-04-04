@@ -36,8 +36,12 @@ form button:hover{
 
 
 
+.dropdown-menu{
+	background-color:rgba(255, 255, 255, 0.9);
+}
+
 .dropdown-menu.columns-3 {
-	min-width: 600px;
+	width: 750px;
 }
 .dropdown-menu li a {
 	padding: 5px 15px;
@@ -51,7 +55,7 @@ form button:hover{
 .multi-column-dropdown li a {
 	display: block;
 	clear: both;
-	line-height: 1.428571429;
+
 	color: #333;
 	white-space: normal;
 }
@@ -63,6 +67,16 @@ form button:hover{
 
 .topic{
 	color: #ff6200;
+}
+
+#showAll{
+	text-align: center;
+}
+
+.showAll a{
+	color:#ff6200;
+	font-weight: 700 !important;
+	font-size: 25px;
 }
  
 @media (max-width: 767px) {
