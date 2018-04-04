@@ -10,6 +10,9 @@ import { SearchComponent } from './search/search.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
 import { RecipesComponent } from './recipes/recipes.component';
+import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
+import { CreateArticleComponent } from './create-article/create-article.component';
+
 
 import { ArticlesComponent } from './articles/articles.component';
 
@@ -22,7 +25,9 @@ const routes: Routes = [
   	{ path: 'articles', component: ArticlesComponent },
   	{ path: 'article/1', component: ArticleDetailComponent },
   	{ path: 'recipes', component: RecipesComponent },
-   	{ path: 'recipe/1', component: RecipeDetailComponent }
+   	{ path: 'recipe/1', component: RecipeDetailComponent },
+    { path: 'create/article', component: CreateArticleComponent },
+    { path: 'create/recipe', component: CreateRecipeComponent },
 ]
 
 @NgModule({

@@ -1,3 +1,42 @@
-.{
-	width: 100%;
+.container{
+	margin-top:10vh;
+	margin-bottom: 10vh;
+}
+
+#article-container h1{
+	color:#FF6200;
+	font-weight: 800;
+}
+
+#article-container div div{
+	margin:0;
+	padding: 0;
+	text-align: center;
+}
+
+.article-food .article-food-write{
+	margin: 0 10px !important;
+	padding: 0;
+
+	background-image:url(../../assets/pic1.jpg);
+	background-size: 60vh;
+	background-position: center;
+	background-repeat: no-repeat;
+
+	min-height: 25vh;
+
+	transition: background-size 0.25s;
+}
+
+.article-food:hover .article-food-write,
+.article-food:focus .article-food-write {
+	background-size: 75vh;
+}
+
+.article-food h3{
+	margin-top: 2vh;
+	text-align: center;
+	color: black;
+	font-weight: 700;
+	padding: 0 10px;
 }
