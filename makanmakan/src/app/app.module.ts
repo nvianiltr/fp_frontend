@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule }    from '@angular/common/http';
 
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -15,6 +16,7 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { ArticlesComponent } from './articles/articles.component';
+import { ArticleService } from './article.service';
 
 
 @NgModule({
@@ -35,9 +37,10 @@ import { ArticlesComponent } from './articles/articles.component';
     NgbModule.forRoot(),
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [ArticleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

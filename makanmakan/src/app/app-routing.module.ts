@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SignupComponent } from './signup/signup.component';
@@ -9,6 +10,7 @@ import { SearchComponent } from './search/search.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
 import { RecipesComponent } from './recipes/recipes.component';
+
 import { ArticlesComponent } from './articles/articles.component';
 
 
