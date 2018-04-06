@@ -46,7 +46,7 @@ import { AuthService } from './auth.service';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [ArticleService],
+  providers: [ArticleService,UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

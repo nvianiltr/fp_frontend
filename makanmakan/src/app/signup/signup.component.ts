@@ -13,6 +13,7 @@ export class SignupComponent implements OnInit {
 
   @Input() signup:Signup;
   message: String;
+  res: any = {};
 
   ngOnInit() {
   	this.signup = new Signup();  
@@ -20,13 +21,13 @@ export class SignupComponent implements OnInit {
 
   register() {
      this.userService.register(this.signup).subscribe(
-     	() => console.log('complete'),
-        err => {
-        console.error(err); alert('Login Unsuccesful');
-        },
-      () => {
-        console.log('REgister Succesful'); alert('{{res.message}}');
-      }
+     	res => {
+         this.res = res;
+         console.log('complete');
+         window.alert(this.res.message);
+       }, err => {
+        console.error(err); alert();
+        }
     );
  	}
  

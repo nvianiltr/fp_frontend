@@ -13,7 +13,7 @@ import { ArticleService } from '../article.service';
 
 export class ArticleDetailComponent implements OnInit {
 	
-  article: Article;  
+  public article: Article = {};  
   
   constructor(
     private route:ActivatedRoute,
@@ -26,10 +26,13 @@ export class ArticleDetailComponent implements OnInit {
 
   getArticle():void {
     const id = +this.route.snapshot.paramMap.get('id');
+    //console.log(id);
     this.articleService.getArticleByID(id)
-      .subscribe(article => this.article = article),
-                 error => console.log("Error :: " + error);
-      console.log(this.article);
+      .subscribe(article => {
+          this.article = article;
+          console.log(this.article.id);
+        });
+      //.subscribe(article => this.article = article);
   }
 
 
