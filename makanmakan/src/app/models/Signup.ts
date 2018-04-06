@@ -1,9 +1,9 @@
-export class Login
+export class Signup
 {	
-    email: string;
-    firstName: string;
-    lastName: string;
-    username: string;
-    password: string;
+    "firstName": string;
+    "lastName": string;
+    "username": string;
+    "email": string;
+    "password": string;
 }
 

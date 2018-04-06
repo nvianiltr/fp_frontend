@@ -19,6 +19,8 @@ import { ArticlesComponent } from './articles/articles.component';
 import { ArticleService } from './article.service';
 import { CreateArticleComponent } from './create-article/create-article.component';
 import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
+import { UserService } from './user.service';
+import { AuthService } from './auth.service';
 
 
 @NgModule({
@@ -38,13 +40,13 @@ import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
     CreateRecipeComponent
   ],
   imports: [
-    NgbModule.forRoot(),
     BrowserModule,
     FormsModule,
+    NgbModule.forRoot(),
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [ArticleService],
+  providers: [ArticleService, UserService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

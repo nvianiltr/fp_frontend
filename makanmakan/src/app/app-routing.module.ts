@@ -23,7 +23,7 @@ const routes: Routes = [
 	  { path: 'signup', component: SignupComponent },
   	{ path: 'search', component: SearchComponent },
   	{ path: 'articles', component: ArticlesComponent },
-  	{ path: 'article/1', component: ArticleDetailComponent },
+  	{ path: 'article/:id', component: ArticleDetailComponent },
   	{ path: 'recipes', component: RecipesComponent },
    	{ path: 'recipe/1', component: RecipeDetailComponent },
     { path: 'create/article', component: CreateArticleComponent },

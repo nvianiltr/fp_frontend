@@ -19,8 +19,6 @@ export class ArticlesComponent implements OnInit {
   getArticles(): void {
   	this.articleService.getArticles()
   		.subscribe(articles => { this.articles = articles });
-
-  	
   }
 
 }
