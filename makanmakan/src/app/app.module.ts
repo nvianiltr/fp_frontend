@@ -19,8 +19,14 @@ import { ArticlesComponent } from './articles/articles.component';
 import { ArticleService } from './article.service';
 import { CreateArticleComponent } from './create-article/create-article.component';
 import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
+<<<<<<< HEAD
 import { UserService } from './user.service';
 import { AuthService } from './auth.service';
+=======
+import { ArticleDetailService } from './article-detail.service';
+import { RecipeCollectionComponent } from './recipe-collection/recipe-collection.component';
+import { RecipeCollectionService } from './recipe-collection.service';
+>>>>>>> Added View For Collection
 
 
 @NgModule({
@@ -37,7 +43,8 @@ import { AuthService } from './auth.service';
     RecipesComponent,
     ArticlesComponent,
     CreateArticleComponent,
-    CreateRecipeComponent
+    CreateRecipeComponent,
+    RecipeCollectionComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +53,11 @@ import { AuthService } from './auth.service';
     HttpClientModule,
     AppRoutingModule
   ],
+<<<<<<< HEAD
   providers: [ArticleService,UserService],
+=======
+  providers: [ArticleService, ArticleDetailService, RecipeCollectionService],
+>>>>>>> Added View For Collection
   bootstrap: [AppComponent]
 })
 export class AppModule { }
