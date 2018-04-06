@@ -53,11 +53,7 @@ import { RecipeCollectionService } from './recipe-collection.service';
     HttpClientModule,
     AppRoutingModule
   ],
-<<<<<<< HEAD
-  providers: [ArticleService,UserService],
-=======
-  providers: [ArticleService, ArticleDetailService, RecipeCollectionService],
->>>>>>> Added View For Collection
+  providers: [ArticleService, ArticleDetailService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
