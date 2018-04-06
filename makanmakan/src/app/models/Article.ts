@@ -5,10 +5,8 @@ export class Article
     "title": string;
     "content":string;
     "views":any;
-    "datePosted":string;
     "dateCreated":string;
-    "isPublic":boolean;
-    "isDeleted":boolean
+    "isDeleted":boolean;
 }
 
 

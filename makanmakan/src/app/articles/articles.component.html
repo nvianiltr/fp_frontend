@@ -4,7 +4,8 @@
 <div class="row">
   	<div class="col-3 article-food" *ngFor="let article of articles ">
   		<img src="../../assets/pic1.jpg"> <br>
-      	<a routerLink="#">{{article.title}}</a>
+      	<a routerLink="/article/{{article.id}}">{{article.title}}</a>
+      	<a routerLink="#">{{ article.datePosted }}</a>
     </div>
 </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Article } from '../models/Article';
 import { ArticleService } from '../article.service';
 
@@ -9,7 +9,7 @@ import { ArticleService } from '../article.service';
 })
 export class ArticlesComponent implements OnInit {
   articles: Article[] = [];
-  
+
   constructor(private articleService: ArticleService) { }
 
   ngOnInit() {
