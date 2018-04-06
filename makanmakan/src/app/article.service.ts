@@ -27,5 +27,9 @@ export class ArticleService {
 		//	});
 	}
 
+ getArticleByID(id: number): Observable<Article> {
+    const url = `${this.articlesUrl}/${id}`;
+    return this.http.get<Article>(url).map(res => {console.log(res); return res;});
+  }
 
 }

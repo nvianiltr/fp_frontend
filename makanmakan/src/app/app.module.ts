@@ -19,6 +19,7 @@ import { ArticlesComponent } from './articles/articles.component';
 import { ArticleService } from './article.service';
 import { CreateArticleComponent } from './create-article/create-article.component';
 import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
+import { ArticleDetailService } from './article-detail.service';
 
 
 @NgModule({
@@ -44,7 +45,7 @@ import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [ArticleService],
+  providers: [ArticleService, ArticleDetailService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
