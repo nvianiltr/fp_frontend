@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Article } from '../models/Article';
 import { ArticleService } from '../article.service';
 
@@ -9,7 +9,7 @@ import { ArticleService } from '../article.service';
 })
 export class ArticlesComponent implements OnInit {
   articles: Article[] = [];
-  
+
   constructor(private articleService: ArticleService) { }
 
   ngOnInit() {
@@ -19,8 +19,7 @@ export class ArticlesComponent implements OnInit {
   getArticles(): void {
   	this.articleService.getArticles()
   		.subscribe(articles => { this.articles = articles });
-
-  	
+      console.log(this.articles);
   }
 
 }
