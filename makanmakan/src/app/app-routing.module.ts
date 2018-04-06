@@ -12,7 +12,7 @@ import { ArticleDetailComponent } from './article-detail/article-detail.componen
 import { RecipesComponent } from './recipes/recipes.component';
 import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
 import { CreateArticleComponent } from './create-article/create-article.component';
-
+import {RecipeCollectionComponent} from './recipe-collection/recipe-collection.component';
 
 import { ArticlesComponent } from './articles/articles.component';
 
@@ -28,6 +28,7 @@ const routes: Routes = [
    	{ path: 'recipe/1', component: RecipeDetailComponent },
     { path: 'create/article', component: CreateArticleComponent },
     { path: 'create/recipe', component: CreateRecipeComponent },
+    { path: 'user/recipe-collection', component: RecipeCollectionComponent}
 ]
 
 @NgModule({

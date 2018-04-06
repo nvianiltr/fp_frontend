@@ -20,6 +20,8 @@ import { ArticleService } from './article.service';
 import { CreateArticleComponent } from './create-article/create-article.component';
 import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
 import { ArticleDetailService } from './article-detail.service';
+import { RecipeCollectionComponent } from './recipe-collection/recipe-collection.component';
+import { RecipeCollectionService } from './recipe-collection.service';
 
 
 @NgModule({
@@ -36,7 +38,8 @@ import { ArticleDetailService } from './article-detail.service';
     RecipesComponent,
     ArticlesComponent,
     CreateArticleComponent,
-    CreateRecipeComponent
+    CreateRecipeComponent,
+    RecipeCollectionComponent
   ],
   imports: [
     NgbModule.forRoot(),
@@ -45,7 +48,7 @@ import { ArticleDetailService } from './article-detail.service';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [ArticleService, ArticleDetailService],
+  providers: [ArticleService, ArticleDetailService, RecipeCollectionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
