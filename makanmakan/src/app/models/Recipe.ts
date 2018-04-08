@@ -15,5 +15,3 @@ export class Recipe
   "tag_details": any = {};
   "ingredient_details": any = {};
 }
-
-

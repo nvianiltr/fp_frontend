@@ -21,6 +21,13 @@ import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
 import { UserService } from './user.service';
 import { RecipeService } from './recipe.service';
 
+import { ArticleDetailService } from './article-detail.service';
+import { RecipeCollectionComponent } from './recipe-collection/recipe-collection.component';
+import { RecipeCollectionService } from './recipe-collection.service';
+import { RecipeService } from './recipe.service';
+import { UpdateArticleComponent } from './update-article/update-article.component';
+import { UpdateRecipeComponent } from './update-recipe/update-recipe.component';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +43,10 @@ import { RecipeService } from './recipe.service';
     RecipesComponent,
     ArticlesComponent,
     CreateArticleComponent,
-    CreateRecipeComponent
+    CreateRecipeComponent,
+    RecipeCollectionComponent,
+    UpdateArticleComponent,
+    UpdateRecipeComponent
   ],
   imports: [
     BrowserModule,
