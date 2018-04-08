@@ -8,7 +8,8 @@
 	font-weight: 800;
 }
 
-#recipe-container div div{
+
+#article-container div div{
 	margin:0;
 	padding: 0;
 	text-align: center;
@@ -39,3 +40,4 @@ img{
 	width:50vh;
 	height: auto;
 }
+

@@ -1,12 +1,17 @@
-export class Recipe{
-    "id": any;
-    "user_id": string;
-    "title": string;
-    "about" : string;
-    "servingQty":string;
-    "preparation":string;
-    'qty':any;
-    "views":any;
-    "dateCreated":string;
-    "isDeleted":boolean;
+export class Recipe
+{
+  "id": any;
+  "username": any;
+  "title": string;
+  "about": string;
+  "pictureURL": string;
+  "servingQty": string;
+  "servingUnit": string;
+  "preparation": string;
+  "qty": string;
+  "price": string;
+  "dateCreated": string;
+  "isDeleted": string;
+  "tag_details": any = {};
+  "ingredient_details": any = {};
 }

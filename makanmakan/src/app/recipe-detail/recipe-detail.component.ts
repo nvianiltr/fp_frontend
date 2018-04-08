@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
+
 import { Recipe } from '../models/Recipe';
 import { RecipeService } from '../recipe.service';
 
@@ -32,6 +33,24 @@ export class RecipeDetailComponent implements OnInit {
         this.recipe = res;
       }, err => {
       });
+  public recipe: Recipe;
+
+  constructor(private route: ActivatedRoute,
+              private recipeService: RecipeService) { }
+
+  ngOnInit() {
+    this.getRecipe();
   }
 
+
+  getRecipe(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    // console.log(id);
+    this.recipeService.getRecipe(id)
+      .subscribe(recipe => {
+        this.recipe = recipe;
+      });
+  }
 }
+
+

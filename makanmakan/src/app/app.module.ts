@@ -4,8 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule }    from '@angular/common/http';
-
+import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SignupComponent } from './signup/signup.component';
@@ -20,7 +19,7 @@ import { ArticleService } from './article.service';
 import { CreateArticleComponent } from './create-article/create-article.component';
 import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
 import { UserService } from './user.service';
-import { AuthService } from './auth.service';
+import { RecipeService } from './recipe.service';
 
 import { ArticleDetailService } from './article-detail.service';
 import { RecipeCollectionComponent } from './recipe-collection/recipe-collection.component';

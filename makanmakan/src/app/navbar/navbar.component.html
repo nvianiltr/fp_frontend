@@ -8,11 +8,11 @@
     <ul class="navbar-nav mr-auto" id="navbarOption">
 
       <li class="nav-item disabled">
-        <a class="nav-link">|</a>        
+        <a class="nav-link">|</a>
       </li>
 
       <li class="nav-item active dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Recipe </a>
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Recipe</a>
           <ul class="dropdown-menu multi-column columns-3">
             <div class="row">
               <div class="col-12" id="showAll">
@@ -20,56 +20,10 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-4">
+              <div class="col-sm-4" *ngFor="let tag of tags">
                 <ul class="multi-column-dropdown">
-                  <li class="topic">Meal Course</li>
-                  <li><a href="#">Appetizer</a></li>
-                  <li><a href="#">Breakfast</a></li>
-                  <li><a href="#">Brunch</a></li>
-                  <li><a href="#">Buffet</a></li>
-                  <li><a href="#">Dessert</a></li>
-                  <li><a href="#">Dinner</a></li>
-                  <li><a href="#">Lunch</a></li>
-                  <li><a href="#">Side</a></li>
-                </ul>
-              </div>
-              <div class="col-sm-4">
-                <ul class="multi-column-dropdown">
-                  <li class="topic">Cuisine</li>
-                  <li><a href="#">African</a></li>
-                  <li><a href="#">American</a></li>
-                  <li><a href="#">Asian</a></li>
-                  <li><a href="#">Chinese</a></li>
-                  <li><a href="#">Eastern Europe</a></li>
-                  <li><a href="#">English</a></li>
-                  <li><a href="#">French</a></li>
-                  <li><a href="#">Indian</a></li>
-                  <li><a href="#">Italian</a></li>
-                  <li><a href="#">Japanese</a></li>
-                  <li><a href="#">Korean</a></li>
-                  <li><a href="#">Mexican</a></li>
-                  <li><a href="#">Middle Eastern</a></li>
-                  <li><a href="#">Thai</a></li>
-                  <li><a href="#">Vietnamese</a></li>
-                </ul>
-              </div>
-              <div class="col-sm-4">
-                <ul class="multi-column-dropdown">
-                  <li class="topic">Dietary Consideration</li>
-                  <li><a href="#">Healthy</a></li>
-                  <li><a href="#">Low Cholestrol</a></li>
-                  <li><a href="#">Vegan</a></li>
-                  <li><a href="#">high Fiber</a></li>
-                  <li><a href="#">Healthy</a></li>
-                  <li><a href="#">Low Calories</a></li>
-                  <li><a href="#">Low Fat</a></li>
-                  <li><a href="#">Low Sodium</a></li>
-                  <li><a href="#">Low / No Sugar</a></li>
-                  <li><a href="#">Wheat / Gluten-free</a></li>
-                  <li><a href="#">Kid-Friendly</a></li>
-                  <li><a href="#">Quick & Easy</a></li>
-                  <li><a href="#">Vegetarian</a></li>
-                  <li class="divider"></li>
+                  <li class="topic"> {{ tag.name }} </li>
+                  <li *ngFor="let detail of tag.tag_header"><a href="#">{{ detail.name }}</a></li>
                 </ul>
               </div>
             </div>
@@ -86,20 +40,33 @@
   </form>
     </ul>
 
+    <div *ngIf="isLoggedIn; else noLoggedIn">
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Profile
+          <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a href="#">Open Recipe.ts Collection</a></li>
+          <li><a (click)="logout()">Log Out</a></li>
 
-    <ul class="navbar-nav ml-auto" id="navbarOption">
+        </ul>
+      </div>
+    </div>
+    <ng-template #noLoggedIn>
+      <ul class="navbar-nav ml-auto" id="navbarOption">
 
-      <li class="nav-item active">
-        <a class="nav-link hvr-underline-from-center" routerLink="/login">Sign In</a>
-      </li>
+        <li class="nav-item active">
+          <a class="nav-link hvr-underline-from-center" routerLink="/login">Sign In</a>
+        </li>
 
-      <li class="nav-item disabled">
-        <a class="nav-link" href="#">or</a>
-      </li>
+        <li class="nav-item disabled">
+          <a class="nav-link" href="#">or</a>
+        </li>
 
-      <li class="nav-item active">
-        <a class="nav-link hvr-underline-from-center" routerLink="/signup">Sign Up</a>
-      </li>
-    </ul>
+        <li class="nav-item active">
+          <a class="nav-link hvr-underline-from-center" routerLink="/signup">Sign Up</a>
+        </li>
+      </ul>
+    </ng-template>
+
   </div>
 </nav>

@@ -18,10 +18,13 @@ import { UpdateRecipeComponent } from './update-recipe/update-recipe.component';
 
 
 import { ArticlesComponent } from './articles/articles.component';
+import {AuthGuard} from './auth.guard';
+import {AppComponent} from './app.component';
 
 
 const routes: Routes = [
-  	{ path: '', component: HomeComponent },
+  	{ path: '', redirectTo: 'home', pathMatch: 'full'},
+    { path: 'home', component: HomeComponent},
 	  { path: 'login', component: LoginComponent },
 	  { path: 'signup', component: SignupComponent },
   	{ path: 'search', component: SearchComponent },
@@ -29,7 +32,9 @@ const routes: Routes = [
   	{ path: 'article/:id', component: ArticleDetailComponent },
   	{ path: 'recipes', component: RecipesComponent },
    	{ path: 'recipe/:id', component: RecipeDetailComponent },
-    { path: 'create/article', component: CreateArticleComponent },
+
+    { path: 'create/article', component: CreateArticleComponent},
+
     { path: 'create/recipe', component: CreateRecipeComponent },
     { path: 'user/recipe-collection', component: RecipeCollectionComponent},
     { path: 'article/:id/update', component:UpdateArticleComponent },

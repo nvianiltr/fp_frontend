@@ -1,49 +1,24 @@
-<br>
-<br>
 <div class="container" *ngIf="recipe">
   <div class="row">
     <div class="col-12" id="recipe">
       <h1>{{recipe.title}}</h1>
-      <h6>created by <span>{{ recipe.id }}</span> at <span>{{ recipe.datePosted }}</span></h6>
-            <a routerLink="update">Change Content</a>
+      <h6>created by <span>{{ recipe.username }}</span> at <span>{{ recipe.dateCreated }}</span></h6>
       <hr>
-      <p>{{ recipe.content }}</p>
-
-      <div class="row">
-        <div class="tags">
-          <h3>Tags:</h3>
-          <span>Food</span> | 
-          <span>Breakfast</span> | 
-          <span>Tags</span> | 
-        </div>
+      <h1> Ingredients </h1>
+      <div *ngFor="let ingredient of recipe.ingredient_details">
+        <p>{{ingredient.quantity}} {{ingredient.unit}} {{ingredient.ingredient.name}}</p>
       </div>
-
-      
-    </div>
-  </div>
-</div>
-
-<!--<div class="container">
-  <div class="row">
-    <div class="col-12" id="recipe">
-      <div class="images"></div>
       <hr>
-      <h1>Cara masak anak ayam dengan kekuatan bulan</h1>
-      <h6>created by <span>Siapa ya</span> at <span>17 Agustus '45</span></h6>
+      <h1> Preparation Steps</h1>
+      <p>{{ recipe.preparation }}</p>
+      <hr>
+
       <div>
-      <h6>rating <span>3.5</span>/5</h6>
-      </div>
-      <hr>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut a dui erat. Donec euismod sapien pulvinar, facilisis quam vel, rutrum ipsum.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut a dui erat. Donec euismod sapien pulvinar, facilisis quam vel, rutrum ipsum.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut a dui erat. Donec euismod sapien pulvinar, facilisis quam vel, rutrum ipsum.</p>
-
-      <div class="row">
-        <div class="tags">
-          <h3>Tags:</h3>
-          <span>Food</span> | 
-          <span>Breakfast</span> | 
-          <span>Tags</span> | 
+        <h1>Tags:</h1>
+        <div  class="row" *ngFor="let tags of recipe.tag_details">
+          <div *ngFor="let tag of tags.tag_header">
+            <button type="button" class="btn btn-outline-warning">{{tag.name}} </button>
+          </div>
         </div>
       </div>
 
@@ -69,4 +44,4 @@
 
     </div>
   </div>
-</div> -->
+</div>

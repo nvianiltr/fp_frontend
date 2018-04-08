@@ -19,21 +19,22 @@ export class RecipeService {
 	constructor(private http: HttpClient) { }
 
 	getRecipes (): Observable<Recipe[]> {
-		//let response: any = {};
 		return this.http.get<Recipe[]>(this.recipesUrl).map(res => {console.log(res); return res;});
-		//.map( res => { console.log(res); 
-		//			response = res;
-		//			return res;
-		//	});
 	}
  
- getRecipeByID(id: number): Observable<Recipe> {
-    const url = `${this.recipesUrl}/${id}`;
+  getRecipe(id: number): Observable<Recipe> {
+    const url = `${this.recipeUrl}/${id}`;
     return this.http.get<Recipe>(url).map(res => {console.log(res); return res;});
+  }
+  
+  getTags() {
+    const url = 'http://localhost:8000/api/TagCategory'
+    return this.http.get(url).map(res => {console.log(res); return res});
   }
 
     updateRecipe(recipe:Recipe, id:number): Observable<Recipe>{
     const url = `${this.recipesUrl}/${id}`;
   	   return this.http.patch<Recipe>(url, recipe, httpOptions);
   }
+
 }

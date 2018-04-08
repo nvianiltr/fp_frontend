@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Recipe } from "../models/Recipe";
 import { RecipeService } from "../recipe.service";
 
+
 @Component({
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
@@ -20,6 +21,6 @@ export class RecipesComponent implements OnInit {
   getRecipes(): void {
   	this.recipeService.getRecipes()
   		.subscribe(recipes => { this.recipes = recipes });
-  }
 
 }
+
