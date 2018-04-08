@@ -24,6 +24,5 @@ export class RecipesComponent implements OnInit {
       .subscribe(recipes => {
         this.recipes = recipes
       });
-
   }
 }

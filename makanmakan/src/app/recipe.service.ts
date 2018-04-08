@@ -29,7 +29,7 @@ export class RecipeService {
 
   getTags() {
     const url = 'http://localhost:8000/api/TagCategory'
-    return this.http.get(url).map(res => {console.log(res); return res});
+    return this.http.get(url).map(res => {return res});
   }
 
     updateRecipe(recipe:Recipe, id:number): Observable<Recipe>{
@@ -37,4 +37,8 @@ export class RecipeService {
   	   return this.http.patch<Recipe>(url, recipe, httpOptions);
   }
 
+  searchRecipe(name: string): Observable<Recipe[]>  {
+	  const url = `${this.recipesUrl}/search/${name}`;
+    return this.http.get<Recipe[]>(url).map(res => {return res;});
+  }
 }

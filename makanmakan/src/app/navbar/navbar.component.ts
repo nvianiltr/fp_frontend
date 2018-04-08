@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {UserService} from '../user.service';
 import {RecipeService} from '../recipe.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,8 +10,8 @@ import {RecipeService} from '../recipe.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private userService: UserService, private recipeService: RecipeService) { }
-
+  constructor(private userService: UserService, private recipeService: RecipeService, private router: Router) { }
+  @Input() name: string;
   isLoggedIn: boolean;
   tags: any = {};
 
@@ -26,12 +27,16 @@ export class NavbarComponent implements OnInit {
 
   getTags() {
     this.recipeService.getTags().subscribe(res => {
-      console.log(res);
-      console.log(res[0].tag_header[0].name);
       this.tags = res;
     });
   }
-  
+
+  search() {
+    this.router.navigate(['/search/'+this.name]);
+    location.reload();
+  };
+
+
   logout() {
     this.userService.logout();
     this.isLoggedIn = false;

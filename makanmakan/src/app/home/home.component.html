@@ -3,90 +3,11 @@
 		<h1>makanmakan</h1>
 		<form class="form-inline">
 			<div class="form-group mx-sm-3 mb-2">
-    			<input type="text" name="search-food" class="form-control form-control-lg" id="inputOption" placeholder="What to cook today?">
+    			<input [(ngModel)]="name" type="text" name="search-food" class="form-control form-control-lg" id="inputOption" placeholder="What to cook today?">
 			</div>
-			<button type="submit" class="btn btn-warning btn-lg mb-2 hvr-sweep-to-right">Search</button>
+			<button type="submit" class="btn btn-warning btn-lg mb-2 hvr-sweep-to-right" (click)="search()">Search</button>
 		</form>
 	</div>
 </div>
-<!--
-
-<div class="container" id="article-container">
-  <div class="row">
-    <div class="col-12">
-      <h2>Article</h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-3 article-food">
-      <div class="article-food-write"></div>
-      <h3>Cara masak Ramen Ayam</h3>
-    </div>
-    <div class="col-3 article-food">
-      <div class="article-food-write"></div>
-      <h3>Cara masak Ramen Ayam</h3>
-    </div>
-    <div class="col-3 article-food">
-      <div class="article-food-write"></div>
-      <h3>Cara masak Ramen Ayam</h3>
-    </div>
-    <div class="col-3 article-food">
-      <div class="article-food-write"></div>
-      <h3>Cara masak Ramen Ayam</h3>
-    </div>
-  </div>
-</div>
 
 
-<div class="container" id="trending-container">
-	<div class="row">
-    <div class="col-12">
-      <h2>Trending Recipe.ts</h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-3 trending-food">
-      <div class="trending-food-write"></div>
-      <h3>Ramen Ayam</h3>
-    </div>
-    <div class="col-3 trending-food">
-      <div class="trending-food-write"></div>
-      <h3>Ramen Ayam</h3>
-    </div>
-    <div class="col-3 trending-food">
-      <div class="trending-food-write"></div>
-      <h3>Ramen Ayam</h3>
-    </div>
-    <div class="col-3 trending-food">
-      <div class="trending-food-write"></div>
-      <h3>Ramen Ayam</h3>
-    </div>
-  </div>
-</div>
-
-
-<div class="container" id="newest-container">
-  <div class="row">
-    <div class="col-12">
-      <h2>Newest Recipe.ts</h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-3 newest-food">
-      <div class="newest-food-write"></div>
-      <h3>Indomie Ayam</h3>
-    </div>
-    <div class="col-3 newest-food">
-      <div class="newest-food-write"></div>
-      <h3>Indomie Ayam</h3>
-    </div>
-    <div class="col-3 newest-food">
-      <div class="newest-food-write"></div>
-      <h3>Indomie Ayam</h3>
-    </div>
-    <div class="col-3 newest-food">
-      <div class="newest-food-write"></div>
-      <h3>Indomie Ayam</h3>
-    </div>
-  </div>
-</div>-->

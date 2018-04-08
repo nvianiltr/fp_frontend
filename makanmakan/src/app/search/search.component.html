@@ -1,3 +1,15 @@
-<p>
-  search works!
-</p>
+<div class="container" id="article-container">
+  <h1> Search on {{ name }} </h1>
+  <hr>
+  <div class="row" *ngIf="isAvailable; else noRecipe">
+    <div class="col-3 article-food" *ngFor="let recipe of recipes ">
+      <img src="../../assets/pic1.jpg"> <br>
+      <a routerLink="/recipe/{{recipe.id}}">{{recipe.title}}</a>
+      <a routerLink="#">{{ recipe.dateCreated }}</a>
+    </div>
+  </div>
+</div>
+
+<ng-template #noRecipe>
+  <p>Sorry.. No recipes available..</p>
+</ng-template>
