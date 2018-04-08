@@ -22,13 +22,13 @@ export class ArticleService {
 	getArticles (): Observable<Article[]> {
 		//let response: any = {};
 		return this.http.get<Article[]>(this.articlesUrl);
-		//.map( res => { console.log(res); 
+		//.map( res => { console.log(res);
 		//			response = res;
 		//			return res;
 		//	});
 	}
 
- getArticleByID(id: number): Observable<Article> {
+ getArticle(id: number): Observable<Article> {
     const url = `${this.articlesUrl}/${id}`;
     return this.http.get<Article>(url).map(res => {console.log(res); return res;});
   }

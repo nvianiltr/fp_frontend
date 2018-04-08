@@ -8,6 +8,11 @@
 	font-weight: 800;
 }
 
+img {
+  width: 25vh;
+  height: 15vh;
+}
+
 #article-container div div{
 	margin:0;
 	padding: 0;

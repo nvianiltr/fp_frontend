@@ -15,18 +15,21 @@ import { CreateArticleComponent } from './create-article/create-article.componen
 
 
 import { ArticlesComponent } from './articles/articles.component';
+import {AuthGuard} from './auth.guard';
+import {AppComponent} from './app.component';
 
 
 const routes: Routes = [
-  	{ path: '', component: HomeComponent },
+  	{ path: '', redirectTo: 'home', pathMatch: 'full'},
+    { path: 'home', component: HomeComponent},
 	  { path: 'login', component: LoginComponent },
 	  { path: 'signup', component: SignupComponent },
   	{ path: 'search', component: SearchComponent },
   	{ path: 'articles', component: ArticlesComponent },
   	{ path: 'article/:id', component: ArticleDetailComponent },
   	{ path: 'recipes', component: RecipesComponent },
-   	{ path: 'recipe/1', component: RecipeDetailComponent },
-    { path: 'create/article', component: CreateArticleComponent },
+   	{ path: 'recipe/:id', component: RecipeDetailComponent },
+    { path: 'create/article', component: CreateArticleComponent},
     { path: 'create/recipe', component: CreateRecipeComponent },
 ]
 

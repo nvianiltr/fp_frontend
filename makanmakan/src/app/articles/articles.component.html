@@ -1,11 +1,15 @@
 <div class="container" id="article-container">
 <h1> Articles </h1>
 <hr>
-<div class="row">
+<div class="row" *ngIf="articles; else noArticle">
   	<div class="col-3 article-food" *ngFor="let article of articles ">
   		<img src="../../assets/pic1.jpg"> <br>
       	<a routerLink="/article/{{article.id}}">{{article.title}}</a>
-      	<a routerLink="#">{{ article.datePosted }}</a>
+      	<a routerLink="#">{{ article.dateCreated }}</a>
     </div>
 </div>
 </div>
+
+<ng-template #noArticle>
+<p>Sorry.. No articles available..</p>
+</ng-template>

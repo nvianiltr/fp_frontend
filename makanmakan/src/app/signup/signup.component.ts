@@ -11,24 +11,31 @@ export class SignupComponent implements OnInit {
 
   constructor(private userService: UserService) { }
 
-  @Input() signup:Signup;
+  @Input() signup: Signup;
+  error: String;
   message: String;
   res: any = {};
+  isError: boolean;
 
   ngOnInit() {
-  	this.signup = new Signup();  
+    this.signup = new Signup();
+    this.isError = false;
   }
 
   register() {
      this.userService.register(this.signup).subscribe(
-     	res => {
+       res => {
          this.res = res;
-         console.log('complete');
-         window.alert(this.res.message);
+         this.isError = false;
+         this.message = this.res.message;
+         // console.log(this.message);
        }, err => {
-        console.error(err); alert();
-        }
-    );
- 	}
- 
+         this.res = err;
+         this.isError = true;
+         this.error = this.res.error.message;
+         // console.log(this.message);
+         // console.error(err); alert(this.res.error.message);
+       }
+     );
+  }
 }

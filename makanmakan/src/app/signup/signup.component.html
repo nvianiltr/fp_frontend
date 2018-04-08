@@ -2,11 +2,14 @@
 	<div class="container-fluid">
 		<h1>sign up</h1>
 		<div class="col-6 offset-xl-3">
+    <div class="alert alert-danger" *ngIf="isError; else noError">
+        {{ error }}
+      </div>
 		<form>
       <div class="form-row">
         <div class="col">
           <label for="signup-firstname">First Name *</label>
-          <input [(ngModel)]="signup.firstName" name="firstname" 
+          <input [(ngModel)]="signup.firstName" name="firstname"
           type="text" class="form-control form-control-lg" id="signup-firstname" aria-describedby="firstnameHelp" placeholder="First name" required>
         </div>
         <div class="col">
@@ -27,31 +30,15 @@
 			    <label for="signup-password">Password *</label>
 			    <input [(ngModel)]="signup.password" name="password" type="password" class="form-control form-control-lg" id="signup-password" placeholder="Password" required>
 			</div>
-			<button type="submit" class="btn btn-lg btn-warning hvr-sweep-to-right"  (click)="register()">Sign Up</button>
+			<button type="submit" class="btn btn-lg btn-warning hvr-sweep-to-right"  (click)="register()" data-toggle="modal" data-target="#myModal" >Sign Up</button>
 		</form>
 		</div>
     <p>Have an account?  <span><a routerLink="/signup">Log in!</a></span></p>
 	</div>
 </div>
 
-<!-- 
-data-toggle="modal" data-target="#myModal"
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-   
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
-      </div>
-      <div class="modal-body">
-        <p>[(ngModel)]="message"</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
+<ng-template #noError>
+  <div class="alert alert-success" *ngIf="message">
+    {{ message }}
   </div>
-</div> -->
+</ng-template>
