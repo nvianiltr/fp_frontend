@@ -21,12 +21,12 @@ export class RecipeService {
 	getRecipes (): Observable<Recipe[]> {
 		return this.http.get<Recipe[]>(this.recipesUrl).map(res => {console.log(res); return res;});
 	}
- 
+
   getRecipe(id: number): Observable<Recipe> {
-    const url = `${this.recipeUrl}/${id}`;
+    const url = `${this.recipesUrl}/${id}`;
     return this.http.get<Recipe>(url).map(res => {console.log(res); return res;});
   }
-  
+
   getTags() {
     const url = 'http://localhost:8000/api/TagCategory'
     return this.http.get(url).map(res => {console.log(res); return res});

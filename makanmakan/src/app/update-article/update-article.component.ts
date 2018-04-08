@@ -12,8 +12,8 @@ import { ArticleService } from '../article.service';
 })
 export class UpdateArticleComponent implements OnInit {
 
-  @Input() article: Article;  
-  
+  @Input() article: Article;
+
   constructor(
     private route:ActivatedRoute,
     private articleService: ArticleService,
@@ -26,7 +26,7 @@ export class UpdateArticleComponent implements OnInit {
   getArticle():void {
     const id = +this.route.snapshot.paramMap.get('id');
     //console.log(id);
-    this.articleService.getArticleByID(id).subscribe(article => {this.article = article;});
+    this.articleService.getArticle(id).subscribe(article => {this.article = article;});
       //.subscribe(article => this.article = article);
   }
 

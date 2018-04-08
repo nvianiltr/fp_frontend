@@ -13,8 +13,8 @@ import { RecipeService } from '../recipe.service';
 })
 export class UpdateRecipeComponent implements OnInit {
 
-  @Input() recipe: Recipe;  
-  
+  @Input() recipe: Recipe;
+
   constructor(
     private route:ActivatedRoute,
     private recipeService: RecipeService,
@@ -27,7 +27,7 @@ export class UpdateRecipeComponent implements OnInit {
   getArticle():void {
     const id = +this.route.snapshot.paramMap.get('id');
     //console.log(id);
-    this.recipeService.getRecipeByID(id).subscribe(recipe => {this.recipe = recipe;});
+    this.recipeService.getRecipe(id).subscribe(recipe => {this.recipe = recipe;});
       //.subscribe(article => this.article = article);
   }
 
