@@ -1,3 +1,15 @@
+<div class="container" id="recipe-container">
+<h1> Type of Recipes </h1>
+<hr>
+<div class="row">
+    <div class="col-3 recipe-food" *ngFor="let recipe of recipes ">
+      <img src="../../assets/pic1.jpg"> <br>
+        <a routerLink="/recipe/{{recipe.id}}">{{recipe.title}}</a>
+        <a routerLink="#">{{ recipe.datePosted }}</a>
+    </div>
+</div>
+</div>
+
 <!--<br>
 <br>
 <br>
@@ -11,7 +23,7 @@
   </li>
 </ul>
 -->
-
+<!--
 <div class="container" id="article-container">
 <h1> Type of Recipes </h1>
 <hr>
@@ -34,3 +46,4 @@
     </div>
   </div>
 </div>
+-->

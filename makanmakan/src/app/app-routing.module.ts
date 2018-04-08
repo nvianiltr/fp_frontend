@@ -13,6 +13,9 @@ import { RecipesComponent } from './recipes/recipes.component';
 import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
 import { CreateArticleComponent } from './create-article/create-article.component';
 import {RecipeCollectionComponent} from './recipe-collection/recipe-collection.component';
+import { UpdateArticleComponent } from './update-article/update-article.component';
+import { UpdateRecipeComponent } from './update-recipe/update-recipe.component';
+
 
 import { ArticlesComponent } from './articles/articles.component';
 
@@ -25,10 +28,12 @@ const routes: Routes = [
   	{ path: 'articles', component: ArticlesComponent },
   	{ path: 'article/:id', component: ArticleDetailComponent },
   	{ path: 'recipes', component: RecipesComponent },
-   	{ path: 'recipe/1', component: RecipeDetailComponent },
+   	{ path: 'recipe/:id', component: RecipeDetailComponent },
     { path: 'create/article', component: CreateArticleComponent },
     { path: 'create/recipe', component: CreateRecipeComponent },
-    { path: 'user/recipe-collection', component: RecipeCollectionComponent}
+    { path: 'user/recipe-collection', component: RecipeCollectionComponent},
+    { path: 'article/:id/update', component:UpdateArticleComponent },
+    { path: 'recipe/:id/update', component:UpdateRecipeComponent }
 ]
 
 @NgModule({

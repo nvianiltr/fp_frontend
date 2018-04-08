@@ -1,4 +1,29 @@
-<div class="container">
+<br>
+<br>
+<div class="container" *ngIf="recipe">
+  <div class="row">
+    <div class="col-12" id="recipe">
+      <h1>{{recipe.title}}</h1>
+      <h6>created by <span>{{ recipe.id }}</span> at <span>{{ recipe.datePosted }}</span></h6>
+            <a routerLink="update">Change Content</a>
+      <hr>
+      <p>{{ recipe.content }}</p>
+
+      <div class="row">
+        <div class="tags">
+          <h3>Tags:</h3>
+          <span>Food</span> | 
+          <span>Breakfast</span> | 
+          <span>Tags</span> | 
+        </div>
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+<!--<div class="container">
   <div class="row">
     <div class="col-12" id="recipe">
       <div class="images"></div>
@@ -44,4 +69,4 @@
 
     </div>
   </div>
-</div>
+</div> -->

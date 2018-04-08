@@ -1,8 +1,5 @@
 <br>
 <br>
-<div>
-<h1>{{ article.id }}</h1>
-</div>
 <div class="container" *ngIf="article">
   <div class="row">
     <div class="col-12" id="article">
@@ -11,8 +8,9 @@
       <h1>{{article.title}}</h1>
       <h6>created by <span>{{ article.id }}</span> at <span>{{ article.datePosted }}</span></h6>
       <hr>
+      
       <p>{{ article.content }}</p>
-
+      <a routerLink="update">Change Content</a>
       <div class="row">
         <div class="tags">
           <h3>Tags:</h3>

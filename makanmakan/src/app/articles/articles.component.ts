@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Article } from '../models/Article';
 import { ArticleService } from '../article.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-articles',

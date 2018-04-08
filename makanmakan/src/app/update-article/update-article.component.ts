@@ -6,14 +6,13 @@ import { Article } from '../models/Article';
 import { ArticleService } from '../article.service';
 
 @Component({
-  selector: 'app-article-detail',
-  templateUrl: './article-detail.component.html',
-  styleUrls: ['./article-detail.component.css']
+  selector: 'app-update-article',
+  templateUrl: './update-article.component.html',
+  styleUrls: ['./update-article.component.css']
 })
+export class UpdateArticleComponent implements OnInit {
 
-export class ArticleDetailComponent implements OnInit {
-	
-  article: Article;  
+  @Input() article: Article;  
   
   constructor(
     private route:ActivatedRoute,
@@ -31,7 +30,13 @@ export class ArticleDetailComponent implements OnInit {
       //.subscribe(article => this.article = article);
   }
 
+  goBack(): void {
+    this.location.back();
+  }
 
+  save():void{
+    const id = +this.route.snapshot.paramMap.get('id');
+  	this.articleService.updateArticle(this.article, id).subscribe(()=>this.goBack());
+  }
 
 }
-

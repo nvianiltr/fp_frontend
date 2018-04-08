@@ -33,4 +33,9 @@ export class ArticleService {
     return this.http.get<Article>(url).map(res => {console.log(res); return res;});
   }
 
+  updateArticle(article:Article, id:number): Observable<Article>{
+    const url = `${this.articlesUrl}/${id}`;
+  	   return this.http.patch<Article>(url, article, httpOptions);
+  }
+
 }
