@@ -5,8 +5,8 @@
   <div class="row" *ngIf="recipes; else noRecipe">
     <div class="col-3 article-food" *ngFor="let recipe of recipes ">
       <img src="../../assets/pic1.jpg"> <br>
-      <a routerLink="/recipe/{{recipe.id}}">{{recipe.title}}</a>
-      <a routerLink="#">{{ recipe.dateCreated }}</a>
+      <h4><a routerLink="/recipe/{{recipe.id}}">{{recipe.title}}</a></h4>
+      <p><a routerLink="#">{{ recipe.dateCreated|date:'longDate' }}</a></p>
     </div>
   </div>
 </div>

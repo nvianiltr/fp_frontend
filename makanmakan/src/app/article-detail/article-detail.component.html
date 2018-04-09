@@ -3,14 +3,25 @@
 <div class="container" *ngIf="article">
   <div class="row">
     <div class="col-12" id="article">
-       <!--<div class="images"></div>-->
+      <!-- <div class="images"></div> -->
       <!--<img src="{{ asset('assets/images/pic1.jpg') }}"> -->
       <h1>{{article.title}}</h1>
-      <h6>created by <span>{{ article.id }}</span> at <span>{{ article.dateCreated }}</span></h6>
+      <h6>created by <span>{{ article.id }}</span> at <span>{{ article.datePosted }}</span></h6>
       <hr>
       
       <p>{{ article.content }}</p>
       <a routerLink="update">Change Content</a>
+      <button (click)="delete(article)"></button>
+      <div class="row">
+        <div class="tags">
+          <h3>Tags:</h3>
+          <span>Food</span> | 
+          <span>Breakfast</span> | 
+          <span>Tags</span> | 
+        </div>
+      </div>
+
+      
     </div>
   </div>
 </div>

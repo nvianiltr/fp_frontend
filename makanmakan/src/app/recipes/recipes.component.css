@@ -1,13 +1,16 @@
+*{
+	font-family: 'Montserrat', sans-serif
+}
+
 .container{
 	margin-top:10vh;
 	margin-bottom: 10vh;
 }
 
-#recipe-container h1{
+#article-container h1{
 	color:#FF6200;
-	font-weight: 800;
+	font-weight: 700;
 }
-
 
 #article-container div div{
 	margin:0;
@@ -15,29 +18,27 @@
 	text-align: center;
 }
 
-.recipe-food{
+img {
+	width: 25vh;
+	height: 15vh;
+}
+
+.article-food .article-food-write{
 	margin: 0 10px !important;
 	padding: 0;
-
-	background-size: 60vh;
-	background-position: center;
-	background-repeat: no-repeat;
-
-	min-height: 25vh;
-
-	transition: background-size 0.25s;
 }
 
-.recipe-food h3{
-	margin-top: 2vh;
-	text-align: center;
-	color: black;
+h4{
+	margin-bottom: 0;
+}
+
+h4 a{
+	color:#ff6200;
 	font-weight: 700;
-	padding: 0 10px;
+	text-decoration: none;
 }
 
-img{
-	width:50vh;
-	height: auto;
+p a{
+	color:black;
+	text-decoration: none;
 }
-

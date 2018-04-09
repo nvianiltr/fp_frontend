@@ -22,4 +22,8 @@ export class ArticlesComponent implements OnInit {
   		.subscribe(articles => { this.articles = articles });
   }
 
+  saveCollection():void{
+    
+  }
+
 }

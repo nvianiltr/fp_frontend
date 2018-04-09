@@ -28,7 +28,7 @@ export class ArticleService {
 		//	});
 	}
 
- getArticle(id: number): Observable<Article> {
+ getArticleByID(id: number): Observable<Article> {
     const url = `${this.articlesUrl}/${id}`;
     return this.http.get<Article>(url).map(res => {console.log(res); return res;});
   }
@@ -36,6 +36,10 @@ export class ArticleService {
   updateArticle(article:Article, id:number): Observable<Article>{
     const url = `${this.articlesUrl}/${id}`;
   	   return this.http.patch<Article>(url, article, httpOptions);
+  }
+
+  addArticle(article:Article): Observable<Article>{
+  	return this.http.post<Article>(this.articlesUrl, article, httpOptions);
   }
 
 }
