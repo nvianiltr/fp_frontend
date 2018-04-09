@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {UserService} from '../user.service';
 import {RecipeService} from '../recipe.service';
-import {Router} from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -10,10 +10,25 @@ import {Router} from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private userService: UserService, private recipeService: RecipeService, private router: Router) { }
+  constructor(private userService: UserService, private recipeService: RecipeService, private router: Router) {
+    this.router.routeReuseStrategy.shouldReuseRoute = function(){
+      return false;
+    }
+
+    this.router.events.subscribe((evt) => {
+      if (evt instanceof NavigationEnd) {
+        // trick the Router into believing it's last link wasn't previously loaded
+        this.router.navigated = false;
+        // if you need to scroll back to top, here is the right place
+        window.scrollTo(0, 0);
+      }
+    });
+
+  }
+
   @Input() name: string;
   isLoggedIn: boolean;
-  tags: any = {};
+  tags: any = [];
 
   ngOnInit() {
     this.isLogin();
@@ -21,7 +36,7 @@ export class NavbarComponent implements OnInit {
   }
 
   isLogin() {
-    console.log(this.userService.isLogin());
+    // console.log(this.userService.isLogin());
     this.isLoggedIn = this.userService.isLogin();
   }
 
@@ -33,13 +48,12 @@ export class NavbarComponent implements OnInit {
 
   search() {
     this.router.navigate(['/search/'+this.name]);
-    location.reload();
   };
-
 
   logout() {
     this.userService.logout();
     this.isLoggedIn = false;
+    location.reload();
   }
 
 }

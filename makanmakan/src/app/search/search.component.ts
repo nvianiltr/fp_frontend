@@ -13,24 +13,24 @@ export class SearchComponent implements OnInit {
   name: string;
   isAvailable: boolean;
 
-  constructor(private route: ActivatedRoute, private recipeService: RecipeService) { }
+  constructor(private route: ActivatedRoute, private recipeService: RecipeService) {}
 
   ngOnInit() {
-     this.searchRecipe();
+    this.searchRecipe();
   }
 
 
   searchRecipe(): void {
    this.name = window.location.href.substr(window.location.href.lastIndexOf('/') + 1);
     this.recipeService.searchRecipe(this.name)
-      .subscribe(recipe => {
-        if(recipe.length == 0) {
-          this.recipes = null;
-          this.isAvailable = false;
+      .subscribe(recipes => {
+        if(recipes.length != 0) {
+          this.isAvailable = true;
+          this.recipes = recipes;
+        //  console.log(recipes);
         }
         else {
-          this.isAvailable = true;
-          this.recipes = recipe;
+          this.isAvailable = false;
         }
       });
   }

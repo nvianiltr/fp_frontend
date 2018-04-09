@@ -12,6 +12,7 @@ import { DatePipe } from '@angular/common';
 export class RecipesComponent implements OnInit {
 
   recipes: Recipe[] = [];
+  isRecipeAvailable: boolean;
 
   constructor(private recipeService: RecipeService) {
   }
@@ -23,7 +24,13 @@ export class RecipesComponent implements OnInit {
   getRecipes(): void {
     this.recipeService.getRecipes()
       .subscribe(recipes => {
-        this.recipes = recipes
+        if(recipes.length!=0) {
+          this.recipes = recipes;
+          this.isRecipeAvailable = true;
+        }
+        else {
+          this.isRecipeAvailable = false;
+        }
       });
   }
 }

@@ -2,7 +2,7 @@
 <div class="container" id="article-container">
   <h1> Recipes </h1>
   <hr>
-  <div class="row" *ngIf="recipes; else noRecipe">
+  <div class="row" *ngIf="isRecipeAvailable; else noRecipe">
     <div class="col-3 article-food" *ngFor="let recipe of recipes ">
       <img src="../../assets/pic1.jpg"> <br>
       <h4><a routerLink="/recipe/{{recipe.id}}">{{recipe.title}}</a></h4>

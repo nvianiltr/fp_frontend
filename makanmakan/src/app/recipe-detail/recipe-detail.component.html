@@ -15,32 +15,47 @@
 
       <div>
         <h1>Tags:</h1>
-        <div  class="row" *ngFor="let tags of recipe.tag_details">
+        <div class="row" *ngFor="let tags of recipe.tag_details">
           <div *ngFor="let tag of tags.tag_header">
-            <button type="button" class="btn btn-outline-warning">{{tag.name}} </button>
+            <button type="button" (click)="search(tag.name)" class="btn btn-outline-warning">{{tag.name}}</button>
           </div>
         </div>
       </div>
 
-<hr>
-
-      <form>
-        <div class="form-group">
-          <label for="comment"><strong>Leave a reply</strong></label>
-          <textarea class="form-control" id="comment-area" rows="3"></textarea>
-        </div>
+      <hr>
+      <div *ngIf="isLoggedIn; else disabledForm">
+        <form>
+          <div class="form-group">
+            <label for="comment"><strong>Leave a review</strong></label>
+            <textarea class="form-control" id="comment-area" rows="3"></textarea>
+          </div>
           <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-
-      <div class="comments">
-        <p class="name">My name</p>
-        <p class="comment">Thank you!!!!!</p>
+        </form>
       </div>
 
-      <div class="comments">
-        <p class="name">My name</p>
-        <p class="comment">Thank you!!!!!</p>
+      <ng-template #disabledForm>
+        <form>
+          <div class="form-group">
+            <label for="comment"><strong>Leave a review</strong></label>
+            <textarea class="form-control" id="comment-area" rows="3" disabled>Log in first if you want to leave a review..</textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" disabled>Submit</button>
+        </form>
+      </ng-template>
+      <hr>
+
+      <h3>Reviews</h3>
+      <div *ngIf="isReviewAvailable; else noReview">
+        <div *ngFor="let review of recipe.reviews" class="comments">
+          <p class="name">{{review.user.username}}</p>
+          <p class="comment">{{review.content}}</p>
+          <button> report if inappropriate</button>
+        </div>
       </div>
+
+      <ng-template #noReview>
+        <p class="comment"> Be the first to review this recipe! </p>
+      </ng-template>
 
     </div>
   </div>

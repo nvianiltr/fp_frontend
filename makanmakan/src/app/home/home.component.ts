@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +9,18 @@ import {Router} from '@angular/router';
 export class HomeComponent implements OnInit {
   @Input() name: string;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    this.router.routeReuseStrategy.shouldReuseRoute = function(){
+      return false;
+    }
+
+    this.router.events.subscribe((evt) => {
+      if (evt instanceof NavigationEnd) {
+        this.router.navigated = false;
+        window.scrollTo(0, 0);
+      }
+    });
+  }
 
   ngOnInit() {
   }

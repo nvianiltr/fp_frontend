@@ -23,7 +23,7 @@
               <div class="col-sm-4" *ngFor="let tag of tags">
                 <ul class="multi-column-dropdown">
                   <li class="topic"> {{ tag.name }} </li>
-                  <li *ngFor="let detail of tag.tag_header"><a href="#">{{ detail.name }}</a></li>
+                  <li *ngFor="let detail of tag.tag_header"><a routerLink="/search/{{detail.name}}">{{ detail.name }}</a></li>
                 </ul>
               </div>
             </div>
@@ -59,7 +59,7 @@
         </li>
 
         <li class="nav-item disabled">
-          <a class="nav-link" href="#">or</a>
+          <a class="nav-link" disabled>or</a>
         </li>
 
         <li class="nav-item active">

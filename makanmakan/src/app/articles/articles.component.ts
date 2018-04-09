@@ -10,6 +10,7 @@ import { DatePipe } from '@angular/common';
 })
 export class ArticlesComponent implements OnInit {
   articles: Article[] = [];
+  isArticleAvailable:  boolean;
 
   constructor(private articleService: ArticleService) { }
 
@@ -19,11 +20,18 @@ export class ArticlesComponent implements OnInit {
 
   getArticles(): void {
   	this.articleService.getArticles()
-  		.subscribe(articles => { this.articles = articles });
+  		.subscribe(articles => {
+  		  if(articles.length!=0) {
+        this.articles = articles;
+        this.isArticleAvailable = true;
+      }
+      else {
+        this.isArticleAvailable = false;
+      }});
   }
 
   saveCollection():void{
-    
+
   }
 
 }

@@ -10,7 +10,7 @@ import 'rxjs/add/operator/catch';
 
 import { Signup } from './models/Signup';
 import { Login } from './models/Login';
-
+import { User } from './models/User';
 
 // const httpOptions = {
 //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -26,9 +26,12 @@ const httpOptions = {
 @Injectable()
 export class UserService {
   private url = 'http://localhost:8000/api';  // URL to web api
-  private token = localStorage.getItem('token');
+  private token: string;
+  private user: User;
 
   constructor(private http: HttpClient) {
+    this.token = localStorage.getItem('token');
+    this.user = JSON.parse(localStorage.getItem('user'));
   }
 
   isLogin(): boolean {
@@ -52,8 +55,9 @@ export class UserService {
     const loginUrl = `${this.url}/login`;
     return this.http.post(loginUrl, login, httpOptions).map(res => {
       localStorage.setItem('token', res['data']['token']);
+      localStorage.setItem('user', JSON.stringify(res['data']['user']));
       this.token = localStorage.getItem('token');
-      console.log(res);
+      this.user = JSON.parse(localStorage.getItem('user'));
       return res;
     });
   }
@@ -61,6 +65,7 @@ export class UserService {
   logout() {
     const logoutUrl = `${this.url}/logout`;
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     return this.http.get(logoutUrl, httpOptions);
   }
 

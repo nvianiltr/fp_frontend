@@ -14,4 +14,5 @@ export class Recipe
   "isDeleted": string;
   "tag_details": any = {};
   "ingredient_details": any = {};
+  "reviews": any = {};
 }
