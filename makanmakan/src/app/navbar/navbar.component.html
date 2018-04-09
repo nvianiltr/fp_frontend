@@ -1,4 +1,4 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-company-blue">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-company-blue">
   <a class="navbar-brand" routerLink="">makanmakan</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarArea" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -42,10 +42,10 @@
 
     <div *ngIf="isLoggedIn; else noLoggedIn">
       <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Profile
+        <button class="btn btn-login btn-light dropdown-toggle" type="button" data-toggle="dropdown">Profile
           <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-          <li><a href="#">Open Recipe Collection</a></li>
+        <ul class="dropdown-menu dropdown-login">
+          <li><a routerLink="/user/recipe-collection">Open Recipe Collection</a></li>
           <li><a (click)="logout()">Log Out</a></li>
 
         </ul>

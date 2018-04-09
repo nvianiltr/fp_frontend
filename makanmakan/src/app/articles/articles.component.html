@@ -6,6 +6,7 @@
   		<img src="../../assets/pic1.jpg"> <br>
       	<h4><a routerLink="/article/{{article.id}}">{{article.title}}</a></h4>
       	<p>{{ article.datePosted |date:'longDate' }}</p>
+      	<p style="color: darkgrey" (click)=saveCollection()>Save Article</p>
     </div>
 </div>
 </div>

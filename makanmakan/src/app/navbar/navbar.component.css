@@ -4,6 +4,7 @@
 
 .navbar {
    background-color: #ff6200 !important;
+   height: 70px;
 }
 
 .navbar-brand{
@@ -75,6 +76,31 @@ form button:hover{
 	color:#ff6200;
 	font-weight: 700 !important;
 	font-size: 25px;
+}
+
+.btn-login{
+	width: 250px !important;
+	font-weight: 700;
+	color: #ff6200 !important;
+}
+
+.dropdown-login{
+	width: 250px;
+}
+
+.dropdown-login li{
+	padding: 5px 0;
+	margin: 0;
+}
+
+.dropdown-login li a{
+	color: black;
+	font-weight: 500;
+}
+
+.dropdown-login li a:hover{
+	cursor: pointer;
+	text-decoration-line: none;
 }
 
 @media (max-width: 767px) {

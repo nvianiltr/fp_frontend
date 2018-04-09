@@ -26,7 +26,7 @@ export class UpdateArticleComponent implements OnInit {
   getArticle():void {
     const id = +this.route.snapshot.paramMap.get('id');
     //console.log(id);
-    this.articleService.getArticle(id).subscribe(article => {this.article = article;});
+    this.articleService.getArticleByID(id).subscribe(article => {this.article = article;});
       //.subscribe(article => this.article = article);
   }
 
