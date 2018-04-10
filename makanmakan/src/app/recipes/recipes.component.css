@@ -3,8 +3,9 @@
 }
 
 .container{
-	margin-top:10vh;
+	margin-top:15vh;
 	margin-bottom: 10vh;
+	min-height: 75vh;
 }
 
 #article-container h1{

@@ -3,7 +3,6 @@ import { Recipe } from "../models/Recipe";
 import { RecipeService } from "../recipe.service";
 import { DatePipe } from '@angular/common';
 
-
 @Component({
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',

@@ -81,8 +81,16 @@ form button:hover{
 .btn-login{
 	width: 250px !important;
 	font-weight: 700;
-	color: #ff6200 !important;
+	background-color: #ff6200 !important;
+	color: white !important;
+	border: none !important;
+	text-align: right !important;
 }
+
+.btn-login:active, .btn-login:hover, .btn-login:focus{
+	border:none !important;
+	box-shadow: none !important;
+} 
 
 .dropdown-login{
 	width: 250px;

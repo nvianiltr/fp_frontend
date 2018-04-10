@@ -14,6 +14,7 @@ import {UserService} from '../user.service';
 export class CreateArticleComponent implements OnInit {
 
 	@Input() article: Article;
+
   user: User;
   message: string;
   res: any = {};
@@ -22,10 +23,15 @@ export class CreateArticleComponent implements OnInit {
     private route:ActivatedRoute,
     private router: Router,
     private articleService: ArticleService,
-    private userService: UserService,
-    private location: Location, private datepipe: DatePipe) { }
+    private location: Location,
+
+
+
+    private userService: UserService, private datepipe: DatePipe) { }
+
 
   ngOnInit() {
+
     this.article = new Article();
   }
 
@@ -49,7 +55,5 @@ export class CreateArticleComponent implements OnInit {
       this.message = this.res.error.error;
     });
 
-    // console.log(this.article.id);
-    //this.router.navigate(['/Article/' + this.article.id]);
   }
 }
