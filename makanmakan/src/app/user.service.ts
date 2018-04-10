@@ -43,6 +43,11 @@ export class UserService {
     }
   }
 
+  getUser(): User {
+    return this.user;
+  }
+
+
   register(signup: Signup) {
     const registerUrl = `${this.url}/register`;
     return this.http.post(registerUrl, signup, httpOptions).map(res => {

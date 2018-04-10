@@ -24,6 +24,7 @@ import { RecipeCollectionComponent } from './recipe-collection/recipe-collection
 import { RecipeCollectionService } from './recipe-collection.service';
 import { UpdateArticleComponent } from './update-article/update-article.component';
 import { UpdateRecipeComponent } from './update-recipe/update-recipe.component';
+import {DatePipe} from '@angular/common';
 
 
 @NgModule({
@@ -52,7 +53,7 @@ import { UpdateRecipeComponent } from './update-recipe/update-recipe.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [ArticleService, UserService, RecipeService],
+  providers: [ArticleService, UserService, RecipeService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -18,7 +18,7 @@ import { UpdateRecipeComponent } from './update-recipe/update-recipe.component';
 
 
 import { ArticlesComponent } from './articles/articles.component';
-import {AuthGuard} from './auth.guard';
+import { AuthGuard } from './auth.guard';
 import {AppComponent} from './app.component';
 
 
@@ -32,17 +32,16 @@ const routes: Routes = [
   	{ path: 'article/:id', component: ArticleDetailComponent },
   	{ path: 'recipes', component: RecipesComponent },
    	{ path: 'recipe/:id', component: RecipeDetailComponent },
-
-    { path: 'create/article', component: CreateArticleComponent},
-
-    { path: 'create/recipe', component: CreateRecipeComponent },
-    { path: 'user/recipe-collection', component: RecipeCollectionComponent},
-    { path: 'article/:id/update', component:UpdateArticleComponent },
-    { path: 'recipe/:id/update', component:UpdateRecipeComponent }
+    { path: 'create/article', component: CreateArticleComponent, canActivate: [AuthGuard]},
+    { path: 'create/recipe', component: CreateRecipeComponent, canActivate: [AuthGuard]},
+    { path: 'user/recipe-collection', component: RecipeCollectionComponent, canActivate: [AuthGuard]},
+    { path: 'article/:id/update', component:UpdateArticleComponent, canActivate: [AuthGuard]},
+    { path: 'recipe/:id/update', component:UpdateRecipeComponent, canActivate: [AuthGuard]}
 ]
 
 @NgModule({
 	imports: [ RouterModule.forRoot(routes) ],
-	exports: [ RouterModule ]
+	exports: [ RouterModule ],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }
