@@ -26,12 +26,12 @@ export class LoginComponent implements OnInit {
       res => {
         this.res = res;
         this.message = null;
-        console.log(this.res);
+        // console.log(this.res);
         this.router.navigate(['']);
         location.reload();
       }, err => {
         this.res = err;
-        console.log(this.res.error);
+        // console.log(this.res.error);
         this.message = this.res.error.error;
       });
   }
