@@ -38,8 +38,16 @@ export class ArticleService {
   	   return this.http.patch<Article>(url, article, httpOptions);
   }
 
-  addArticle(article:Article): Observable<Article>{
-  	return this.http.post<Article>(this.articlesUrl, article, httpOptions);
+  // addArticle(article:Article){
+  // 	return this.http.post<Article>(this.articlesUrl, article, httpOptions);
+  // }
+
+  addArticle(article:Article){
+//    const url = `${this.articlesUrl}`;
+      return this.http.post(this.articlesUrl, article, httpOptions).map(res => {
+      console.log(res);
+      return res;
+    });
   }
 
 }

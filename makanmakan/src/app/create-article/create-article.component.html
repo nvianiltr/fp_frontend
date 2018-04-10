@@ -4,18 +4,16 @@
 	<form>
 		<div class="form-group">
 			<label>Article Title</label>
-			<input #articleTitle name="articleTitle" type="text" class="form-control form-control-lg" id="articleTitle" placeholder="Your Title" required>
+			<input [(ngModel)] = "article.title" name="articleTitle" type="text" class="form-control form-control-lg" id="articleTitle" placeholder="Your Title" required>
 		</div>
 		<div class="form-group">
  			<label>Article Content</label>
-			<textarea #articleContent class="form-control" id="articleContent" rows="10" name="articleContent" required></textarea>
+			<textarea [(ngModel)] = "article.content" class="form-control" id="articleContent" rows="10" name="articleContent" required></textarea>
 		</div>
 		<div class="form-group">
 		    <label for="articlePic">Upload Picture</label>
 		    <input type="file" class="form-control-file" id="articlePic">
 		</div>
-		  <button type="submit" class="btn btn-warning" 
-		  (click)="add(articleTitle.value, articleContent.value);
-		  articleTitle.value=''; articleContent.value='';">Save</button>
+		  <button type="submit" class="btn btn-warning" (click)="add()">Save</button>
 	</form>
 </div>

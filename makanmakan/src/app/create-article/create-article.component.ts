@@ -13,19 +13,30 @@ import { ArticleService } from '../article.service';
 })
 export class CreateArticleComponent implements OnInit {
 
-	articles: Article[] = [];
+	@Input() article: Article;
+  res: any = {};
 
   constructor(
     private route:ActivatedRoute,
     private articleService: ArticleService,
     private location: Location) { }
 
-  add(title:string, content:string){
-  	this.articleService.addArticle({title, content} as Article)
-  	.subscribe(articles => this.articles.push(articles));
+  // add(title:string, content:string){
+  // 	this.articleService.addArticle(article)
+  // 	.subscribe(article => this.articles ;
+  // }
+
+  add() {
+    this.articleService.addArticle(this.article).subscribe(
+       res => {
+         this.res = res;
+       });
   }
 
+//    console.log(this.article);
+
   ngOnInit() {
+    this.article = new Article;
   }
 
 }
