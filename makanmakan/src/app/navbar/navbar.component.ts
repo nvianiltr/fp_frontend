@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import {UserService} from '../user.service';
 import {RecipeService} from '../recipe.service';
 import {NavigationEnd, Router} from '@angular/router';
+import {User} from '../models/User';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +12,7 @@ import {NavigationEnd, Router} from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   constructor(private userService: UserService, private recipeService: RecipeService, private router: Router) {
+
     this.router.routeReuseStrategy.shouldReuseRoute = function(){
       return false;
     }
@@ -29,6 +31,8 @@ export class NavbarComponent implements OnInit {
   @Input() name: string;
   isLoggedIn: boolean;
   tags: any = [];
+  user: User;
+
 
   ngOnInit() {
     this.isLogin();
@@ -38,6 +42,10 @@ export class NavbarComponent implements OnInit {
   isLogin() {
     // console.log(this.userService.isLogin());
     this.isLoggedIn = this.userService.isLogin();
+
+    if(this.userService.isLogin()) {
+      this.user = this.userService.getUser();
+    }
   }
 
   getTags() {
@@ -56,4 +64,8 @@ export class NavbarComponent implements OnInit {
     location.reload();
   }
 
+  openRecipeCollection() {
+    this.router.navigate(['/user/'+this.user.id+'/recipe-collection']);
+//routerLink="/user/{{user.id}}/recipe-collection"
+  }
 }

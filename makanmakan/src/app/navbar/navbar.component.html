@@ -42,10 +42,12 @@
 
     <div *ngIf="isLoggedIn; else noLoggedIn">
       <div class="dropdown">
-        <button class="btn btn-login btn-warning dropdown-toggle" type="button" data-toggle="dropdown">Profile
+        <button class="btn btn-login btn-warning dropdown-toggle" type="button" data-toggle="dropdown">{{user.firstName}} {{user.lastName}}
           <span class="caret"></span></button>
         <ul class="dropdown-menu dropdown-login">
-          <li><a routerLink="/user/recipe-collection">Open Recipe Collection</a></li>
+          <li><a routerLink="/create/recipe">Create Recipe</a></li>
+          <li><a routerLink="/create/article">Create Article</a></li>
+          <li><a (click)="openRecipeCollection()">Open Recipe Collection</a></li>
           <li><a (click)="logout()">Log Out</a></li>
 
         </ul>
