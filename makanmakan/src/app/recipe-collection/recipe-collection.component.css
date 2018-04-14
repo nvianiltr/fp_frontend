@@ -61,3 +61,12 @@ img{
 	font-weight: 700;
 	border-bottom: 2px solid darkgrey;
 }
+
+#recipe-button{
+	padding-top: 20px;
+}
+
+#recipe-button button{
+	margin-top: 10px;
+	width: 100px;
+}

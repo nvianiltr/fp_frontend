@@ -24,14 +24,10 @@ export class CreateArticleComponent implements OnInit {
     private router: Router,
     private articleService: ArticleService,
     private location: Location,
-
-
-
     private userService: UserService, private datepipe: DatePipe) { }
 
 
   ngOnInit() {
-
     this.article = new Article();
   }
 
