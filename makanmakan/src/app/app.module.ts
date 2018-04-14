@@ -21,11 +21,13 @@ import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
 import { UserService } from './user.service';
 import { RecipeService } from './recipe.service';
 import { RecipeCollectionComponent } from './recipe-collection/recipe-collection.component';
-import { RecipeCollectionService } from './recipe-collection.service';
 import { UpdateArticleComponent } from './update-article/update-article.component';
 import { UpdateRecipeComponent } from './update-recipe/update-recipe.component';
-import {DatePipe} from '@angular/common';
-
+import { DatePipe } from '@angular/common';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from './../environments/environment';
 
 @NgModule({
   declarations: [
@@ -49,9 +51,12 @@ import {DatePipe} from '@angular/common';
   imports: [
     BrowserModule,
     FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     NgbModule.forRoot(),
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [ArticleService, UserService, RecipeService, DatePipe],
   bootstrap: [AppComponent]

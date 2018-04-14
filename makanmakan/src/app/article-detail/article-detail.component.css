@@ -4,6 +4,9 @@
 
 /*Article*/
 
+container {
+  margin-top:20px;
+}
 #article{
 	margin-top:100px;
 }

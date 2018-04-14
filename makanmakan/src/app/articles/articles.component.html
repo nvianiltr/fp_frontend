@@ -3,10 +3,11 @@
 <hr>
 <div class="row" *ngIf="isArticleAvailable; else noArticle">
   	<div class="col-3 article-food" *ngFor="let article of articles ">
-  		<img src="../../assets/pic1.jpg"> <br>
+  		<div *ngIf="article.imageURL!='default.jpg'">
+        <img id="image"> <br>
+      </div>
       	<h4><a routerLink="/article/{{article.id}}">{{article.title}}</a></h4>
       	<p>{{ article.dateCreated |date:'longDate' }}</p>
-      	<p style="color: darkgrey" (click)=saveCollection()>Save Article</p>
     </div>
 </div>
 </div>

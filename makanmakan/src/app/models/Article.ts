@@ -1,12 +1,11 @@
 export class Article
 {
     "id": any;
-    "user_id": string;
-    "imageUrl": string;
-    "username": string;
     "title": string;
-    "imageURL": string;
+    "user_id": string;
+    "username": string;
     "content":string;
+    "imageURL": string;
     "dateCreated":string;
     "isDeleted":boolean;
 }
