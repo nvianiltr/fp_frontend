@@ -1,33 +1,51 @@
 <div class="container-fluid">
 	<div class="row row-all">
-	<div class="col-3 recipe-collection-topic">
-		<i class="material-icons">face</i>
-		<h1>Your Recipe Collection</h1> <br>
-		<h3>Saved Recipe</h3>
-		<h3>Personal Recipe</h3>
-	</div>
-	<div class="col-9 recipe-col">
-	<div class="row" id="recipe-collection-all">
-		<div class="col-2">
-			<img src="../../assets/pic1.jpg">
+		<div class="col-3 recipe-collection-topic">
+			<h1>Your Recipe Collection</h1> <br>
+			<h3>Personal Article</h3>
+			<h3>Personal Recipe</h3>
+			<h3>Saved Recipe</h3>
 		</div>
-		<div class="col-9" id="recipe-collection-data">
-			<h3>The Recipe Name</h3>
-			<h4>Recipe Maker</h4>
-			<h4>Recipe Date</h4>
-			
+		<div class="col-9 recipe-col" *ngIf="isArticleAvailable; else noArticle">
+			<div class="row" id="recipe-collection-all" *ngFor="let article of articles">
+				<div class="col-2">
+					<img src="../../assets/pic1.jpg">
+				</div>	
+				<div class="col-8" id="recipe-collection-data">
+					<h3>{{article.title}}</h3>
+					<h4>{{article.username}}</h4>
+					<h4>{{article.dateCreated}}</h4>
+				</div>
+				<div class="col-1" id="recipe-button">
+					<button type="button" class="btn btn-success">
+						<a routerLink="article/{{article.id}}/update">Update</a>
+					</button>
+					<button type="button" class="btn btn-danger">
+					<a (click)="deleteArticle()">Delete</a>
+					</button>
+				</div>
+			</div>
 		</div>
-	</div>
-	<div class="row" id="recipe-collection-all">
-		<div class="col-2">
-			<img src="../../assets/pic1.jpg">
+
+		<div class="col-9 recipe-col" *ngIf="isRecipeAvailable; else noRecipe">
+			<div class="row" id="recipe-collection-all" *ngFor="let recipe of recipes">
+				<div class="col-2">
+					<img src="../../assets/pic1.jpg">
+				</div>	
+				<div class="col-8" id="recipe-collection-data">
+					<h3>{{recipe.title}}</h3>
+					<h4>{{recipe.username}}</h4>
+					<h4>{{recipe.dateCreated}}</h4>
+				</div>
+				<div class="col-1" id="recipe-button">
+					<button type="button" class="btn btn-success">
+						<a routerLink="recipe/{{recipe.id}}/update">Update</a>
+					</button>
+					<button type="button" class="btn btn-danger">Delete</button>
+				</div>
+			</div>
 		</div>
-		<div class="col-9" id="recipe-collection-data">
-			<h3>The Recipe Name</h3>
-			<h4>Recipe Maker</h4>
-			<h4>Recipe Date</h4>
-		</div>
+
+
 	</div>
-	</div>
-</div>
 </div>

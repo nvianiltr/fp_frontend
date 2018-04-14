@@ -24,6 +24,8 @@ import {AppComponent} from './app.component';
 
 const routes: Routes = [
   	{ path: '', redirectTo: 'home', pathMatch: 'full'},
+    { path: 'user/:id/recipe-collection/article/:id/update', redirectTo: 'article/:id/update', pathMatch: 'full'},
+    { path: 'user/:id/recipe-collection/recipe/:id/update', redirectTo: 'recipe/:id/update', pathMatch: 'full'},
     { path: 'home', component: HomeComponent},
 	  { path: 'login', component: LoginComponent },
 	  { path: 'signup', component: SignupComponent },
@@ -34,7 +36,7 @@ const routes: Routes = [
    	{ path: 'recipe/:id', component: RecipeDetailComponent },
     { path: 'create/article', component: CreateArticleComponent, canActivate: [AuthGuard]},
     { path: 'create/recipe', component: CreateRecipeComponent, canActivate: [AuthGuard]},
-    { path: 'user/recipe-collection', component: RecipeCollectionComponent, canActivate: [AuthGuard]},
+    { path: 'user/:id/recipe-collection', component: RecipeCollectionComponent, canActivate: [AuthGuard]},
     { path: 'article/:id/update', component:UpdateArticleComponent, canActivate: [AuthGuard]},
     { path: 'recipe/:id/update', component:UpdateRecipeComponent, canActivate: [AuthGuard]}
 ]

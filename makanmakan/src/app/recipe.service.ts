@@ -9,12 +9,18 @@ import 'rxjs/add/operator/map';
 import { Recipe } from './models/Recipe';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({
+   'Content-Type': 'application/json',
+   'Authorization': `Bearer ${localStorage.token}`
+  }),
 };
 
 @Injectable()
 export class RecipeService {
 	private recipesUrl = 'http://localhost:8000/api/Recipe';  // URL to web api
+
+  private personalrecipesUrl = 'http://localhost:8000/api/SavedRecipe';  // URL to web api
+
 
 	constructor(private http: HttpClient) { }
 
@@ -40,5 +46,13 @@ export class RecipeService {
   searchRecipe(name: string): Observable<Recipe[]>  {
 	  const url = `${this.recipesUrl}/search/${name}`;
     return this.http.get<Recipe[]>(url).map(res => {return res;});
+  }
+
+  getPersonalRecipe(id: number):Observable<Recipe[]>{
+    const url = `${this.personalrecipesUrl}/${id}`;
+    return this.http.get<Recipe[]>(url,httpOptions).map(res => {
+      console.log(res);
+      return res;
+    });
   }
 }
