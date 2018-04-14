@@ -33,6 +33,9 @@ export class RecipeCollectionComponent implements OnInit {
   public ngOnInit()
   {
     $(document).ready(function(){
+      $("#personal-article").click(function(){
+        
+      })
     });
 
     this.getPersonalArticles();
@@ -54,12 +57,12 @@ export class RecipeCollectionComponent implements OnInit {
       }});
   }
 
-  deleteArticle():void{
-        const id = +this.route.snapshot.paramMap.get('id');
-    //console.log(id);
-    this.articleService.deletePersonalArticle(id).subscribe(article => {this.article = article;});
-      //.subscribe(article => this.article = article);
-  }
+  // deleteArticle():void{
+  //       const id = +this.route.snapshot.paramMap.get('id');
+  //   //console.log(id);
+  //   this.articleService.deletePersonalArticle(id).subscribe(article => {this.articles = article;});
+  //     //.subscribe(article => this.article = article);
+  // }
 
   getPersonalRecipes(): void{
   const id = +this.route.snapshot.paramMap.get('id');
