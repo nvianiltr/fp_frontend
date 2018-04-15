@@ -16,13 +16,11 @@ import { ArticleDetailComponent } from './article-detail/article-detail.componen
 import { RecipesComponent } from './recipes/recipes.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { ArticleService } from './article.service';
-import { CreateArticleComponent } from './create-article/create-article.component';
-import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
+import { ArticleEditorComponent } from './article-editor/article-editor.component';
+import { RecipeEditorComponent } from './recipe-editor/recipe-editor.component';
 import { UserService } from './user.service';
 import { RecipeService } from './recipe.service';
 import { RecipeCollectionComponent } from './recipe-collection/recipe-collection.component';
-import { UpdateArticleComponent } from './update-article/update-article.component';
-import { UpdateRecipeComponent } from './update-recipe/update-recipe.component';
 import { DatePipe } from '@angular/common';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -42,11 +40,9 @@ import { environment } from './../environments/environment';
     ArticleDetailComponent,
     RecipesComponent,
     ArticlesComponent,
-    CreateArticleComponent,
-    CreateRecipeComponent,
+    ArticleEditorComponent,
+    RecipeEditorComponent,
     RecipeCollectionComponent,
-    UpdateArticleComponent,
-    UpdateRecipeComponent
   ],
   imports: [
     BrowserModule,

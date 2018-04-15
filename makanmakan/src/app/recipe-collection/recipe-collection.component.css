@@ -1,3 +1,7 @@
+*{
+  font-family: 'Montserrat', sans-serif
+}
+
 .container-fluid{
 	padding: 0;
 	margin-top:70px;
@@ -62,11 +66,19 @@ img{
 	border-bottom: 2px solid darkgrey;
 }
 
-#recipe-button{
-	padding-top: 20px;
-}
-
 #recipe-button button{
 	margin-top: 10px;
 	width: 100px;
 }
+
+h3 a{
+  color:#ff6200;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+p a{
+  color:black;
+  text-decoration: none;
+}
+

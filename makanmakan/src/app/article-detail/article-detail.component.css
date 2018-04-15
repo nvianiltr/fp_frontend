@@ -4,9 +4,11 @@
 
 /*Article*/
 
-container {
-  margin-top:20px;
+.container {
+  margin-top:0px;
+  margin-bottom:0px;
 }
+
 #article{
 	margin-top:100px;
 }

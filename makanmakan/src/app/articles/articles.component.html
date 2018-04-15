@@ -3,11 +3,14 @@
 <hr>
 <div class="row" *ngIf="isArticleAvailable; else noArticle">
   	<div class="col-3 article-food" *ngFor="let article of articles ">
-  		<div *ngIf="article.imageURL!='default.jpg'">
-        <img id="image"> <br>
+      <div *ngIf="article.imageURL!='default.jpg';else noImage">
+        <img src="{{article.imageURL}}"> <br>
       </div>
+      <ng-template #noImage>
+        <img src="../../assets/default.jpg"> <br>
+      </ng-template>
       	<h4><a routerLink="/article/{{article.id}}">{{article.title}}</a></h4>
-      	<p>{{ article.dateCreated |date:'longDate' }}</p>
+      	<p>by {{ article.username }}</p>
     </div>
 </div>
 </div>

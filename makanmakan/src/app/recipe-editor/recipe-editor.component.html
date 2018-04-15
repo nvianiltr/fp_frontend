@@ -1,0 +1,53 @@
+<div class="container">
+  <h1>Create Your Recipe</h1>
+  <hr>
+  <form>
+    <div class="form-group">
+      <label>Recipe Title</label>
+      <input [(ngModel)]="recipe.title" type="text" class="form-control form-control-lg" id="recipeTite" name="recipeTitle" required>
+    </div>
+    <div class="form-group">
+      <label>About Recipe</label>
+      <textarea [(ngModel)]="recipe.about" class="form-control" id="recipeAbout" rows="2" name="recipeAbout"></textarea>
+    </div>
+      <div class="form-group">
+        <label>Serving Quantity</label>
+        <input [(ngModel)]="recipe.servingQty" type="number" class="form-control form-control-lg" id="servingQty" name="servingQty">
+      </div>
+      <div class="form-group">
+        <label>Serving Unit</label>
+        <select class="form-control" id="servingUnit">
+          <option *ngFor="let unit of units">{{unit}}</option>
+        </select>
+      </div>
+    <hr>
+    <div><label>Ingredient</label></div>
+    <hr>
+    <div class="form-group">
+      <label>Preparation</label>
+      <textarea [(ngModel)]="recipe.preparation" class="form-control" id="recipePreparation" rows="5" name="recipePreparation"></textarea>
+    </div>
+    <hr>
+    <div class="form-group">
+      <label>Details</label>
+      <br>
+      <select style="width:100%" data-placeholder="" multiple class="chosen-select" tabindex="5">
+        <option value=""></option>
+        <optgroup *ngFor="let tag of tags" label={{tag.name}}>
+          <option *ngFor="let detail of tag.tag_header">{{detail.name}}</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="articlePic">Upload Picture</label>
+      <input type="file" class="form-control-file" id="articlePic">
+    </div>
+    <button type="submit" class="btn btn-warning">Save</button>
+  </form>
+</div>
+<script src="https://harvesthq.github.io/chosen/chosen.jquery.js"></script>
+<script>
+  $(document).ready(function () {
+    $(".chosen-select").chosen();
+  })
+</script>

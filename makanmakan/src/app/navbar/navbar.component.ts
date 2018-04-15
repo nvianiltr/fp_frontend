@@ -40,7 +40,6 @@ export class NavbarComponent implements OnInit {
   }
 
   isLogin() {
-    // console.log(this.userService.isLogin());
     this.isLoggedIn = this.userService.isLogin();
 
     if(this.userService.isLogin()) {
@@ -64,8 +63,4 @@ export class NavbarComponent implements OnInit {
     location.reload();
   }
 
-  openRecipeCollection() {
-    this.router.navigate(['/user/'+this.user.id+'/recipe-collection']);
-//routerLink="/user/{{user.id}}/recipe-collection"
-  }
 }

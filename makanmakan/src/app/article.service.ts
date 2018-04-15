@@ -20,9 +20,6 @@ const httpOptions = {
 export class ArticleService {
   private articlesUrl = 'http://localhost:8000/api/Article';  // URL to web api
 
-  private personalarticlesUrl = 'http://localhost:8000/api/SavedArticle';  // URL to web api
-
-
   constructor(private http: HttpClient) { }
 
   getArticles(): Observable<Article[]> {
@@ -32,7 +29,20 @@ export class ArticleService {
   getArticleByID(id: number): Observable<Article> {
     const url = `${this.articlesUrl}/${id}`;
     return this.http.get<Article>(url).map(res => {
-      console.log(res);
+      // console.log(res);
+      return res;
+    });
+  }
+
+  addArticle(article: Article): Observable<Article> {
+    return this.http.post<Article>(this.articlesUrl, article, httpOptions)
+    .map(res=>{console.log(res); return res;});
+  }
+
+  getPersonalArticle(id: number):Observable<Article[]>{
+    const url = `${this.articlesUrl}/personal/${id}`;
+    return this.http.get<Article[]>(url,httpOptions).map(res => {
+     // console.log(res);
       return res;
     });
   }
@@ -42,25 +52,12 @@ export class ArticleService {
     return this.http.put<Article>(url, article, httpOptions);
   }
 
-  addArticle(article: Article): Observable<Article> {
-    return this.http.post<Article>(this.articlesUrl, article, httpOptions)
-    .map(res=>{console.log(res); return res;});
-  }
-
-  getPersonalArticle(id: number):Observable<Article[]>{
-    const url = `${this.personalarticlesUrl}/${id}`;
-    return this.http.get<Article[]>(url,httpOptions).map(res => {
-      console.log(res);
-      return res;
-    });
-  }
-
   deletePersonalArticle(id:number){
-    const url = `${this.articlesUrl}/${id}`;
-    console.log(url);
-    return this.http.delete(url, httpOptions).map(res => {
-      console.log(res);
-    });
+    // const url = `${this.articlesUrl}/${id}`;
+    // console.log(url);
+    // return this.http.delete(url, httpOptions).map(res => {
+    //   console.log(res);
+    // });
   }
 
 }

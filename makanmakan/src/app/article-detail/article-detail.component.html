@@ -3,16 +3,16 @@
 <div class="container" *ngIf="article">
   <div class="row">
     <div class="col-12" id="article">
-      <!--<img src="{{ asset('assets/images/pic1.jpg') }}">-->
-      <img id="image" src=""/>
+      <div *ngIf="article.imageURL!='default.jpg';else noImage">
+        <img src="{{article.imageURL}}"> <br>
+      </div>
+      <ng-template #noImage>
+        <img src="../../assets/default.jpg"> <br>
+      </ng-template>
       <h1>{{article.title}}</h1>
-      <h6>created by <span>{{ article.username }}</span> at <span>{{ article.dateCreated }}</span></h6>
+      <h6>created by <span>{{ article.username }}</span> at <span>{{ article.dateCreated | date:'longDate' }}</span></h6>
       <hr>
-
       <p>{{ article.content }}</p>
-      <a routerLink="update">Change Content</a>
-
-
     </div>
   </div>
 </div>

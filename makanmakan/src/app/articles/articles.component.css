@@ -20,14 +20,24 @@
 }
 
 img {
-	width: 25vh;
-	height: 15vh;
+  alignment: center;
+	width: 40vh;
+	height: 25vh;
 }
 
-.article-food .article-food-write{
-	margin: 0 10px !important;
-	padding: 0;
+.row {
+  alignment: center;
+}
 
+.article-food {
+	margin: 5px 10px !important;
+	padding: 10px !important;
+  border: 2px solid black;
+  display: block;
+  margin: 15px auto;
+}
+.article-food img {
+  /*align*/
 }
 
 h4{
