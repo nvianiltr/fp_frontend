@@ -55,7 +55,7 @@ export class ArticleService {
     });
   }
 
-  deletePersonalArticle(id:number){
+  deletePersonalArticle(id:number): any{
     const url = `${this.articlesUrl}/${id}`;
     console.log(url);
     return this.http.delete(url, httpOptions).map(res => {

@@ -1,7 +1,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-12 recipe-collection-topic">
-			<h1>Your Recipe Collection</h1>
+			<h1>Your Article Collection</h1>
 <!--			<h3><a (click)="toPersonalArticle()">Personal Article</a></h3>
 			<h3> | </h3>
 			<h3>Personal Recipe</h3>
@@ -11,22 +11,22 @@
 	</div>
 
 	<div class="row" id="row-article">
-		<div class="col-12 recipe-col" id="personal-article" *ngIf="isRecipeAvailable; else noRecipe">
-			<div class="row" id="recipe-collection-all" *ngFor="let recipe of recipes">
+		<div class="col-12 recipe-col" id="personal-article" *ngIf="isArticleAvailable; else noArticle">
+			<div class="row" id="recipe-collection-all" *ngFor="let article of articles">
 				<div class="col-2">
 					<img src="../../assets/pic1.jpg">
 				</div>	
 				<div class="col-8" id="recipe-collection-data">
-					<h3>{{recipe.title}}</h3>
-					<h4>{{recipe.username}}</h4>
-					<h4>{{recipe.dateCreated}}</h4>
+					<h3>{{article.title}}</h3>
+					<h4>{{article.username}}</h4>
+					<h4>{{article.dateCreated}}</h4>
 				</div>
 				<div class="col-1" id="recipe-button">
 					<button type="button" class="btn btn-success">
-						<a routerLink="article/{{recipe.id}}/update">Update</a>
+						<a routerLink="article/{{article.id}}/update">Update</a>
 					</button>
 					<button type="button" class="btn btn-danger">
-					<a (click)="deleteArticle(recipe.id)">Delete</a>
+					<a (click)="deleteArticle(article.id)">Delete</a>
 					</button>
 				</div>
 			</div>

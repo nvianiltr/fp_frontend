@@ -12,13 +12,13 @@ import {Location} from '@angular/common';
 import * as $ from 'jquery';
 
 import {User} from '../models/User';
-
 @Component({
-  selector: 'app-recipe-collection',
-  templateUrl: './recipe-collection.component.html',
-  styleUrls: ['./recipe-collection.component.css']
+  selector: 'app-personal-article',
+  templateUrl: './personal-article.component.html',
+  styleUrls: ['./personal-article.component.css']
 })
-export class RecipeCollectionComponent implements OnInit {
+export class PersonalArticleComponent implements OnInit {
+
 
   articles: Article[];
   article: Article;
@@ -94,6 +94,5 @@ export class RecipeCollectionComponent implements OnInit {
   saveCollection():void{
 
   }
-
 
 }

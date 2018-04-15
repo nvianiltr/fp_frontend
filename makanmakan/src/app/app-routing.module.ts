@@ -15,7 +15,8 @@ import { CreateArticleComponent } from './create-article/create-article.componen
 import {RecipeCollectionComponent} from './recipe-collection/recipe-collection.component';
 import { UpdateArticleComponent } from './update-article/update-article.component';
 import { UpdateRecipeComponent } from './update-recipe/update-recipe.component';
-
+import { PersonalArticleComponent} from './personal-article/personal-article.component';
+import { SavedRecipeComponent } from './saved-recipe/saved-recipe.component';
 
 import { ArticlesComponent } from './articles/articles.component';
 import { AuthGuard } from './auth.guard';
@@ -38,7 +39,9 @@ const routes: Routes = [
     { path: 'create/recipe', component: CreateRecipeComponent, canActivate: [AuthGuard]},
     { path: 'user/:id/recipe-collection', component: RecipeCollectionComponent, canActivate: [AuthGuard]},
     { path: 'article/:id/update', component:UpdateArticleComponent, canActivate: [AuthGuard]},
-    { path: 'recipe/:id/update', component:UpdateRecipeComponent, canActivate: [AuthGuard]}
+    { path: 'recipe/:id/update', component:UpdateRecipeComponent, canActivate: [AuthGuard]},
+    { path: 'user/:id/personal-article', component: PersonalArticleComponent, canActivate: [AuthGuard]},
+    { path: 'user/:id/saved-recipe', component: SavedRecipeComponent, canActivate: [AuthGuard]},
 ]
 
 @NgModule({

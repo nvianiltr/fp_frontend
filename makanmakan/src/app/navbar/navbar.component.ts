@@ -66,6 +66,11 @@ export class NavbarComponent implements OnInit {
 
   openRecipeCollection() {
     this.router.navigate(['/user/'+this.user.id+'/recipe-collection']);
-//routerLink="/user/{{user.id}}/recipe-collection"
+  }
+  openPersonalArticle() {
+    this.router.navigate(['/user/'+this.user.id+'/personal-article']);
+  }
+  openSavedRecipe() {
+    this.router.navigate(['/user/'+this.user.id+'/saved-recipe']);
   }
 }
