@@ -4,43 +4,55 @@
 	<form>
 		<div class="form-group">
 			<label>Recipe Title</label>
-			<input type="text" class="form-control form-control-lg" id="recipeTitle" name="recipeTitle" required>
+			<input [(ngModel)]="recipe.about" type="text" class="form-control form-control-lg" id="recipeTitle" name="recipeTitle" required>
 		</div>
 		<div class="form-group">
  			<label>About Recipe</label>
-			<textarea class="form-control" id="recipeContent" rows="2" name="recipeContent" placeholder="What is your recipe about?"></textarea>
+			<textarea [(ngModel)]="recipe.about" class="form-control" id="recipeContent" rows="2" name="recipeContent" placeholder="What is your recipe about?"></textarea>
 		</div>
 		<div class="form-group">
 			<label>Serving Qty</label>
-			<input type="number" class="form-control form-control-lg" id="servingQty" name="servingQty">
+			<input [(ngModel)]="recipe.servingQty" type="number" class="form-control form-control-lg" id="servingQty" name="servingQty">
 		</div>
 		<div class="form-group">
 			<label>Serving Unit</label>
-			<select class="form-control" id="servingUnit">
-				<option>kg</option>
-				<option>pound</option>
-				<option>person</option>
-				<option>litre</option>
-				<option>servings</option>
+			<select  [(ngModel)]="recipe.servingUnit" class="form-control" id="servingUnit">
+				<!--<option [value]="kg">kg</option>
+				<option [value]="pound">pound</option>
+				<option [value]="person">person</option>
+				<option [value]="litre">litre</option>
+				<option [value]="servings">servings</option>-->
+				<option [value]="kg">kg</option>
+				<option [value]="pound">pound</option>
+				<option [value]="person">person</option>
+				<option [value]="litre">litre</option>
+				<option [value]="servings">servings</option>
 			</select>
 		</div>
 		<div class="form-group">
  			<label>Preparation</label>
-			<textarea class="form-control" id="recipeContent" rows="5" name="recipeContent"></textarea>
+			<textarea [(ngModel)]="recipe.preparation" class="form-control" id="recipeContent" rows="5" name="recipeContent"></textarea>
 		</div>
-		<div class="form-group">
-			<label>Meal Course</label>
-			<select class="form-control" id="mealCourse">
-				<option>Appetizer</option>
+
+		<div>
+		<div class="form-group" *ngFor="let tag of tags">
+			<label>{{tag.name}}</label>
+			<select class="form-control" id="mealCourse" >
+				<!--<option>Appetizer</option>
 				<option>Breakfast</option>
 				<option>Brunch</option>
 				<option>Buffet</option>
 				<option>Dessert</option>
 				<option>Dinner</option>
 				<option>Lunch</option>
-				<option>Side</option>
+				<option>Side</option>-->
+
+				<option *ngFor="let detail of tag.tag_header">{{detail.name}}</option>
 			</select>
 		</div>
+		</div>
+<br><br>
+<!--
 		<div class="form-group">
 			<label>Cuisine</label>
 			<select class="form-control" id="cuisine">
@@ -75,14 +87,15 @@
 				<option>Low / No Sugar</option>
 				<option>Wheat / Gluten-free</option>
 				<option>Kid-Friendly</option>
-				<option>Quick&Easy</option>
+				<option>Quick&amp;Easy</option>
 				<option>Vegetarian</option>
 			</select>
 		</div>
+-->
 		<div class="form-group">
 		    <label for="articlePic">Upload Picture</label>
 		    <input type="file" class="form-control-file" id="articlePic">
 		</div>
-		<button type="submit" class="btn btn-warning">Save</button>
+		<button type="submit" class="btn btn-warning" (click)="add()">Save</button>
 	</form>
 </div>

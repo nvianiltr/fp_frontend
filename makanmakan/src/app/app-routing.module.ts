@@ -25,7 +25,7 @@ import {AppComponent} from './app.component';
 
 const routes: Routes = [
   	{ path: '', redirectTo: 'home', pathMatch: 'full'},
-    { path: 'user/:id/recipe-collection/article/:id/update', redirectTo: 'article/:id/update', pathMatch: 'full'},
+    { path: 'user/:id/personal-article/article/:id/update', redirectTo: 'article/:id/update', pathMatch: 'full'},
     { path: 'user/:id/recipe-collection/recipe/:id/update', redirectTo: 'recipe/:id/update', pathMatch: 'full'},
     { path: 'home', component: HomeComponent},
 	  { path: 'login', component: LoginComponent },

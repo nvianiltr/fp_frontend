@@ -30,6 +30,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from './../environments/environment';
 import { PersonalArticleComponent } from './personal-article/personal-article.component';
 import { SavedRecipeComponent } from './saved-recipe/saved-recipe.component';
+import { ReviewService } from './review.service';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import { SavedRecipeComponent } from './saved-recipe/saved-recipe.component';
     HttpClientModule,
     AppRoutingModule,
   ],
-  providers: [ArticleService, UserService, RecipeService, DatePipe],
+  providers: [ArticleService, UserService, RecipeService, DatePipe, ReviewService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

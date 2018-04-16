@@ -9,6 +9,9 @@
         <p>{{ingredient.quantity}} {{ingredient.unit}} {{ingredient.ingredient.name}}</p>
       </div>
       <hr>
+      <h1>About This Recipe</h1>
+      <p>{{recipe.about}}</p>
+      <hr>
       <h1> Preparation Steps</h1>
       <p>{{ recipe.preparation }}</p>
       <hr>
@@ -27,11 +30,11 @@
         <form>
           <div class="form-group">
             <label for="comment"><strong>Leave a review</strong></label>
-            <textarea class="form-control" id="comment-area" rows="3"></textarea>
+            <textarea class="form-control" name="content" id="comment-area" rows="3" [(ngModel)]="review.content" #content="ngModel"></textarea>
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary" (click)="addReviews()">Submit</button>
         </form>
-      </div>
+      </div>  
 
       <ng-template #disabledForm>
         <form>

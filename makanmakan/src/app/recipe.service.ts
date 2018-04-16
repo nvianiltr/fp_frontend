@@ -55,4 +55,18 @@ export class RecipeService {
       return res;
     });
   }
+
+  deletePersonalRecipe(id:number):any{
+   const url = `${this.recipesUrl}/${id}`;
+    console.log(url);
+    return this.http.delete(url, httpOptions).map(res => {
+      console.log(res);
+    });
+  }
+
+  addRecipe(recipe:Recipe):Observable<Recipe>{
+    return this.http.post<Recipe>(this.recipesUrl, recipe, httpOptions)
+    .map(res=>{console.log(res); return res;});
+  }
+  
 }

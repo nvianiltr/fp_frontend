@@ -21,7 +21,7 @@ import {User} from '../models/User';
 export class RecipeCollectionComponent implements OnInit {
 
   articles: Article[];
-  article: Article;
+  recipe: Recipe;
   recipes: Recipe[];
   isArticleAvailable:  boolean;
   isRecipeAvailable:  boolean;
@@ -45,30 +45,32 @@ export class RecipeCollectionComponent implements OnInit {
         });
     });
 
-    this.getPersonalArticles();
+    // this.getPersonalArticles();
     this.getPersonalRecipes();
   }
 
-  getPersonalArticles(): void {
-	const id = +this.route.snapshot.paramMap.get('id');
-    //console.log(id);
-    this.articleService.getPersonalArticle(id).
-    	subscribe(articles => {
-        if(articles.length!=0) {
-        this.articles = articles;
-        console.log(this.articles);
-        this.isArticleAvailable = true;
-      }
-      else {
-        this.isArticleAvailable = false;
-      }});
-  }
+ //  getPersonalArticles(): void {
+	// const id = +this.route.snapshot.paramMap.get('id');
+ //    //console.log(id);
+ //    this.articleService.getPersonalArticle(id).
+ //    	subscribe(articles => {
+ //        if(articles.length!=0) {
+ //        this.articles = articles;
+ //        console.log(this.articles);
+ //        this.isArticleAvailable = true;
+ //      }
+ //      else {
+ //        this.isArticleAvailable = false;
+ //      }});
+ //  }
 
-  deleteArticle(id: any){
+  deleteRecipe(id: any){
         // const id = +this.route.snapshot.paramMap.get('id');
     //console.log(id);
-    this.articleService.deletePersonalArticle(id).subscribe(article => {this.article = article;
-    window.location.reload(true)});
+    this.recipeService.deletePersonalRecipe(id).subscribe(recipe => {this.recipe = recipe;
+      this.router.navigate(['/user/'+this.user.id+'/recipe-collection']);
+      location.reload();
+    });
       //.subscribe(article => this.article = article);
   }
 
@@ -87,9 +89,9 @@ export class RecipeCollectionComponent implements OnInit {
       }});    
   }
 
-  toPersonalArticle():void{
-    this.router.navigate(['/user/'+this.user.id+'/recipe-collection/personal-article']);
-  }
+  // toPersonalArticle():void{
+  //   this.router.navigate(['/user/'+this.user.id+'/recipe-collection/personal-article']);
+  // }
 
   saveCollection():void{
 
