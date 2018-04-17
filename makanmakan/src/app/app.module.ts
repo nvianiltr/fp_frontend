@@ -31,6 +31,7 @@ import { environment } from './../environments/environment';
 import { PersonalArticleComponent } from './personal-article/personal-article.component';
 import { SavedRecipeComponent } from './saved-recipe/saved-recipe.component';
 import { ReviewService } from './review.service';
+import { ReportReviewComponent } from './report-review/report-review.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ReviewService } from './review.service';
     UpdateArticleComponent,
     UpdateRecipeComponent,
     PersonalArticleComponent,
-    SavedRecipeComponent
+    SavedRecipeComponent,
+    ReportReviewComponent
   ],
   imports: [
     BrowserModule,

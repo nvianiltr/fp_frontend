@@ -17,6 +17,7 @@ import { UpdateArticleComponent } from './update-article/update-article.componen
 import { UpdateRecipeComponent } from './update-recipe/update-recipe.component';
 import { PersonalArticleComponent} from './personal-article/personal-article.component';
 import { SavedRecipeComponent } from './saved-recipe/saved-recipe.component';
+import { ReportReviewComponent } from './report-review/report-review.component';
 
 import { ArticlesComponent } from './articles/articles.component';
 import { AuthGuard } from './auth.guard';
@@ -42,6 +43,7 @@ const routes: Routes = [
     { path: 'recipe/:id/update', component:UpdateRecipeComponent, canActivate: [AuthGuard]},
     { path: 'user/:id/personal-article', component: PersonalArticleComponent, canActivate: [AuthGuard]},
     { path: 'user/:id/saved-recipe', component: SavedRecipeComponent, canActivate: [AuthGuard]},
+    { path: 'report-review', component: ReportReviewComponent, canActivate:[AuthGuard] }
 ]
 
 @NgModule({

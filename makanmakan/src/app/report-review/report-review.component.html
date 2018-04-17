@@ -1,0 +1,16 @@
+<div class="container">
+	<h1>Report Review</h1>
+	<hr>
+	<form *ngIf="article">
+		<div class="form-group">
+			<label>Reported Review</label>
+			<input [(ngModel)]="review.content" name="reportContent" type="text" class="form-control form-control-lg" id="articleTite" placeholder="This is the content you want to report" >
+		</div>
+		<div class="form-group">
+ 			<label>Reported Reason</label>
+			<textarea [(ngModel)]="report.reason" class="form-control" id="articleContent" rows="10" name="articleContent" placeholder="Why you report it?"></textarea>
+		</div>
+		  <button type="submit" class="btn btn-warning" (click)="report()" >Save</button>
+		  <button type="submit" class="btn btn-warning" (click)="goBack()">Cancel</button>
+	</form>
+</div>
