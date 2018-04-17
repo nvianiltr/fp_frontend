@@ -9,8 +9,12 @@
   margin-bottom:0px;
 }
 
+.white-space-pre {
+  white-space: pre-wrap;
+}
+
 #article{
-	margin-top:100px;
+	margin-top:25px;
 }
 
 #article h1{

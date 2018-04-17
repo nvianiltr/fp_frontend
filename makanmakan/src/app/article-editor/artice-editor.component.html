@@ -1,20 +1,24 @@
 <div class="container">
   <h1>Create Your Article</h1>
   <hr>
+  <div class="alert alert-danger" *ngIf="message">
+    {{ message }}
+  </div>
   <form>
     <div class="form-group">
-      <div class="alert alert-danger" *ngIf="message">
-        {{ message }}
+      <div class="row">
+        <div class="col">
+          <label>Article Title*</label>
+        </div>
+        <div class="col">
+          <p align="right"><strong>*required fields</strong></p>
+        </div>
       </div>
-      <label>Article Title</label>
-
-      <input [(ngModel)]="article.title" #articleTitle name="articleTitle" type="text"
-             class="form-control form-control-lg" id="articleTitle" required>
+      <input [(ngModel)]="article.title" name="articleTitle" type="text" class="form-control form-control-lg" required>
     </div>
     <div class="form-group">
-      <label>Article Content</label>
-      <textarea [(ngModel)]="article.content" #articleContent class="form-control" id="articleContent" rows="10"
-                name="articleContent" required></textarea>
+      <label>Article Content*</label>
+      <textarea [(ngModel)]="article.content" class="form-control" rows="10" name="recipeAbout" required></textarea>
     </div>
     <div class="form-group">
       <label for="image">Upload Picture</label>

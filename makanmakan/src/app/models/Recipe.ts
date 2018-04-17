@@ -6,13 +6,12 @@ export class Recipe
   "title": string;
   "about": string;
   "pictureURL": string;
-  "servingQty": string;
+  "servingQty": any;
   "servingUnit": string;
   "preparation": string;
   "qty": string;
   "price": string;
   "dateCreated": string;
-  "isDeleted": string;
   "tag_details": any = {};
   "ingredient_details": any = {};
   "reviews": any = {};

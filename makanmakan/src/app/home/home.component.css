@@ -2,15 +2,15 @@
 	font-family: 'Montserrat', sans-serif
 }
 
-.container{
-	margin-bottom: 7.5vh;
-}
+/*.container{*/
+	/*margin-bottom: 7.5vh;*/
+/*}*/
 
 /*Part 1*/
 .jumbotron{
 	background-image:linear-gradient(rgba(255,98,0,.5), rgba(255,98,0,.5)),url(../../assets/pic1.jpg);
 	background-size: cover;
-	height: 95.5vh;
+	height: 100vh;
 	background-position: center;
 	padding-top: 30vh;
 	margin-bottom: 0;
@@ -53,123 +53,3 @@ form button:hover{
 	color: white;
 	cursor: pointer;
 }
-
-
-
-/*Part 2
-#trending-container div div h2{
-	color:#FF6200;
-	font-weight: 700;
-	font-size: 40px;
-}
-
-#trending-container div div{
-	margin:0;
-	padding: 0;
-	text-align: center;
-}
-
-.trending-food .trending-food-write{
-	margin: 0 10px !important;
-	padding: 0;
-
-	background-image:url(../../assets/pic1.jpg);
-	background-size: 60vh;
-	background-position: center;
-	background-repeat: no-repeat;
-
-	min-height: 25vh;
-
-	transition: background-size 0.25s;
-}
-
-.trending-food:hover .trending-food-write,
-.trending-food:focus .trending-food-write {
-	background-size: 75vh;
-}
-
-.trending-food h3{
-	margin-top: 2vh;
-	text-align: center;
-	color: black;
-	font-weight: 700;
-}
-/*
-/*Part 3
-#newest-container div div h2{
-	color:#FF6200;
-	font-weight: 700;
-	font-size: 40px;
-}
-
-#newest-container div div{
-	margin:0;
-	padding: 0;
-	text-align: center;
-}
-
-.newest-food .newest-food-write{
-	margin: 0 10px !important;
-	padding: 0;
-
-	background-image:url(../../assets/pic1.jpg);
-	background-size: 60vh;
-	background-position: center;
-	background-repeat: no-repeat;
-
-	min-height: 25vh;
-
-	transition: background-size 0.25s;
-}
-
-.newest-food:hover .newest-food-write,
-.newest-food:focus .newest-food-write {
-	background-size: 75vh;
-}
-
-.newest-food h3{
-	margin-top: 2vh;
-	text-align: center;
-	color: black;
-	font-weight: 700;
-}*/
-
-/*Part 4
-#article-container div div h2{
-	color:#FF6200;
-	font-weight: 700;
-	font-size: 40px;
-}
-
-#article-container div div{
-	margin:0;
-	padding: 0;
-	text-align: center;
-}
-
-.article-food .article-food-write{
-	margin: 0 10px !important;
-	padding: 0;
-
-	background-image:url(../../assets/pic1.jpg);
-	background-size: 60vh;
-	background-position: center;
-	background-repeat: no-repeat;
-
-	min-height: 25vh;
-
-	transition: background-size 0.25s;
-}
-
-.article-food:hover .article-food-write,
-.article-food:focus .article-food-write {
-	background-size: 75vh;
-}
-
-.article-food h3{
-	margin-top: 2vh;
-	text-align: center;
-	color: black;
-	font-weight: 700;
-	padding: 0 10px;
-}*/

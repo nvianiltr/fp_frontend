@@ -51,6 +51,7 @@ form button{
 
 form button:hover{
 	color:#ff6200 !important;
+  background-color: white !important;
 }
 
 p{
@@ -60,4 +61,9 @@ p{
 
 p span{
 	font-weight: 700;
+}
+
+a {
+  color:#ff6200 !important;
+  text-decoration: none;
 }

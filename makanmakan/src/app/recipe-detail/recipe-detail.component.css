@@ -2,9 +2,14 @@
 	font-family: 'Montserrat', sans-serif
 }
 
+
+.container {
+  margin-top:0px;
+  margin-bottom:0px;
+}
 /*Recipe.ts*/
 #recipe{
-	margin-top:10vh;
+	margin-top:12vh;
 }
 
 #recipe h1{
@@ -18,6 +23,11 @@
 #recipe img{
 	max-width: 52vw;
 	height: auto;
+  margin: 5px 0px;
+}
+
+.white-space-pre {
+  white-space: pre-wrap;
 }
 
 #recipe .images{

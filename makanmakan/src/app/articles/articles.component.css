@@ -2,11 +2,11 @@
 	font-family: 'Montserrat', sans-serif
 }
 
-.container{
-	margin-top:15vh;
-	margin-bottom: 10vh;
-	min-height: 75vh;
-}
+/*.container{*/
+	/*margin-top:15vh;*/
+	/*margin-bottom: 10vh;*/
+	/*min-height: 75vh;*/
+/*}*/
 
 #article-container h1{
 	color:#FF6200;
@@ -21,24 +21,19 @@
 
 img {
   alignment: center;
-	width: 40vh;
-	height: 25vh;
+	width: 38vh;
+	height: 23vh;
 }
 
 .row {
-  alignment: center;
+  text-align: center;
 }
 
 .article-food {
-	margin: 5px 10px !important;
-	padding: 10px !important;
-  border: 2px solid black;
+  margin: 5px 0 0 !important;
   display: block;
-  margin: 15px auto;
 }
-.article-food img {
-  /*align*/
-}
+
 
 h4{
 	margin-bottom: 0;

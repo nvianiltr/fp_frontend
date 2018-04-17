@@ -24,7 +24,6 @@ export class ArticleEditorComponent implements OnInit {
   message: string;
   res: any = {};
   selectedFile: File = null;
-  private sub: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,11 +34,11 @@ export class ArticleEditorComponent implements OnInit {
     private userService: UserService,
     private datepipe: DatePipe,
     private firebase: FirebaseApp
-  ) {
-  }
+  ) {}
 
 
   ngOnInit() {
+    this.user = this.userService.getUser();
     this.article = new Article();
     this.route.params.subscribe(params => {
       var id = +params['id'];
@@ -119,14 +118,12 @@ export class ArticleEditorComponent implements OnInit {
         this.article.imageURL = res.toString();
         console.log(this.article.imageURL);
       }).then(() => {
-        this.user = this.userService.getUser();
         this.article.user_id = this.user.id;
         this.article.dateCreated = this.datepipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
         this.articleService.addArticle(this.article).subscribe(res => {
           this.article = res;
           // console.log(this.article);
           this.router.navigate(['/article/'+this.article.id]);
-          location.reload();
         }, err => {
           this.res = err;
           // console.log(this.res);
@@ -153,7 +150,6 @@ export class ArticleEditorComponent implements OnInit {
         this.articleService.updateArticle(this.article, this.article.id).subscribe(
           () => {
             this.router.navigate(['/article/'+this.article.id]);
-            location.reload();
           });
       })
     }

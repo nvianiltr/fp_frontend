@@ -2,11 +2,9 @@
 	font-family: 'Montserrat', sans-serif
 }
 
-.container{
-	margin-top:15vh;
-	margin-bottom: 10vh;
-	min-height: 75vh;
-}
+/*.container{*/
+	/*margin-top:10vh;*/
+/*}*/
 
 #article-container h1{
 	color:#FF6200;
@@ -20,13 +18,18 @@
 }
 
 img {
-	width: 25vh;
-	height: 15vh;
+  alignment: center;
+  width: 38vh;
+  height: 23vh;
 }
 
-.article-food .article-food-write{
-	margin: 0 10px !important;
-	padding: 0;
+.row {
+  text-align: center;
+}
+
+.article-food {
+  margin: 5px 0 0 !important;
+  display: block;
 }
 
 h4{

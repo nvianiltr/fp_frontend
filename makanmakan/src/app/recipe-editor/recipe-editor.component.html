@@ -1,53 +1,112 @@
 <div class="container">
   <h1>Create Your Recipe</h1>
   <hr>
+  <div class="alert alert-danger" *ngIf="message">
+    {{ message }}
+  </div>
   <form>
+    <div class="row">
+      <div class="col">
+        <label>Recipe Title*</label>
+      </div>
+      <div class="col">
+        <p align="right"><strong>*required fields</strong></p>
+      </div>
+    </div>
     <div class="form-group">
-      <label>Recipe Title</label>
-      <input [(ngModel)]="recipe.title" type="text" class="form-control form-control-lg" id="recipeTite" name="recipeTitle" required>
+      <input [(ngModel)]="recipe.title" name="recipeTitle" type="text" class="form-control" required>
+      <!--<input [(ngModel)]="recipe.title" type="text" class="form-control form-control-lg" id="recipeTitle" name="recipeTitle" required>-->
     </div>
     <div class="form-group">
       <label>About Recipe</label>
-      <textarea [(ngModel)]="recipe.about" class="form-control" id="recipeAbout" rows="2" name="recipeAbout"></textarea>
+      <textarea [(ngModel)]="recipe.about" class="form-control" id="recipeAbout" rows="3" name="articleContent" required></textarea>
+
+      <!--<textarea [(ngModel)]="recipe.about" class="form-control" id="recipeAbout" rows="2" name="recipeAbout" required></textarea>-->
     </div>
-      <div class="form-group">
-        <label>Serving Quantity</label>
-        <input [(ngModel)]="recipe.servingQty" type="number" class="form-control form-control-lg" id="servingQty" name="servingQty">
+    <div class="form-group">
+      <label>Serving Quantity</label>
+      <input [(ngModel)]="recipe.servingQty" name="recipeQty" type="number" class="form-control" required>
+      <!--<input [(ngModel)]="recipe.servingQty" name="servingQty" type="number" class="form-control" required>-->
+    </div>
+    <div class="form-group">
+      <label>Serving Unit</label>
+      <select class="form-control" [(ngModel)]="recipe.servingUnit" name="recipeUnit">
+        <option *ngFor="let unit of servingUnits" value="{{unit}}">{{unit}}</option>
+      </select>
+    </div>
+    <hr>
+
+    <div class="form-group">
+      <label>Ingredient</label>
+    </div>
+    <div class="form-group" *ngIf="ingredients.length!=0">
+      <div *ngFor="let ing of ingredients">
+        <div class="form-inline">
+          <input class="col-7 form-control" type="text" value="{{ing.name}}" name="ingredientName" (change)="updateIngredient()">
+          <input class="col-2 form-control" type="number" min="0" value="{{ing.quantity}}" name="ingredientQty">
+          <select class="col-2 form-control" name="ingredientUnit">
+            <option *ngFor="let unit of ingredientUnits" value="{{ing.unit}}">{{ing.unit}}</option>
+          </select>
+          <button class="btn btn-danger" (click)="deleteIngredient(ing.name)">-</button>
+        </div>
       </div>
-      <div class="form-group">
-        <label>Serving Unit</label>
-        <select class="form-control" id="servingUnit">
-          <option *ngFor="let unit of units">{{unit}}</option>
+      <hr>
+    </div>
+
+    <div class="form-group">
+      <label>Name*</label>
+      <input id="_ingredientName" class="form-control" type="text">
+    </div>
+    <div class="row">
+      <div class="col">
+        <label>Quantity*</label>
+      </div>
+      <div class="col">
+        <label>Unit</label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col">
+        <input id="_ingredientQty" class="form-control" type="number" min="0">
+      </div>
+      <div class="col">
+        <select class="form-control" id="_ingredientUnit">
+          <option value="select">select</option>
+          <option *ngFor="let unit of ingredientUnits" value="{{unit}}">{{unit}}</option>
         </select>
       </div>
-    <hr>
-    <div><label>Ingredient</label></div>
+    </div>
+    <div class="text-center">
+      <br>
+      <button class="btn" (click)="addIngredient()">ADD INGREDIENT</button>
+    </div>
+    <br>
     <hr>
     <div class="form-group">
-      <label>Preparation</label>
-      <textarea [(ngModel)]="recipe.preparation" class="form-control" id="recipePreparation" rows="5" name="recipePreparation"></textarea>
+      <label>Preparation*</label>
+      <textarea [(ngModel)]="recipe.preparation" class="form-control" rows="5" name="recipePreparation" required></textarea>
     </div>
     <hr>
     <div class="form-group">
-      <label>Details</label>
+      <label>Details (hold ctrl (Windows) or command (Mac) button to pick more than one)</label>
       <br>
-      <select style="width:100%" data-placeholder="" multiple class="chosen-select" tabindex="5">
-        <option value=""></option>
+      <select class="form-control" style="width:100%;height: 150px;" multiple id="recipeDetails" tabindex="5">
         <optgroup *ngFor="let tag of tags" label={{tag.name}}>
-          <option *ngFor="let detail of tag.tag_header">{{detail.name}}</option>
+          <option *ngFor="let detail of tag.tag_header" value="{{detail.id}}">{{detail.name}}</option>
         </optgroup>
       </select>
     </div>
+    <hr>
     <div class="form-group">
-      <label for="articlePic">Upload Picture</label>
-      <input type="file" class="form-control-file" id="articlePic">
+      <p>Upload an image</p>
     </div>
-    <button type="submit" class="btn btn-warning">Save</button>
+    <div class="form-inline">
+      <button type="button" (click)="fileInput.click()">Choose image</button>
+      <p style="margin:0px 5px" id="filename">No file chosen</p>
+    </div>
+    <input type="file" class="form-control-file" name="articleImg" id="image" style="display:none"
+           (change)="onFileSelected()" #fileInput>
+    <br>
+    <button type="submit" class="btn btn-warning" (click)="save()">Save</button>
   </form>
 </div>
-<script src="https://harvesthq.github.io/chosen/chosen.jquery.js"></script>
-<script>
-  $(document).ready(function () {
-    $(".chosen-select").chosen();
-  })
-</script>

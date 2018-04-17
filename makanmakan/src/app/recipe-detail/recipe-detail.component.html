@@ -3,30 +3,45 @@
     <div class="col-12" id="recipe">
       <h1>{{recipe.title}}</h1>
       <h6>created by <span>{{ recipe.username }}</span> at <span>{{ recipe.dateCreated |date:'longDate'}}</span></h6>
+      <div *ngIf="recipe.pictureURL!='default.jpg';else noImage">
+        <img src="{{recipe.pictureURL}}"> <br>
+      </div>
+      <ng-template #noImage>
+        <img src="../../assets/default.jpg"> <br>
+      </ng-template>
+      <br>
+      <div *ngIf="recipe.servingQty!=null">
+        <h6><b>Servings:</b> {{recipe.servingQty}} {{recipe.servingUnit}}</h6>
+      </div>
+      <h6><b>About the Recipe: </b>{{recipe.about}}</h6>
       <hr>
       <h1> Ingredients </h1>
       <div *ngFor="let ingredient of recipe.ingredient_details">
         <p>{{ingredient.quantity}} {{ingredient.unit}} {{ingredient.ingredient.name}}</p>
       </div>
-      <hr>
-      <h1> Preparation Steps</h1>
-      <p>{{ recipe.preparation }}</p>
-      <hr>
 
-      <div>
+      <div id="preparation">
+        <hr>
+        <h1> Preparation </h1>
+        <div class="white-space-pre">{{ recipe.preparation }}</div>
+        <hr>
+      </div>
+
+
+      <div *ngIf="recipe.tag_details.length!=0">
         <h1>Tags:</h1>
         <div class="row" *ngFor="let tags of recipe.tag_details">
           <div *ngFor="let tag of tags.tag_header">
             <button type="button" (click)="search(tag.name)" class="btn btn-outline-warning">{{tag.name}}</button>
           </div>
         </div>
+        <hr>
       </div>
 
-      <hr>
+      <h1>Leave a Review</h1>
       <div *ngIf="isLoggedIn; else disabledForm">
         <form>
           <div class="form-group">
-            <label for="comment"><strong>Leave a review</strong></label>
             <textarea class="form-control" id="comment-area" rows="3"></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
@@ -36,7 +51,6 @@
       <ng-template #disabledForm>
         <form>
           <div class="form-group">
-            <label for="comment"><strong>Leave a review</strong></label>
             <textarea class="form-control" id="comment-area" rows="3" disabled>Log in first if you want to leave a review..</textarea>
           </div>
           <button type="submit" class="btn btn-primary" disabled>Submit</button>
@@ -44,7 +58,7 @@
       </ng-template>
       <hr>
 
-      <h3>Reviews</h3>
+      <h1>Reviews</h1>
       <div *ngIf="isReviewAvailable; else noReview">
         <div *ngFor="let review of recipe.reviews" class="comments">
           <p class="name">{{review.user.username}}</p>

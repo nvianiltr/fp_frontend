@@ -7,6 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
 
 import { Recipe } from './models/Recipe';
+import {Article} from './models/Article';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -55,4 +56,32 @@ export class RecipeService {
       return res;
     });
   }
+
+  addDetails(obj: any){
+	  const url = `${this.recipesUrl}/TagDetails`;
+	  return this.http.post(url,obj,httpOptions).map(res => {
+        return res;
+    })
+  }
+
+  addRecipe(recipe: Recipe): Observable<Recipe> {
+    return this.http.post<Recipe>(this.recipesUrl, recipe, httpOptions)
+      .map(res=>{console.log(res); return res;});
+  }
+
+  addIngredients(obj: any){
+    const url = `${this.recipesUrl}/Ingredient`;
+    return this.http.post(url,obj,httpOptions).map(res=>{
+      return res;
+    })
+  }
+
+  addIngredientDetails(obj: any){
+    const url = `${this.recipesUrl}/IngredientDetails`;
+    return this.http.post(url,obj,httpOptions).map(res=>{
+      return res;
+    })
+  }
 }
+
+

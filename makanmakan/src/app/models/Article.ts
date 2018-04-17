@@ -7,7 +7,6 @@ export class Article
     "content":string;
     "imageURL": string;
     "dateCreated":string;
-    "isDeleted":boolean;
 }
 
 

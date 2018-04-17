@@ -4,9 +4,15 @@
   <hr>
   <div class="row" *ngIf="isRecipeAvailable; else noRecipe">
     <div class="col-3 article-food" *ngFor="let recipe of recipes ">
-      <img src="../../assets/pic1.jpg"> <br>
+      <div *ngIf="recipe.pictureURL!='default.jpg';else noImage">
+        <img src="{{recipe.pictureURL}}"> <br>
+      </div>
+      <ng-template #noImage>
+        <img src="../../assets/default.jpg">
+        <br>
+      </ng-template>
       <h4><a routerLink="/recipe/{{recipe.id}}">{{recipe.title}}</a></h4>
-      <p><a routerLink="#">{{ recipe.dateCreated}}</a></p>
+      <p>by {{ recipe.username }}</p>
     </div>
   </div>
 </div>
