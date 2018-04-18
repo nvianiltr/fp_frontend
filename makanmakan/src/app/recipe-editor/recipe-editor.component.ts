@@ -193,7 +193,7 @@ export class RecipeEditorComponent implements OnInit {
   addDetails() {
     return new Promise((resolve, reject) => {
       var details = $('#recipeDetails').val();
-      var temp: any[] = null;
+      var temp: any[] = new Array();
       if (details.length != 0) {
         for (var i = 0; i < details.length; i++) {
           var obj = {
@@ -201,11 +201,14 @@ export class RecipeEditorComponent implements OnInit {
             "tag_id": details[i]
           };
           this.recipeService.addDetails(obj).subscribe(res=>{
+
+            console.log(res);
             temp.push(res);
-          });
-          if(temp.length == details.length) {
-            resolve(true)
-          }
+          },()=>{},
+            ()=>{
+            if(temp.length == details.length) {
+              resolve(true)
+            }});
         }
       }
       else {
@@ -241,7 +244,9 @@ export class RecipeEditorComponent implements OnInit {
         this.addRecipe().then(() => {
           this.addIngredients().then((res) => {
             this.addIngredientDetails(res).then(() => {
-              this.router.navigate(['/recipe/' + this.recipe.id]);
+              this.addDetails().then(() => {
+                this.router.navigate(['/recipe/' + this.recipe.id]);
+              })
             })
           })
         })

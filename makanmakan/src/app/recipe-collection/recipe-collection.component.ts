@@ -18,9 +18,8 @@ export class RecipeCollectionComponent implements OnInit {
 
   articles: Article[] = [];
   recipes: Recipe[] = [];
-  user: User = this.userService.getUser();
-  isArticleAvailable: boolean;
-  isRecipeAvailable: boolean;
+  user: User;
+  isRecipeAvailable: boolean = true;
 
   constructor(
     private router: Router,
@@ -32,22 +31,13 @@ export class RecipeCollectionComponent implements OnInit {
   }
 
   public ngOnInit() {
-    $(document).ready(function () {});
-    this.getPersonalArticles();
+    this.user = this.userService.getUser();
     this.getPersonalRecipes();
   }
 
-  getPersonalArticles(): void {
-    console.log(this.user.id);
-    this.articleService.getPersonalArticle(this.user.id).subscribe(articles => {
-      if (articles.length != 0) {
-        this.articles = articles;
-        console.log(this.articles);
-        this.isArticleAvailable = true;
-      }
-      else {
-        this.isArticleAvailable = false;
-      }
+  deleteRecipe(id: any){
+    this.recipeService.deletePersonalRecipe(id).subscribe(() =>{
+     location.reload();
     });
   }
 
@@ -55,7 +45,6 @@ export class RecipeCollectionComponent implements OnInit {
     this.recipeService.getPersonalRecipe(this.user.id).subscribe(recipes => {
       if (recipes.length != 0) {
         this.recipes = recipes;
-        console.log(this.recipes);
         this.isRecipeAvailable = true;
       }
       else {
@@ -63,10 +52,4 @@ export class RecipeCollectionComponent implements OnInit {
       }
     });
   }
-
-  saveCollection(): void {
-
-  }
-
-
 }

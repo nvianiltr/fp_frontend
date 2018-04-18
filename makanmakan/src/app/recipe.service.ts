@@ -82,6 +82,15 @@ export class RecipeService {
       return res;
     })
   }
+
+  deletePersonalRecipe(id:number):any{
+    const url = `${this.recipesUrl}/${id}`;
+    console.log(url);
+    return this.http.delete(url, httpOptions).map(res => {
+      console.log(res);
+    });
+  }
+
 }
 
 

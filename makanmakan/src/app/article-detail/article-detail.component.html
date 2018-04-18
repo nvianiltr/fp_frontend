@@ -8,9 +8,6 @@
       <div *ngIf="article.imageURL!='default.jpg';else noImage">
         <img src="{{article.imageURL}}"> <br>
       </div>
-      <ng-template #noImage>
-        <img src="../../assets/default.jpg"> <br>
-      </ng-template>
       <hr>
       <div class="white-space-pre">{{ article.content }}</div>
       <br>

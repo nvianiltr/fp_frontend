@@ -11,6 +11,7 @@ import 'rxjs/add/operator/catch';
 import { Signup } from './models/Signup';
 import { Login } from './models/Login';
 import { User } from './models/User';
+import { Review } from './models/Review';
 
 // const httpOptions = {
 //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,6 +20,7 @@ import { User } from './models/User';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
+    'Accept': 'application/json',
     'Authorization': `Bearer ${localStorage.token}`
   }),
 };
@@ -72,6 +74,12 @@ export class UserService {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     return this.http.get(logoutUrl, httpOptions);
+  }
+
+  addReview(review: Review): Observable<Review> {
+    const reviewUrl =  `${this.url}/Review`;
+    return this.http.post<Review>(reviewUrl, review, httpOptions)
+      .map(res=>{console.log(res); return res;});
   }
 
 }

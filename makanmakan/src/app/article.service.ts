@@ -52,12 +52,13 @@ export class ArticleService {
     return this.http.put<Article>(url, article, httpOptions);
   }
 
-  deletePersonalArticle(id:number){
-    // const url = `${this.articlesUrl}/${id}`;
-    // console.log(url);
-    // return this.http.delete(url, httpOptions).map(res => {
-    //   console.log(res);
-    // });
+  deletePersonalArticle(id:number): any{
+    const url = `${this.articlesUrl}/${id}`;
+    console.log(url);
+    return this.http.delete(url, httpOptions).map(res => {
+      console.log(res);
+    });
   }
+
 
 }

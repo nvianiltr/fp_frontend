@@ -26,6 +26,9 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from './../environments/environment';
+import { SavedRecipeComponent } from './saved-recipe/saved-recipe.component';
+import { ReportReviewComponent } from './report-review/report-review.component';
+import { PersonalArticleComponent } from './personal-article/personal-article.component';
 
 @NgModule({
   declarations: [
@@ -43,16 +46,19 @@ import { environment } from './../environments/environment';
     ArticleEditorComponent,
     RecipeEditorComponent,
     RecipeCollectionComponent,
+    SavedRecipeComponent,
+    ReportReviewComponent,
+    PersonalArticleComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
+    AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgbModule.forRoot(),
-    HttpClientModule,
-    AppRoutingModule,
   ],
   providers: [ArticleService, UserService, RecipeService, DatePipe],
   bootstrap: [AppComponent]

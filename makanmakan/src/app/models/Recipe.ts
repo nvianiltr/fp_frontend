@@ -9,8 +9,6 @@ export class Recipe
   "servingQty": any;
   "servingUnit": string;
   "preparation": string;
-  "qty": string;
-  "price": string;
   "dateCreated": string;
   "tag_details": any = {};
   "ingredient_details": any = {};

@@ -43,7 +43,7 @@ h1{
 }
 
 img{
-  max-width: 15vw;
+  max-width: 13vw;
   max-height: 20vh;
   margin:auto;
 }
@@ -55,8 +55,8 @@ img{
 }
 
 #recipe-button button{
+  margin: 10px 0;
   width: 100px;
-  margin: 5px 0;
 }
 
 h5 a {

@@ -3,17 +3,17 @@
     <div class="col-12" id="recipe">
       <h1>{{recipe.title}}</h1>
       <h6>created by <span>{{ recipe.username }}</span> at <span>{{ recipe.dateCreated |date:'longDate'}}</span></h6>
-      <div *ngIf="recipe.pictureURL!='default.jpg';else noImage">
+      <div *ngIf="recipe.pictureURL!='default.jpg'">
         <img src="{{recipe.pictureURL}}"> <br>
       </div>
-      <ng-template #noImage>
-        <img src="../../assets/default.jpg"> <br>
-      </ng-template>
       <br>
       <div *ngIf="recipe.servingQty!=null">
         <h6><b>Servings:</b> {{recipe.servingQty}} {{recipe.servingUnit}}</h6>
       </div>
-      <h6><b>About the Recipe: </b>{{recipe.about}}</h6>
+      <div *ngIf="recipe.about!=null">
+        <h6><b>About the Recipe: </b>{{recipe.about}}</h6>
+
+      </div>
       <hr>
       <h1> Ingredients </h1>
       <div *ngFor="let ingredient of recipe.ingredient_details">
@@ -27,8 +27,7 @@
         <hr>
       </div>
 
-
-      <div *ngIf="recipe.tag_details.length!=0">
+      <div *ngIf="recipe.tag_details">
         <h1>Tags:</h1>
         <div class="row" *ngFor="let tags of recipe.tag_details">
           <div *ngFor="let tag of tags.tag_header">
@@ -42,11 +41,12 @@
       <div *ngIf="isLoggedIn; else disabledForm">
         <form>
           <div class="form-group">
-            <textarea class="form-control" id="comment-area" rows="3"></textarea>
+            <textarea class="form-control" name="content" id="comment-area" rows="3" [(ngModel)]="review.content" #content="ngModel"></textarea>
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary" (click)="addReviews()">Submit</button>
         </form>
       </div>
+
 
       <ng-template #disabledForm>
         <form>
