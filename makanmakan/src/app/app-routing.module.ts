@@ -18,7 +18,6 @@ import { AuthGuard } from './auth.guard';
 
 import { PersonalArticleComponent} from './personal-article/personal-article.component';
 import { SavedRecipeComponent } from './saved-recipe/saved-recipe.component';
-import { ReportReviewComponent } from './report-review/report-review.component';
 
 const routes: Routes = [
   	{ path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -37,7 +36,6 @@ const routes: Routes = [
     { path: 'update-article/:id', component:ArticleEditorComponent, canActivate: [AuthGuard]},
     { path: 'my-article-collection', component: PersonalArticleComponent, canActivate: [AuthGuard]},
     { path: 'saved-recipe', component: SavedRecipeComponent, canActivate: [AuthGuard]},
-    { path: 'report-review', component: ReportReviewComponent, canActivate:[AuthGuard] }
 
 ]
 

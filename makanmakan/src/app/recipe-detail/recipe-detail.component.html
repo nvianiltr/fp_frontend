@@ -6,7 +6,6 @@
       <div *ngIf="recipe.pictureURL!='default.jpg'">
         <img src="{{recipe.pictureURL}}"> <br>
       </div>
-      <br>
       <div *ngIf="recipe.servingQty!=null">
         <h6><b>Servings:</b> {{recipe.servingQty}} {{recipe.servingUnit}}</h6>
       </div>
@@ -17,7 +16,7 @@
       <hr>
       <h1> Ingredients </h1>
       <div *ngFor="let ingredient of recipe.ingredient_details">
-        <p>{{ingredient.quantity}} {{ingredient.unit}} {{ingredient.ingredient.name}}</p>
+        <p>{{ingredient.quantity}} {{ingredient.unit}} {{ingredient.name}}</p>
       </div>
 
       <div id="preparation">
@@ -27,15 +26,18 @@
         <hr>
       </div>
 
-      <div *ngIf="recipe.tag_details">
+      <div id="review" *ngIf="recipe.tag_details.length!=0">
         <h1>Tags:</h1>
-        <div class="row" *ngFor="let tags of recipe.tag_details">
-          <div *ngFor="let tag of tags.tag_header">
-            <button type="button" (click)="search(tag.name)" class="btn btn-outline-warning">{{tag.name}}</button>
+        <div class="row">
+          <div *ngFor="let tags of recipe.tag_details">
+            <div class="col-1" *ngFor="let tag of tags.tag_header">
+              <button type="button" (click)="search(tag.name)" class="btn btn-outline-warning">{{tag.name}}</button>
+            </div>
           </div>
         </div>
         <hr>
       </div>
+
 
       <h1>Leave a Review</h1>
       <div *ngIf="isLoggedIn; else disabledForm">

@@ -9,7 +9,7 @@ import {ArticleService} from '../article.service';
 })
 export class ArticlesComponent implements OnInit {
   articles: Article[];
-  isArticleAvailable: boolean;
+  isArticleAvailable: boolean = true;
 
   constructor(private articleService: ArticleService) {
   }

@@ -1,13 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-import { catchError, map, tap } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
-
 import { Recipe } from './models/Recipe';
-import {Article} from './models/Article';
+import {Ingredient} from './models/Ingredient';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -18,37 +14,78 @@ const httpOptions = {
 
 @Injectable()
 export class RecipeService {
-	private recipesUrl = 'http://localhost:8000/api/Recipe';  // URL to web api
-
-  private personalrecipesUrl = 'http://localhost:8000/api/SavedRecipe';  // URL to web api
-
+	private recipesUrl = 'http://localhost:8000/api/Recipe';
+  private personalrecipesUrl = 'http://localhost:8000/api/SavedRecipe';
 
 	constructor(private http: HttpClient) { }
 
+	/* GET RECIPES FROM EVERYONE */
 	getRecipes (): Observable<Recipe[]> {
-		return this.http.get<Recipe[]>(this.recipesUrl).map(res => {console.log(res); return res;});
+		return this.http.get<Recipe[]>(this.recipesUrl).map(res => {return res;});
 	}
 
+	/* GET A SPECIFIC RECIPE BY ID FOR RECIPE-DETAIL COMPONENT */
   getRecipe(id: number): Observable<Recipe> {
     const url = `${this.recipesUrl}/${id}`;
-    return this.http.get<Recipe>(url).map(res => {console.log(res); return res;});
+    return this.http.get<Recipe>(url).map(res => {return res;});
   }
 
-  getTags() {
-    const url = 'http://localhost:8000/api/TagCategory'
-    return this.http.get(url).map(res => {return res});
-  }
-
-  updateRecipe(recipe:Recipe, id:number): Observable<Recipe>{
-    const url = `${this.recipesUrl}/${id}`;
-  	   return this.http.patch<Recipe>(url, recipe, httpOptions);
-  }
-
+  /* SEARCH FOR RECIPE(S) THAT MATCH USER'S CRITERIA */
   searchRecipe(name: string): Observable<Recipe[]>  {
 	  const url = `${this.recipesUrl}/search/${name}`;
     return this.http.get<Recipe[]>(url).map(res => {return res;});
   }
 
+  /* GET ALL RECIPE TAGS / CATEGORIES */
+  getTags() {
+    const url = 'http://localhost:8000/api/TagCategory'
+    return this.http.get(url).map(res => {return res});
+  }
+
+  /* GET INGREDIENT DETAILS FROM A SPECIFIC RECIPE */
+  getIngredients(recipe_id: number): Observable<Ingredient[]> {
+	  const url = `${this.recipesUrl}/IngredientDetails/${recipe_id}`;
+	  return this.http.get<Ingredient[]>(url,httpOptions).map(res=>{return res;});
+  }
+
+  /* ADD NEW INGREDIENT NAME TO INGREDIENTS TABLE */
+  addIngredients(obj: any){
+    const url = `${this.recipesUrl}/Ingredient`;
+    return this.http.post(url,obj,httpOptions).map(res=>{return res;})
+  }
+
+  /* DELETE INGREDIENT DETAILS FROM INGREDIENTS_DETAILS TABLE */
+  deleteIngredientDetails(ingredient_id:number, recipe_id: number){
+    const url = `${this.recipesUrl}/IngredientDetails/${ingredient_id}/${recipe_id}`;
+	  return this.http.delete(url,httpOptions).map(res=>{return res;});
+  }
+
+  /* UPDATE INGREDIENT DETAILS (e.g.: Name, Quantity, or Unit) IN INGREDIENT_DETAILS TABLE */
+  updateIngredientDetails(ingredient: any){
+    const url = `${this.recipesUrl}/IngredientDetails/${ingredient.ingredient_id}`;
+    return this.http.put(url, ingredient, httpOptions).map(res=>{return res;});
+  }
+
+  /* ADD INGREDIENT DETAILS TO INGREDIENT_DETAILS TABLE */
+  addIngredientDetails(obj: any){
+    const url = `${this.recipesUrl}/IngredientDetails`;
+    return this.http.post(url,obj,httpOptions).map(res=>{return res;})
+  }
+
+  /* ADD TAG DETAILS TO A SPECIFIC RECIPE */
+  /* obj CONTAINS RECIPE ID AND TAG ID */
+  addTagDetails(obj: any){
+    const url = `${this.recipesUrl}/TagDetails`;
+    return this.http.post(url,obj,httpOptions).map(res => {return res;})
+  }
+
+  /* DELETE A TAG DETAIL FROM A SPECIFIC RECIPE WHERE ITS TAG_ID == tag_id */
+  deleteTagDetails(tag_id:number, recipe_id: number){
+    const url = `${this.recipesUrl}/TagDetails/${tag_id}/${recipe_id}`;
+    return this.http.delete(url,httpOptions).map(res => {return res;})
+  }
+
+  /* GET USER'S PERSONAL RECIPE(S) */
   getPersonalRecipe(id: number):Observable<Recipe[]>{
     const url = `${this.personalrecipesUrl}/${id}`;
     return this.http.get<Recipe[]>(url,httpOptions).map(res => {
@@ -57,32 +94,18 @@ export class RecipeService {
     });
   }
 
-  addDetails(obj: any){
-	  const url = `${this.recipesUrl}/TagDetails`;
-	  return this.http.post(url,obj,httpOptions).map(res => {
-        return res;
-    })
-  }
-
+  /* ADD A PERSONAL RECIPE */
   addRecipe(recipe: Recipe): Observable<Recipe> {
-    return this.http.post<Recipe>(this.recipesUrl, recipe, httpOptions)
-      .map(res=>{console.log(res); return res;});
+    return this.http.post<Recipe>(this.recipesUrl, recipe, httpOptions).map(res=>{return res;});
   }
 
-  addIngredients(obj: any){
-    const url = `${this.recipesUrl}/Ingredient`;
-    return this.http.post(url,obj,httpOptions).map(res=>{
-      return res;
-    })
+  /* UPDATE USER'S PERONAL RECIPE */
+  updateRecipe(recipe:Recipe, id:number): Observable<Recipe>{
+    const url = `${this.recipesUrl}/${id}`;
+    return this.http.put<Recipe>(url, recipe, httpOptions);
   }
 
-  addIngredientDetails(obj: any){
-    const url = `${this.recipesUrl}/IngredientDetails`;
-    return this.http.post(url,obj,httpOptions).map(res=>{
-      return res;
-    })
-  }
-
+  /* DELETE USER'S PERSONAL RECIPE */
   deletePersonalRecipe(id:number):any{
     const url = `${this.recipesUrl}/${id}`;
     console.log(url);
@@ -90,7 +113,6 @@ export class RecipeService {
       console.log(res);
     });
   }
-
 }
 
 

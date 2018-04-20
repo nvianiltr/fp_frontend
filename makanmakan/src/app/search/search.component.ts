@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class SearchComponent implements OnInit {
   recipes: Recipe[] = [];
   name: string;
-  isAvailable: boolean;
+  isAvailable: boolean = true;
 
   constructor(private route: ActivatedRoute, private recipeService: RecipeService) {}
 

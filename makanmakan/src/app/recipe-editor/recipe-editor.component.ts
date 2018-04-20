@@ -21,15 +21,18 @@ import {Ingredient} from '../models/Ingredient';
 
 export class RecipeEditorComponent implements OnInit {
 
+  private user: User; // HOLDS CURRENT LOGGED IN USER'S DETAILS
+  private _ingredients: Ingredient[] = new Array(); // HOLDS OLD INGREDIENTS' DETAILS
+  private _tagDetails: any = new Array(); // HOLDS OLD TAG DETAILS
+
   @Input() recipe: Recipe;
-  servingUnits: string[] = ['person', 'people', 'serving', 'servings', 'cup', 'cups', 'quart', 'quarts', 'gallon', 'gallons', 'dozen', 'liter', 'liters'];
+  message: string = null; // HOLDS UNPROCESSABLE ENTITY MESSAGE. E.G.: WHEN USER LEFT NAME FIELD EMPTY, "THE NAME FIELD IS REQUIRED" WILL SHOW UP IN THE ALERT BOX
+  selectedFile: File = null; // HOLDS FILE FOR RECIPE'S IMAGE THAT USER WANTS TO UPLOAD
+  ingredients: Ingredient[] = new Array(); // HOLDS THE NEWEST INGREDIENTS' DETAILS
+  tagDetails: any = new Array(); // HOLDS THE NEWEST TAG DETAILS
+  servingUnits: string[] = ['select', 'person', 'people', 'serving', 'servings', 'cup', 'cups', 'quart', 'quarts', 'gallon', 'gallons', 'dozen', 'liter', 'liters'];
   ingredientUnits: string[] = ['g', 'grams', 'kg', 'bottle', 'bottles', 'box', 'boxes', 'can', 'cans', 'ounce', 'ounces', 'cup', 'cups', 'gallon', 'gallons', 'dozen', 'dozens', 'liter', 'liters', 'ml', 'milliliters', 'pound', 'pounds', 'tablespoon', 'tablespoons', 'teaspoon', 'teaspoons'];
-  user: User;
-  tags: any = [];
-  message: string = null;
-  res: any = {};
-  selectedFile: File = null;
-  ingredients: Ingredient[] = new Array();
+  tags: any = []; // TAG OPTIONS
 
   constructor(
     private route: ActivatedRoute,
@@ -43,14 +46,51 @@ export class RecipeEditorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    document.body.style.cursor = ''; // SET MOUSE CURSOR TO DEFAULT
+    this.getTags(); // GET TAG DETAILS FOR <SELECT> TAG
+    this.user = this.userService.getUser(); // GET USER'S DETAILS
+
+    /* IF USER IS CREATING NEW RECIPE */
     this.recipe = new Recipe();
-    this.user = this.userService.getUser();
-    this.getTags();
+    if (this.recipe.servingUnit == null) {
+      this.recipe.servingUnit = 'select';
+    }
+    /* IF USER IS EDITING EXISTING RECIPE */
     this.route.params.subscribe(params => {
       var id = +params['id'];
       if (params.id != null) {
         this.recipeService.getRecipe(id).subscribe(recipe => {
           this.recipe = recipe;
+          this.recipe.user_id = this.user.id;
+          this.ingredients = this.recipe.ingredient_details;
+
+          /* GET OLD INGREDIENTS - FOR COMPARING IT WITH NEWEST INGREDIENTS IF USER'S UPDATING THE INGREDIENTS LATER */
+          this.recipeService.getIngredients(this.recipe.id).subscribe(res => {
+            this._ingredients = res;
+          });
+
+          if (this.recipe.servingUnit == null) {
+            this.recipe.servingUnit = 'select';
+          }
+
+          for (var i = 0; i < this.ingredients.length; i++) {
+            if (this.ingredients[i].unit == null) {
+              this.ingredients[i].unit = 'select';
+            }
+          }
+
+          /* GET TAG DETAILS' ID FOR <SELECT> TAG*/
+          var arr = new Array();
+          for (var i = 0; i < this.recipe.tag_details.length; i++) {
+            arr.push(this.recipe.tag_details[i].tag_id);
+          }
+          this._tagDetails = arr.map(function (e) {
+            return e.toString();
+          });
+          /* SET SELECTED RECIPE'S TAG DETAILS */
+          $('#recipeDetails').val(arr);
+
+          /* SET UPLOADED IMAGE PATH  */
           if (this.recipe.pictureURL != 'default.jpg') {
             var tempurl = this.recipe.pictureURL;
             tempurl = tempurl.substr(75, 40);
@@ -64,14 +104,14 @@ export class RecipeEditorComponent implements OnInit {
     });
   }
 
+  /* GET TAG DETAILS FOR <SELECT> TAG */
   getTags() {
     this.recipeService.getTags().subscribe(res => {
       this.tags = res;
-      $(document).ready(function () {
-      });
     });
   }
 
+  /* CREATE UUID FOR RECIPE'S IMAGE PATH SO IT DOESN'T OVERWRITE ANOTHER IMAGE WITH THE SAME ID IN FIREBASE STORAGE */
   createUUID() {
     var dt = new Date().getTime();
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -82,12 +122,14 @@ export class RecipeEditorComponent implements OnInit {
     return uuid + '.jpg';
   }
 
+  /* SET SELECTED IMAGE PATH TO <p> WITH ID 'filename' IF USER SELECTED AN IMAGE FILE */
   onFileSelected() {
     $(document).ready(function () {
       $('p#filename').text($('#image')[0].files[0].name);
     });
   }
 
+  /* UPLOAD AN IMAGE TO FIREBASE STORAGE AND RETURNS ITS URL IN FIREBASE STORAGE */
   uploadImage() {
     return new Promise((resolve) => {
       var _url: string;
@@ -95,9 +137,9 @@ export class RecipeEditorComponent implements OnInit {
       this.selectedFile = <File> $('#image')[0].files[0];
       const fd = new FormData();
       fd.append('image', this.selectedFile, temp);
-        this.http.post('https://us-central1-makanmakan-e28a1.cloudfunctions.net/uploadFile', fd)
+      this.http.post('https://us-central1-makanmakan-e28a1.cloudfunctions.net/uploadFile', fd)
         .subscribe(res => {
-            console.log(res);
+            // console.log(res);
           }, error => {
             console.log(error);
           },
@@ -115,100 +157,223 @@ export class RecipeEditorComponent implements OnInit {
     });
   }
 
+  /* ADD AN INGREDIENT TO 'ingredients' ARRAY */
   addIngredient() {
-    var _ingredient = new Ingredient($('#_ingredientName').val(), $('#_ingredientQty').val(), $('#_ingredientUnit').val());
-    this.ingredients.push(_ingredient);
+    /* VALIDATOR */
+    var result = this.ingredients.filter(x => x.name === $('#_ingredientName').val());
+    if (result.length != 0) {
+      alert('You already input ' + $('#_ingredientName').val() + ' in your list of ingredients ❤');
+    }
+    else if ($('#_ingredientName').val().length == 0) {
+      alert('The Name field is required ❤');
+    }
+    else if (($('#_ingredientQty').val() < 0) || ($('#_ingredientQty').val().length == 0)) {
+      alert('Please insert a whole or decimal number such as 2 or 0.5 in Quantity field ❤');
+    }
+    else {
+      var id = 1;
+      if (this.ingredients.length != 0) {
+        id = this.ingredients[this.ingredients.length - 1].id + 1;
+      }
+      var _ingredient = new Ingredient(id, $('#_ingredientName').val(), $('#_ingredientQty').val(), $('#_ingredientUnit').val());
+      this.ingredients.push(_ingredient);
+      //console.log(this.ingredients);
+    }
   }
 
+  /* REMOVE ONE SPECIFIC INGREDIENT FROM 'ingredients' ARRAY */
   deleteIngredient(name: string) {
     this.ingredients = $.grep(this.ingredients, function (o, i) {
       return o.name === name;
     }, true);
   }
 
-  addRecipe() {
-    return new Promise((resolve)=>{
-      this.recipe.user_id = this.user.id;
-      this.recipe.dateCreated = this.datepipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
-      this.recipeService.addRecipe(this.recipe).subscribe(res => {
-        this.recipe = res;
-        resolve(res);
-      }, err => {
-        this.res = err;
-        // console.log(this.res);
-        this.message = this.res.error.error;
-        window.scrollTo(0, 0);
-      });
-    })
+  /* UPDATE INGREDIENT DETAILS FROM 'ingredients' ARRAY */
+  editIngredient(id: number, status: boolean) {
+    var index = this.ingredients.findIndex(x => x.id === id);
+    var name = $('.ingredientName');
+    var qty = $('.ingredientQty');
+    var unit = $('.ingredientUnit');
+
+    if (status) {
+      var result = this.ingredients.filter(x => x.name === $(name[index]).val());
+      if (result.length != 0) {
+        alert('You already input ' + $('.ingredientName').val() + ' in your list of ingredients ❤');
+        $(name[index]).val(this.ingredients[index].name);
+      }
+    }
+
+    this.ingredients[index].name = $(name[index]).val();
+    this.ingredients[index].quantity = $(qty[index]).val();
+    this.ingredients[index].unit = $(unit[index]).val();
   }
 
-  addIngredients() {
-    return new Promise((resolve)=> {
-      var _ingredientsID = new Array();
-      for (var i = 0; i < this.ingredients.length; i++) {
-        var obj = {
-          'name': this.ingredients[i].name
-        };
-        this.recipeService.addIngredients(obj).subscribe(res => {
-          _ingredientsID.push(res);
-          console.log(_ingredientsID);
-        },()=>{},
-          ()=>{
-            if (_ingredientsID.length == this.ingredients.length) {
-              console.log('finished');
-              resolve(_ingredientsID)
-            }
+  /* CALLING RECIPE SERVICE IF USER EITHER WANTS TO UPDATE OR CREATE A NEW RECIPE */
+  setRecipe(status: string) {
+    return new Promise((resolve) => {
+      if (this.recipe.servingUnit == 'select') {
+        this.recipe.servingUnit = null;
+      }
+
+      /* IF USER WANTS TO CREATE A NEW RECIPE */
+      if (status === 'add') {
+        this.recipe.user_id = this.user.id;
+        this.recipe.dateCreated = this.datepipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
+        this.recipeService.addRecipe(this.recipe).subscribe(res => {
+          this.recipe = res;
+          resolve(res);
+        }, err => {
+          // console.log(this.res);
+          document.body.style.cursor = '';
+          this.message = err.error.error;
+          window.scrollTo(0, 0);
+        });
+      }
+      /* THIS ONE IS FOR UPDATING EXISITING RECIPE */
+      else {
+        this.recipeService.updateRecipe(this.recipe, this.recipe.id).subscribe(res => {
+          // console.log(res);
+          this.recipe = res;
+          resolve(res);
+        }, err => {
+          document.body.style.cursor = '';
+          this.message = err.error.error;
+          window.scrollTo(0, 0);
+        });
+      }
+    });
+  }
+
+  /* ADDING NEW INGREDIENT TO INGREDIENTS DATABASE */
+  updateIngredient(obj: any) {
+    return new Promise((resolve) => {
+      var _obj = {
+        'name': obj.name
+      };
+      this.recipeService.addIngredients(_obj).subscribe(res => {
+          obj.id = <number>res;
+        }, () => {
+        },
+        () => {
+          resolve(true);
+        });
+    });
+  }
+
+  /* THIS FUNCTION WILL CALL updateIngredient FUNCTION RECURSIVELY UNTIL ALL INGREDIENTS IN 'ingredients' ARRAY ARE ADDED TO INGREDIENTS TABLE */
+  addIngredients(i) {
+    return new Promise((resolve) => {
+      if (i < this.ingredients.length) {
+        this.updateIngredient(this.ingredients[i]).then(() => {
+          resolve(this.addIngredients(i + 1).then(
+            () => {resolve(true);}
+            ));
+        });
+      }
+      else {
+        resolve(true);
+      }
+    });
+  }
+
+  /* FUNCTION TO UPDATE OR ADD NEW INGREDIENT DETAILS TO INGREDIENT_DETAILS TABLE */
+  updateIngredientDetails(obj: any) {
+    return new Promise((resolve) => {
+
+      if (obj.unit == 'select') {
+        obj.unit = null;
+      }
+
+      var _ingredient = {
+        'recipe_id': this.recipe.id,
+        'ingredient_id': obj.id,
+        'quantity': obj.quantity,
+        'unit': obj.unit
+      };
+
+      /*
+      ** RETURNS AN ARRAY OF INGREDIENT OBJECT IF THE INGREDIENT IS ALREADY EXIST IN THE RECIPE BEFORE
+      ** OTHERWISE, IT WILL RETURN AN EMPTY ARRAY IF IT IS A NEW INGREDIENT
+      */
+      var result = this._ingredients.filter(x => x.id === obj.id);
+
+      /* ADD NEW INGREDIENT DETAILS TO INGREDIENT_DETAILS TABLE */
+      if (result.length == 0) {
+        this.recipeService.addIngredientDetails(_ingredient).subscribe(res => {
+            // console.log(res);
+          },
+          (err) => {
+            console.log(err);
+          }, () => {
+            resolve(true);
+          });
+      }
+      /* UPDATE INGREDIENT DETAILS IN INGREDIENT_DETAILS TABLE */
+      else {
+        this.recipeService.updateIngredientDetails(_ingredient).subscribe(res => {
+            // console.log(res);
+          },
+          (err) => {
+            console.log(err);
+          }, () => {
+            resolve(true);
           });
       }
     });
   }
 
-  addIngredientDetails(IDs: any) {
+  /* THIS IS A RECURSIVE FUNCTION THAT WILL CALL updateIngredientDetals FUNCTION UNTIL ALL INGREDIENTS IN 'ingredients' ARRAY ARE ADDED TO INGREDIENT_DETAILS TABLE */
+  addIngredientDetails(i) {
     return new Promise((resolve) => {
-      for (var i = 0; i < IDs.length; i++) {
-        if(this.ingredients[i].unit == "select" ){
-          this.ingredients[i].unit = null
-        }
-
-        var _ingredient = {
-          'recipe_id': this.recipe.id,
-          'ingredient_id': IDs[i],
-          'quantity': this.ingredients[i].quantity,
-          'unit': this.ingredients[i].unit
-        };
-        this.recipeService.addIngredientDetails(_ingredient).subscribe(res => {
-            console.log(res);
-          },
-          (err) => {
-            console.log(err);
-          },()=>{
-            if (IDs.length == this.ingredients.length) {
-              resolve()
-            }
-        })
+      if (i < this.ingredients.length) {
+        this.updateIngredientDetails(this.ingredients[i]).then(() => {
+          resolve(this.addIngredientDetails(i + 1).then(() => {
+            resolve(true);
+          }));
+        });
       }
-    })
+      else {
+        resolve(true);
+      }
+    });
   }
 
-  addDetails() {
-    return new Promise((resolve, reject) => {
-      var details = $('#recipeDetails').val();
-      var temp: any[] = new Array();
-      if (details.length != 0) {
-        for (var i = 0; i < details.length; i++) {
-          var obj = {
-            "recipe_id": this.recipe.id,
-            "tag_id": details[i]
-          };
-          this.recipeService.addDetails(obj).subscribe(res=>{
+  /*
+  ** DELETE INGREDIENT DETAILS THAT IS NO LONGER EXIST IN THE RECIPE
+  ** FROM INGREDIENT_DETAILS TABLE IN DB
+  */
+  deleteIngredientDetails(id) {
+    return new Promise((resolve) => {
+      this.recipeService.deleteIngredientDetails(id, this.recipe.id).subscribe(res => {
+        },
+        () => {
+        },
+        () => {
+          resolve(true);
+        });
+    });
+  }
 
-            console.log(res);
-            temp.push(res);
-          },()=>{},
-            ()=>{
-            if(temp.length == details.length) {
-              resolve(true)
-            }});
+  /*
+  ** THIS IS A RECURSIVE FUNCTION THAT WILL CALL deleteIngredientDetails FUNCTION
+  ** IF THERE IS AN INGREDIENT IN '_ingredients' ARRAY (OLD INGREDIENTS)
+  ** THAT IS NOT IN 'ingredients' ARRAY (UPDATED INGREDIENTS)
+  */
+  deleteIngredients(i: number) {
+    return new Promise((resolve) => {
+      if (i < this._ingredients.length) {
+        var result = this.ingredients.filter(x => x.id === this._ingredients[i].id);
+        if (result.length == 0) {
+          this.deleteIngredientDetails(this._ingredients[i].id).then(() => {
+            resolve(this.deleteIngredients(i + 1).then(() => {
+              resolve(true);
+            }));
+          });
+        }
+        else {
+          this.deleteIngredients(i + 1).then(() => {
+            resolve(true);
+          });
         }
       }
       else {
@@ -217,50 +382,160 @@ export class RecipeEditorComponent implements OnInit {
     });
   }
 
-  save() {
-    if (this.recipe.id == null) {
-      const p = new Promise((resolve, reject) => {
-        if (this.ingredients.length == 0) {
-          reject('Please enter ingredients <3');
-        }
-        else if ($('#image')[0].files[0] == null || this.recipe.title == null || this.recipe.preparation == null) { // tambahin if ingredients == null
-          resolve('default.jpg');
+  /*
+  ** DELETE TAG DETAILS THAT IS NO LONGER EXIST IN THE RECIPE
+  ** FROM TAG_DETAILS TABLE IN DB
+  */
+  deleteTagDetails(id) {
+    return new Promise((resolve) => {
+      this.recipeService.deleteTagDetails(id, this.recipe.id).subscribe(res => {
+        },
+        () => {
+        },
+        () => {
+          resolve(true);
+        });
+    });
+  }
+
+  /*
+  ** THIS IS A RECURSIVE FUNCTION THAT WILL CALL deleteTagDetails FUNCTION
+  ** IF THERE IS A TAG IN '_tagDetails' ARRAY (OLD TAGS)
+  ** THAT IS NOT IN 'tagDetails' ARRAY (UPDATED TAGS)
+  */
+  deleteTags(i: number) {
+    return new Promise((resolve) => {
+      if (i < this._tagDetails.length) {
+        var result = this.tagDetails.includes(this._tagDetails[i]);
+        if (!result) {
+          this.deleteTagDetails(this._tagDetails[i]).then(() => {
+            resolve(this.deleteTags(i + 1).then(() => {
+              resolve(true);
+            }));
+          });
         }
         else {
-          resolve(this.uploadImage().then((res) => {
-            resolve(res);
-          }));
+          this.deleteTags(i + 1).then(() => {
+            resolve(true);
+          });
         }
-      });
+      }
+      else {
+        resolve(true);
+      }
+    });
+  }
 
-      p.catch((res) => {
-        this.message = res;
-        window.scrollTo(0, 0);
-      });
+  /* FUNCTION TO ADD NEW TAG DETAILS TO TAG_DETAILS TABLE */
+  updateTagDetails(obj: any) {
+    return new Promise((resolve, reject) => {
+      var result = this._tagDetails.includes(obj);
+      if (!result) {
+        var _obj = {
+          'recipe_id': this.recipe.id,
+          'tag_id': obj
+        };
+        this.recipeService.addTagDetails(_obj).subscribe(res => {
+          }, () => {
+          },
+          () => {
+            resolve(true);
+          });
+      }
+      else {
+        resolve(true);
+      }
+    });
+  }
 
-      p.then((res) => {
-        this.recipe.pictureURL = res.toString();
-      }).then(() => {
-        this.addRecipe().then(() => {
-          this.addIngredients().then((res) => {
-            this.addIngredientDetails(res).then(() => {
-              this.addDetails().then(() => {
+  /* THIS IS A RECURSIVE FUNCTION THAT WILL CALL updateTagDetails FUNCTION UNTIL ALL TAGS IN 'tagDetails' ARRAY ARE ADDED TO TAG_DETAILS TABLE */
+  addTags(i) {
+    return new Promise((resolve, reject) => {
+      if (i < this.tagDetails.length) {
+        this.updateTagDetails(this.tagDetails[i]).then(() => {
+          resolve(this.addTags(i + 1).then(() => {
+            resolve(true);
+          }));
+        });
+      }
+      else {
+        resolve(true);
+      }
+    });
+  }
+
+  /* WHEN USER CLICKS SAVE BUTTON */
+  save() {
+    document.body.style.cursor = 'wait';
+    const p = new Promise((resolve, reject) => {
+      if (this.ingredients.length == 0) {
+        reject('Please enter ingredients ❤');
+      }
+      else if ($('#image')[0].files[0] == null || this.recipe.title == null || this.recipe.preparation == null) {
+        resolve('default.jpg');
+      }
+      else {
+        resolve(this.uploadImage().then((res) => {
+          resolve(res); // RETURNS THE FULL IMAGE URL IN FIREBASE STORAGE THAT WILL BE STORED IN DATABASE
+        }));
+      }
+    });
+
+    p.catch((res) => {
+      this.message = res;
+      document.body.style.cursor = '';
+      window.scrollTo(0, 0);
+    });
+
+    p.then((res) => {
+      this.recipe.pictureURL = res.toString();
+      this.tagDetails = $('#recipeDetails').val();
+    }).then(() => {
+      /* IF USER IS CREATING A NEW RECIPE (makanmakan.me/create-recipe) */
+      if (this.recipe.id == null) {
+        this.setRecipe('add').then(() => {
+          this.addIngredients(0).then(() => {
+            this.addIngredientDetails(0).then(() => {
+              if (this.tagDetails.length != 0) {
+                this.addTags(0).then(() => {
+                  document.body.style.cursor = '';
+                  this.router.navigate(['/recipe/' + this.recipe.id]);
+                });
+              }
+              else {
+                document.body.style.cursor = '';
                 this.router.navigate(['/recipe/' + this.recipe.id]);
-              })
-            })
-          })
-        })
-      })
-    }
+              }
+            });
+          });
+        });
+      }
+      /* IF USER IS UPDATING EXISTING RECIPE (makanmakan.me/update-recipe/{id}) */
+      else {
+        this.setRecipe('update').then(() => {
+          this.addIngredients(0).then(() => {
+            this.addIngredientDetails(0).then(() => {
+              this.deleteIngredients(0).then(() => {
+                if (this.tagDetails.length != 0) {
+                  this.addTags(0).then(() => {
+                    this.deleteTags(0).then(() => {
+                      document.body.style.cursor = '';
+                      this.router.navigate(['/recipe/' + this.recipe.id]);
+                    });
+                  });
+                }
+                else {
+                  document.body.style.cursor = '';
+                  this.router.navigate(['/recipe/' + this.recipe.id]);
+                }
+              });
+            });
+          });
+        });
+      }
+    });
   }
 }
 
 
 
-
-//this.recipeService.addDetails().subscribe()
-//      this.user = this.userService.getUser();
-//  this.recipe.user_id = this.user.id;
-// this.recipe.dateCreated = this.datepipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
-// const id = +this.route.snapshot.paramMap.get('id');
-// this.recipeService.updateRecipe(this.recipe, id).subscribe(()=>this.goBack());

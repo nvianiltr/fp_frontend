@@ -11,7 +11,7 @@ import { DatePipe } from '@angular/common';
 export class RecipesComponent implements OnInit {
 
   recipes: Recipe[] = [];
-  isRecipeAvailable: boolean;
+  isRecipeAvailable: boolean = true;
 
   constructor(private recipeService: RecipeService) {
   }

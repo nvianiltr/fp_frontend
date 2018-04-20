@@ -27,7 +27,6 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from './../environments/environment';
 import { SavedRecipeComponent } from './saved-recipe/saved-recipe.component';
-import { ReportReviewComponent } from './report-review/report-review.component';
 import { PersonalArticleComponent } from './personal-article/personal-article.component';
 
 @NgModule({
@@ -47,7 +46,6 @@ import { PersonalArticleComponent } from './personal-article/personal-article.co
     RecipeEditorComponent,
     RecipeCollectionComponent,
     SavedRecipeComponent,
-    ReportReviewComponent,
     PersonalArticleComponent,
   ],
   imports: [
