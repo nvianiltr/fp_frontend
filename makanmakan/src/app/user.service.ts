@@ -7,11 +7,13 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
 import { Signup } from './models/Signup';
 import { Login } from './models/Login';
 import { User } from './models/User';
 import { Review } from './models/Review';
+import { Report } from './models/Report';
 
 // const httpOptions = {
 //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -80,6 +82,22 @@ export class UserService {
     const reviewUrl =  `${this.url}/Review`;
     return this.http.post<Review>(reviewUrl, review, httpOptions)
       .map(res=>{console.log(res); return res;});
+  }
+
+  addReport(report:Report): Observable<any>{
+    const reportUrl = `${this.url}/ReportedReview`;
+    return this.http.post<any>(reportUrl, report, httpOptions)
+      .map(res=>{console.log(res); return res;})
+      .catch(err=>{return Observable.throw(err);});
+  }
+
+  getReview():Observable<any>{
+    const url = `${this.url}/Review`;
+    console.log(url);
+    return this.http.get<any>(url, httpOptions).map(res => {
+      console.log(res);
+      return res;
+    });
   }
 
 }

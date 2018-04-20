@@ -62,10 +62,40 @@
 
       <h1>Reviews</h1>
       <div *ngIf="isReviewAvailable; else noReview">
-        <div *ngFor="let review of recipe.reviews" class="comments">
-          <p class="name">{{review.user.username}}</p>
+        <div *ngFor="let review of reviews" class="comments">
+          <p class="name">{{review.user.username}} - {{review.id}}</p>
           <p class="comment">{{review.content}}</p>
-          <button> report if inappropriate</button>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal" (click)="getReview(review)">
+  report if inappropriate
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Report The Review</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <br>
+          <!--<textarea class="form-control" name="report-review" id="report-review" rows="3" [(ngModel)]="report.reason" #content="ngModel" placeholder="Why do you report this review?"></textarea>-->
+          <textarea [(ngModel)]="report.reason" #reason="ngModel" class="form-control" name="reason" id="reportReason" rows="3" placeholder="Why do you report this review?"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="addReport()">Report this review</button>
+      </div>
+    </div>
+  </div>
+</div>
+
         </div>
       </div>
 

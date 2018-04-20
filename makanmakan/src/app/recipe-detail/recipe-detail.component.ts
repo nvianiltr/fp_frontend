@@ -6,6 +6,7 @@ import {Recipe} from '../models/Recipe';
 import {RecipeService} from '../recipe.service';
 import {Review} from '../models/Review';
 import {DatePipe} from '@angular/common';
+import {Report} from '../models/Report';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -17,8 +18,11 @@ export class RecipeDetailComponent implements OnInit {
 
   recipe: Recipe;
   isLoggedIn: boolean;
+  err: any = {};
   isReviewAvailable: boolean;
-  @Input() review: Review;
+  review: any = {};
+  reviews:any = [];
+  report:any = {};
   user: User;
   message: string;
   res: any = {};
@@ -40,8 +44,20 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.review = new Review();
+    this.getAllReview();
+    // this.review = new Review();
+
     this.getRecipe();
+  }
+
+  getAllReview() {
+    this.userService.getReview().subscribe(
+      res => {
+        this.reviews = res;
+        console.log('test', this.reviews);
+      }, err => {
+        console.log(err);
+      });
   }
 
   getRecipe(): void {
@@ -58,6 +74,12 @@ export class RecipeDetailComponent implements OnInit {
       });
   }
 
+  getReview(review: any){
+    this.report.review_id = review.id;
+    this.report.dateReported = this.datepipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
+    console.log('review:',this.report); 
+  }
+
   search($name) {
     this.router.navigate(['/search/' + $name]);
   }
@@ -71,6 +93,19 @@ export class RecipeDetailComponent implements OnInit {
       location.reload();
     }, err => {
       console.log(err);
+    });
+  }
+
+  addReport(): any{
+    console.log('from add report: ',this.report)
+    this.userService.addReport(this.report).subscribe(res => {
+      this.report = res;
+      location.reload();
+    }, err => {
+      console.log(err);
+      this.err = err.error;
+      console.log(this.err.msg);
+      window.alert(this.err.msg);
     });
   }
 
