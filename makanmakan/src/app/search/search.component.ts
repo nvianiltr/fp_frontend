@@ -19,7 +19,6 @@ export class SearchComponent implements OnInit {
     this.searchRecipe();
   }
 
-
   searchRecipe(): void {
    this.name = window.location.href.substr(window.location.href.lastIndexOf('/') + 1);
     this.recipeService.searchRecipe(this.name)

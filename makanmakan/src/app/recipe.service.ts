@@ -15,7 +15,6 @@ const httpOptions = {
 @Injectable()
 export class RecipeService {
 	private recipesUrl = 'http://localhost:8000/api/Recipe';
-  private personalrecipesUrl = 'http://localhost:8000/api/SavedRecipe';
 
 	constructor(private http: HttpClient) { }
 
@@ -87,7 +86,7 @@ export class RecipeService {
 
   /* GET USER'S PERSONAL RECIPE(S) */
   getPersonalRecipe(id: number):Observable<Recipe[]>{
-    const url = `${this.personalrecipesUrl}/${id}`;
+    const url = `${this.recipesUrl}/personal-recipe/${id}`;
     return this.http.get<Recipe[]>(url,httpOptions).map(res => {
       console.log(res);
       return res;
@@ -108,11 +107,40 @@ export class RecipeService {
   /* DELETE USER'S PERSONAL RECIPE */
   deletePersonalRecipe(id:number):any{
     const url = `${this.recipesUrl}/${id}`;
-    console.log(url);
     return this.http.delete(url, httpOptions).map(res => {
       console.log(res);
     });
   }
+
+  /* SAVE SOMEONE'S RECIPE */
+  saveRecipe(obj: any) {
+    const url = `${this.recipesUrl}/saved-recipe`;
+    return this.http.post(url, obj, httpOptions).map(res=>{return res;});
+  }
+
+  /* REMOVE A RECIPE FROM SAVED RECIPE COLLECTION */
+  removeSavedRecipe(obj: any) {
+    const url = `${this.recipesUrl}/saved-recipe/${obj.user_id}/${obj.recipe_id}`;
+    return this.http.delete(url, httpOptions).map(res=>{return res;});
+  }
+
+  /* GET USER'S SAVED RECIPE(S) */
+  getSavedRecipes(id: number):Observable<Recipe[]>{
+    const url = `${this.recipesUrl}/saved-recipe/${id}`;
+    return this.http.get<Recipe[]>(url,httpOptions).map(res => {
+      console.log(res);
+      return res;
+    });
+  }
+
+  /* GET USER'S RECIPE(S) */
+  getUserRecipes(username: string):Observable<Recipe[]>{
+    const url = `${this.recipesUrl}/user/${username}`;
+    return this.http.get<Recipe[]>(url,httpOptions).map(res => {
+      return res;
+    });
+  }
+
 }
 
 

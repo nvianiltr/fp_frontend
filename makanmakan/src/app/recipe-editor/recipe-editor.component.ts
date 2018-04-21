@@ -33,6 +33,7 @@ export class RecipeEditorComponent implements OnInit {
   servingUnits: string[] = ['select', 'person', 'people', 'serving', 'servings', 'cup', 'cups', 'quart', 'quarts', 'gallon', 'gallons', 'dozen', 'liter', 'liters'];
   ingredientUnits: string[] = ['g', 'grams', 'kg', 'bottle', 'bottles', 'box', 'boxes', 'can', 'cans', 'ounce', 'ounces', 'cup', 'cups', 'gallon', 'gallons', 'dozen', 'dozens', 'liter', 'liters', 'ml', 'milliliters', 'pound', 'pounds', 'tablespoon', 'tablespoons', 'teaspoon', 'teaspoons'];
   tags: any = []; // TAG OPTIONS
+  element: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,7 +47,7 @@ export class RecipeEditorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    document.body.style.cursor = ''; // SET MOUSE CURSOR TO DEFAULT
+    this.element = document.getElementById("saveButton");
     this.getTags(); // GET TAG DETAILS FOR <SELECT> TAG
     this.user = this.userService.getUser(); // GET USER'S DETAILS
 
@@ -224,7 +225,7 @@ export class RecipeEditorComponent implements OnInit {
           resolve(res);
         }, err => {
           // console.log(this.res);
-          document.body.style.cursor = '';
+          this.element.classList.remove("running");
           this.message = err.error.error;
           window.scrollTo(0, 0);
         });
@@ -236,7 +237,7 @@ export class RecipeEditorComponent implements OnInit {
           this.recipe = res;
           resolve(res);
         }, err => {
-          document.body.style.cursor = '';
+          this.element.classList.remove("running");
           this.message = err.error.error;
           window.scrollTo(0, 0);
         });
@@ -466,7 +467,7 @@ export class RecipeEditorComponent implements OnInit {
 
   /* WHEN USER CLICKS SAVE BUTTON */
   save() {
-    document.body.style.cursor = 'wait';
+    this.element.classList.add("running");
     const p = new Promise((resolve, reject) => {
       if (this.ingredients.length == 0) {
         reject('Please enter ingredients ❤');
@@ -483,7 +484,7 @@ export class RecipeEditorComponent implements OnInit {
 
     p.catch((res) => {
       this.message = res;
-      document.body.style.cursor = '';
+      this.element.classList.remove("running");
       window.scrollTo(0, 0);
     });
 

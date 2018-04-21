@@ -43,3 +43,9 @@
 	color:#ff6200;
 	cursor: pointer;
 }
+
+a {
+  font-weight: bold;
+  color: #ff6200;
+  text-decoration: none;
+}

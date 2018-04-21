@@ -8,6 +8,14 @@
   font-family: 'Montserrat', sans-serif
 }
 
+.textButton {
+  background:none!important;
+  border:none;
+  padding:0!important;
+  cursor:pointer;
+  color: darksalmon;
+}
+
 /*Recipe.ts*/
 #recipe{
   /*margin-top:10vh;*/
@@ -52,4 +60,10 @@ form .form-group{
 .tags span:hover{
   color:#ff6200;
   cursor: pointer;
+}
+
+a {
+  font-weight: bold;
+  color: #ff6200;
+  text-decoration: none;
 }

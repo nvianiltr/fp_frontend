@@ -4,4 +4,5 @@ export class Review{
   "user_id":any;
   "content":any;
   "datePosted":string;
+  "user": any;
 }

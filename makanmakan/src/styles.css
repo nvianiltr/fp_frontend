@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("loading.css");
+@import url("loading-btn.css");
 .container{
 	margin-top: 10vh;
   height:100%;

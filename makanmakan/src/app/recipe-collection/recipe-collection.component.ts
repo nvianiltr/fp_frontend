@@ -6,7 +6,6 @@ import {RecipeService} from '../recipe.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {UserService} from '../user.service';
-import * as $ from 'jquery';
 import {User} from '../models/User';
 
 @Component({
@@ -20,6 +19,7 @@ export class RecipeCollectionComponent implements OnInit {
   recipes: Recipe[] = [];
   user: User;
   isRecipeAvailable: boolean = true;
+  selectedRecipe: number;
 
   constructor(
     private router: Router,
@@ -35,8 +35,12 @@ export class RecipeCollectionComponent implements OnInit {
     this.getPersonalRecipes();
   }
 
-  deleteRecipe(id: any){
-    this.recipeService.deletePersonalRecipe(id).subscribe(() =>{
+  setSelectedRecipe(id: any) {
+    this.selectedRecipe = id;
+  }
+
+  deleteRecipe(){
+    this.recipeService.deletePersonalRecipe(this.selectedRecipe).subscribe(() =>{
      location.reload();
     });
   }

@@ -29,8 +29,8 @@
       </div>
       <input type="file" class="form-control-file" name="articleImg" id="image" style="display:none" (change)="onFileSelected()" #fileInput>
     </div>
-    <button type="submit" class="btn btn-warning"
-            (click)="save()">Save
-    </button>
+    <div id="saveButton" class="btn btn-warning ld-over-full" (click)="save()"> Save
+      <div class="ld ld-ring ld-spin"></div>
+    </div>
   </form>
 </div>

@@ -1,0 +1,37 @@
+<div class="container" id="article-container">
+  <h1>{{username}}'s profile</h1>
+  <hr>
+  <div *ngIf="isRecipeAvailable">
+    <h3>Recipes</h3>
+    <div class="row">
+      <div class="col-3 article-food" *ngFor="let recipe of recipes ">
+        <div *ngIf="recipe.pictureURL!='default.jpg';else noImage">
+          <img src="{{recipe.pictureURL}}"> <br>
+        </div>
+        <ng-template #noImage>
+          <img src="../../assets/default.jpg">
+          <br>
+        </ng-template>
+        <h4><a routerLink="/recipe/{{recipe.id}}">{{recipe.title}}</a></h4>
+        <p>by {{ recipe.username }}</p>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isArticleAvailable">
+    <hr>
+    <h3>Articles</h3>
+    <div class="row">
+
+      <div class="col-3 article-food" *ngFor="let article of articles ">
+        <div *ngIf="article.imageURL!='default.jpg';else noImage">
+          <img src="{{article.imageURL}}"> <br>
+        </div>
+        <ng-template #noImage>
+          <img src="../../assets/default.jpg"> <br>
+        </ng-template>
+        <h4><a routerLink="/article/{{article.id}}">{{article.title}}</a></h4>
+        <p>by {{ article.username }}</p>
+      </div>
+    </div>
+  </div>
+</div>

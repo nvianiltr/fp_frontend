@@ -7,6 +7,7 @@ import {catchError, map, tap} from 'rxjs/operators';
 import 'rxjs/add/operator/map';
 
 import {Article} from './models/Article';
+import {Recipe} from './models/Recipe';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -40,7 +41,7 @@ export class ArticleService {
   }
 
   getPersonalArticle(id: number):Observable<Article[]>{
-    const url = `${this.articlesUrl}/personal/${id}`;
+    const url = `${this.articlesUrl}/personal-article/${id}`;
     return this.http.get<Article[]>(url,httpOptions).map(res => {
      // console.log(res);
       return res;
@@ -60,5 +61,31 @@ export class ArticleService {
     });
   }
 
+  /* SAVE SOMEONE'S ARTICLE */
+  saveArticle(obj: any) {
+    const url = `${this.articlesUrl}/saved-article`;
+    return this.http.post(url, obj, httpOptions).map(res=>{return res;});
+  }
 
+  /* REMOVE AN ARTICLE FROM SAVED ARTICLE TABLE */
+  removeSavedArticle(obj: any) {
+    const url = `${this.articlesUrl}/saved-article/${obj.user_id}/${obj.article_id}`;
+    return this.http.delete(url, httpOptions).map(res=>{return res;});
+  }
+
+  /* GET USER'S SAVED ARTICLE(S) */
+  getSavedArticles(id: number):Observable<Article[]> {
+    const url = `${this.articlesUrl}/saved-article/${id}`;
+    return this.http.get<Article[]>(url, httpOptions).map(res => {
+      return res;
+    });
+  }
+
+  /* GET USER'S ARTICLE(S) */
+  getUserArticles(username: string):Observable<Article[]> {
+    const url = `${this.articlesUrl}/user/${username}`;
+    return this.http.get<Article[]>(url, httpOptions).map(res => {
+      return res;
+    });
+  }
 }

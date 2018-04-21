@@ -4,8 +4,25 @@
   <div class="row">
     <div class="col-12" id="article">
       <h1>{{article.title}}</h1>
-      <h6>created by <span>{{ article.username }}</span> at <span>{{ article.dateCreated | date:'longDate' }}</span></h6>
-      <div *ngIf="article.imageURL!='default.jpg';else noImage">
+      <h6>created by <a routerLink="/{{article.username}}">{{ article.username }}</a> at {{ article.dateCreated | date:'longDate' }}</h6>
+      <div *ngIf="isLoggedIn; else disabledSaveButton">
+        <div *ngIf="user.id != article.user_id; else editArticle">
+          <div *ngIf="isArticleSaved; else notSaved">
+            <button type="button" class="btn btn-info" (click)="unsaveArticle()">SAVED</button>
+          </div>
+          <ng-template #notSaved>
+            <button type="button" class="btn btn-warning" (click)="saveArticle()">SAVE ARTICLE</button>
+          </ng-template>
+        </div>
+        <ng-template #editArticle>
+          <button type="button" class="btn btn-warning" routerLink="/update-article/{{article.id}}"> Edit</button>
+        </ng-template>
+      </div>
+      <ng-template #disabledSaveButton>
+        <button type="button" class="btn btn-warning" title="You need to log in first :(" disabled>SAVE ARTICLE</button>
+      </ng-template>
+      <br>
+      <div *ngIf="article.imageURL!='default.jpg'">
         <img src="{{article.imageURL}}"> <br>
       </div>
       <hr>

@@ -1,3 +1,46 @@
-<p>
-  saved-recipe works!
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 recipe-collection-topic">
+      <h1>Your Saved Article Collection</h1>
+    </div>
+  </div>
+
+
+  <div class="row" id="row-article">
+    <div class="col-12 recipe-col" id="personal-article" *ngIf="isRecipeAvailable; else noRecipe">
+      <div class="row" id="recipe-collection-all" *ngFor="let recipe of recipes">
+        <div class="col-2" *ngIf="recipe.pictureURL!='default.jpg'; else noImage">
+          <img src="{{recipe.pictureURL}}">
+        </div>
+        <ng-template #noImage>
+          <img src="../../assets/default.jpg">
+        </ng-template>
+        <div class="col-9" id="recipe-collection-data">
+          <h3><a routerLink="/recipe/{{recipe.id}}">{{recipe.title}}</a></h3>
+          <h4>{{recipe.username}}</h4>
+        </div>
+        <div class="col-1" id="recipe-button">
+          <button type="button" class="btn btn-danger" (click)="setSelectedRecipe(recipe.id)" data-toggle="modal" data-target="#exampleModal">Delete</button>
+        </div>
+      </div>
+    </div>
+    <ng-template #noRecipe>
+      <h5>You haven't saved any recipe..<a routerLink="/recipes"> Click here</a> to browse more recipes ❤</h5>
+    </ng-template>
+  </div>
+</div>
+
+<!-- Trigger the modal with a button -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-body" style="text-align: center">
+          <p>Are you sure you want to remove this recipe?</p>
+          <button type="button" class="btn" data-dismiss="modal">No</button>
+          <button type="button" class="btn btn-danger" (click)="deleteRecipe()">Yes</button>
+        </div>
+    </div>
+  </div>
+</div>

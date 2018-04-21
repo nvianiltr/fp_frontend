@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 recipe-collection-topic">
-      <h1>Your Recipe Collection</h1>
+      <h1>Your Personal Recipe Collection</h1>
     </div>
   </div>
 
@@ -13,21 +13,36 @@
           <img src="{{recipe.pictureURL}}">
         </div>
         <ng-template #noImage>
-            <img src="../../assets/default.jpg">
+          <img src="../../assets/default.jpg">
         </ng-template>
         <div class="col-9" id="recipe-collection-data">
-          <h3>{{recipe.title}}</h3>
+          <h3><a routerLink="/recipe/{{recipe.id}}">{{recipe.title}}</a></h3>
           <h4>{{recipe.username}}</h4>
           <h4>{{recipe.dateCreated | date:'longDate' }}</h4>
         </div>
         <div class="col-1" id="recipe-button">
           <button type="button" class="btn btn-success" routerLink="/update-recipe/{{recipe.id}}">Update</button>
-          <button type="button" class="btn btn-danger" (click)="deleteRecipe(recipe.id)">Delete</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" (click)="setSelectedRecipe(recipe.id)">Delete</button>
         </div>
       </div>
     </div>
     <ng-template #noRecipe>
-      <h5>You haven't created any recipe.. Why don't you start writing one? <a routerLink="/create-recipe"> Click here ❤</a></h5>
+      <h5>You haven't created any recipe.. Why don't you start writing one? <a routerLink="/create-recipe"> Click here
+        ❤</a></h5>
     </ng-template>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body" style="text-align: center">
+        <p>Are you sure you want to delete this recipe?</p>
+        <button type="button" class="btn" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-danger" (click)="deleteRecipe()">Yes</button>
+      </div>
+    </div>
   </div>
 </div>

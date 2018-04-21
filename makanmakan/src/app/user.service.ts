@@ -15,9 +15,6 @@ import { User } from './models/User';
 import { Review } from './models/Review';
 import { Report } from './models/Report';
 
-// const httpOptions = {
-//   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-// };
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -51,7 +48,6 @@ export class UserService {
     return this.user;
   }
 
-
   register(signup: Signup) {
     const registerUrl = `${this.url}/register`;
     return this.http.post(registerUrl, signup, httpOptions).map(res => {
@@ -78,10 +74,9 @@ export class UserService {
     return this.http.get(logoutUrl, httpOptions);
   }
 
-  addReview(review: Review): Observable<Review> {
-    const reviewUrl =  `${this.url}/Review`;
-    return this.http.post<Review>(reviewUrl, review, httpOptions)
-      .map(res=>{console.log(res); return res;});
+  addReview(review: Review){
+    const reviewUrl = `${this.url}/Review`;
+    return this.http.post(reviewUrl, review, httpOptions).map(res=>{return res;});
   }
 
   addReport(report:Report): Observable<any>{
@@ -90,15 +85,5 @@ export class UserService {
       .map(res=>{console.log(res); return res;})
       .catch(err=>{return Observable.throw(err);});
   }
-
-  getReview():Observable<any>{
-    const url = `${this.url}/Review`;
-    console.log(url);
-    return this.http.get<any>(url, httpOptions).map(res => {
-      console.log(res);
-      return res;
-    });
-  }
-
 }
 

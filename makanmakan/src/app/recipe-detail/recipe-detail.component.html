@@ -2,20 +2,36 @@
   <div class="row">
     <div class="col-12" id="recipe">
       <h1>{{recipe.title}}</h1>
-      <h6>created by <span>{{ recipe.username }}</span> at <span>{{ recipe.dateCreated |date:'longDate'}}</span></h6>
-      <div *ngIf="recipe.pictureURL!='default.jpg'">
+      <h6>created by <a routerLink="/{{recipe.username}}">{{ recipe.username }}</a> at {{ recipe.dateCreated |date:'longDate'}}</h6>
+      <div *ngIf="isLoggedIn; else disabledSaveButton">
+        <div *ngIf="user.id != recipe.user_id; else editRecipe">
+          <div *ngIf="isRecipeSaved; else notSaved">
+            <button type="button" class="btn btn-info" (click)="unsaveRecipe()">SAVED</button>
+          </div>
+          <ng-template #notSaved>
+            <button type="button" class="btn btn-warning" (click)="saveRecipe()">SAVE RECIPE</button>
+          </ng-template>
+        </div>
+        <ng-template #editRecipe>
+          <button type="button" class="btn btn-warning" routerLink="/update-recipe/{{recipe.id}}">Edit</button>
+        </ng-template>
+      </div>
+      <ng-template #disabledSaveButton>
+        <button type="button" class="btn btn-warning" title="You need to log in first :(" disabled>SAVE RECIPE</button>
+      </ng-template>
+      <br>
+      <div *ngIf="recipe.pictureURL != 'default.jpg'">
         <img src="{{recipe.pictureURL}}"> <br>
       </div>
-      <div *ngIf="recipe.servingQty!=null">
+      <div *ngIf="recipe.servingQty != null">
         <h6><b>Servings:</b> {{recipe.servingQty}} {{recipe.servingUnit}}</h6>
       </div>
-      <div *ngIf="recipe.about!=null">
+      <div *ngIf="recipe.about != null">
         <h6><b>About the Recipe: </b>{{recipe.about}}</h6>
-
       </div>
       <hr>
       <h1> Ingredients </h1>
-      <div *ngFor="let ingredient of recipe.ingredient_details">
+      <div *ngFor="let ingredient of ingredients">
         <p>{{ingredient.quantity}} {{ingredient.unit}} {{ingredient.name}}</p>
       </div>
 
@@ -29,9 +45,9 @@
       <div id="review" *ngIf="recipe.tag_details.length!=0">
         <h1>Tags:</h1>
         <div class="row">
-          <div *ngFor="let tags of recipe.tag_details">
-            <div class="col-1" *ngFor="let tag of tags.tag_header">
-              <button type="button" (click)="search(tag.name)" class="btn btn-outline-warning">{{tag.name}}</button>
+          <div *ngFor="let tag of tags">
+            <div class="col-1" *ngFor="let t of tag.tag_header">
+              <button type="button" (click)="search(t.name)" class="btn btn-outline-warning">{{t.name}}</button>
             </div>
           </div>
         </div>
@@ -41,11 +57,15 @@
 
       <h1>Leave a Review</h1>
       <div *ngIf="isLoggedIn; else disabledForm">
+        <div class="alert alert-danger" *ngIf="reviewErrorMessage">
+          {{ reviewErrorMessage }}
+        </div>
         <form>
           <div class="form-group">
-            <textarea class="form-control" name="content" id="comment-area" rows="3" [(ngModel)]="review.content" #content="ngModel"></textarea>
+            <textarea class="form-control" name="content" id="comment-area" rows="3" [(ngModel)]="review.content"
+                      #content="ngModel"></textarea>
           </div>
-          <button type="submit" class="btn btn-primary" (click)="addReviews()">Submit</button>
+          <button type="submit" class="btn btn-primary" (click)="addReview()">Submit</button>
         </form>
       </div>
 
@@ -63,46 +83,57 @@
       <h1>Reviews</h1>
       <div *ngIf="isReviewAvailable; else noReview">
         <div *ngFor="let review of reviews" class="comments">
-          <p class="name">{{review.user.username}} - {{review.id}}</p>
-          <p class="comment">{{review.content}}</p>
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal" (click)="getReview(review)">
-  report if inappropriate
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Report The Review</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <br>
-          <!--<textarea class="form-control" name="report-review" id="report-review" rows="3" [(ngModel)]="report.reason" #content="ngModel" placeholder="Why do you report this review?"></textarea>-->
-          <textarea [(ngModel)]="report.reason" #reason="ngModel" class="form-control" name="reason" id="reportReason" rows="3" placeholder="Why do you report this review?"></textarea>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="addReport()">Report this review</button>
-      </div>
-    </div>
-  </div>
-</div>
-
+          <div class="row">
+            <div class="name">{{review.user.username}}</div>
+            <p class="comment">&nbsp;says, "{{review.content}}"&nbsp;</p>
+            <div *ngIf="isLoggedIn; else disabledButton">
+              <button type="button" class="btn btn-light textButton" data-toggle="modal" data-target="#exampleModal"
+                      (click)="getReportedReview(review)">
+                / report if inappropriate
+              </button>
+            </div>
+            <ng-template #disabledButton>
+              <button type="button" class="btn btn-light textButton" title="You need to log in first :(" disabled>
+                / report if inappropriate
+              </button>
+            </ng-template>
+          </div>
         </div>
       </div>
 
       <ng-template #noReview>
         <p class="comment"> Be the first to review this recipe! </p>
       </ng-template>
+    </div>
+  </div>
+</div>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle">Report The Review</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger" *ngIf="reportedReviewErrorMessage">
+          {{ reportedReviewErrorMessage }}
+        </div>
+        <div class="form-group">
+          <div id="thankYouMessage"></div>
+          <textarea [(ngModel)]="report.reason" #reason="ngModel" class="form-control" name="reason"
+                    id="reportReason" rows="3" placeholder="Why do you want to report this review?"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="addReportButton" (click)="addReport()">Report this review
+        </button>
+      </div>
     </div>
   </div>
 </div>

@@ -17,6 +17,7 @@ export class PersonalArticleComponent implements OnInit {
   articles: Article[];
   isArticleAvailable: boolean = true;
   user: User;
+  selectedArticle: number;
 
   constructor(
     private router:Router,
@@ -44,7 +45,11 @@ export class PersonalArticleComponent implements OnInit {
       }});
   }
 
-  deleteArticle(id: any){
-    this.articleService.deletePersonalArticle(id).subscribe(article => {location.reload()});
+  setSelectedArticle(id: any) {
+    this.selectedArticle = id;
+  }
+
+  deleteArticle(){
+    this.articleService.deletePersonalArticle(this.selectedArticle).subscribe(article => {location.reload()});
   }
 }

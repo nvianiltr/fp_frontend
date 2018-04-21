@@ -24,6 +24,7 @@ export class ArticleEditorComponent implements OnInit {
   message: string;
   res: any = {};
   selectedFile: File = null;
+  element: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,6 +39,7 @@ export class ArticleEditorComponent implements OnInit {
 
 
   ngOnInit() {
+    this.element = document.getElementById("saveButton");
     this.user = this.userService.getUser();
     this.article = new Article();
     this.route.params.subscribe(params => {
@@ -103,6 +105,8 @@ export class ArticleEditorComponent implements OnInit {
 
 
   save() {
+    this.element.classList.add("running");
+
     /* CREATING NEW ARTICLE */
     if (this.article.id == null) {
       const p = new Promise((resolve, reject) => {
@@ -127,6 +131,7 @@ export class ArticleEditorComponent implements OnInit {
         }, err => {
           this.res = err;
           // console.log(this.res);
+          this.element.classList.remove("running");
           this.message = this.res.error.error;
           window.scrollTo(0,0);
         });

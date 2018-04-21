@@ -28,6 +28,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from './../environments/environment';
 import { SavedRecipeComponent } from './saved-recipe/saved-recipe.component';
 import { PersonalArticleComponent } from './personal-article/personal-article.component';
+import { SavedArticleComponent } from './saved-article/saved-article.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { PersonalArticleComponent } from './personal-article/personal-article.co
     RecipeCollectionComponent,
     SavedRecipeComponent,
     PersonalArticleComponent,
+    SavedArticleComponent,
+    UserDetailComponent,
   ],
   imports: [
     BrowserModule,
