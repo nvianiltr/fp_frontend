@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-company-blue">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-warning">
   <a class="navbar-brand" routerLink="">makanmakan</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarArea" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -7,7 +7,7 @@
   <div class="collapse navbar-collapse float-right" id="navbarArea">
     <ul class="navbar-nav mr-auto" id="navbarOption">
 
-      <li class="nav-item disabled">
+      <li class="nav-item disabled hidden-small">
         <a class="nav-link">|</a>
       </li>
 
@@ -20,7 +20,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-4" *ngFor="let tag of tags">
+              <div class="col-sm-4 col-xs-4" *ngFor="let tag of tags">
                 <ul class="multi-column-dropdown">
                   <li class="topic"> {{ tag.name }} </li>
                   <li *ngFor="let detail of tag.tag_header"><a routerLink="/search/{{detail.name}}">{{ detail.name }}</a></li>

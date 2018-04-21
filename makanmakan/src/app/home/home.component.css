@@ -48,8 +48,25 @@ form button:hover{
 	background-color: white !important;
 }
 
-.container-fluid p{
-	font-size: 20px;
-	color: white;
-	cursor: pointer;
+@media (max-width: 575.98px) {
+.jumbotron h1{
+	margin-top: 10vh;
+	font-size: 50px;
+}
+
+form{
+	margin-left: 0vw;
+	text-align: center;
+}
+
+form .form-group .form-control{
+	width: 85vw;
+
+}
+
+form button{
+	margin-left: 22.5vw;
+	width: 40vw;
+}
+
 }
