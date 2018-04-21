@@ -63,3 +63,13 @@ a {
   text-decoration: none;
   color: #ff6200;
 }
+
+@media (max-width: 575.98px) {
+  img{
+    max-width: 80vw;
+    max-height: 40vh;
+  }
+  #recipe-button button{
+    display: inline-block;
+  }
+}
