@@ -3,7 +3,7 @@
   <h1> Recipes </h1>
   <hr>
   <div class="row" *ngIf="isRecipeAvailable; else noRecipe">
-    <div class="col-3 article-food" *ngFor="let recipe of recipes ">
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 article-food" *ngFor="let recipe of recipes ">
       <div *ngIf="recipe.pictureURL!='default.jpg';else noImage">
         <img src="{{recipe.pictureURL}}"> <br>
       </div>

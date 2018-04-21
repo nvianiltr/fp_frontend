@@ -1,8 +1,8 @@
 <div class="container" id="article-container">
-  <h1> Articles </h1>
-  <hr>
-  <div class="row" *ngIf="isArticleAvailable; else noArticle">
-    <div class="col-3 article-food" *ngFor="let article of articles ">
+<h1> Articles </h1>
+<hr>
+<div class="row" *ngIf="isArticleAvailable; else noArticle">
+  	<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 article-food" *ngFor="let article of articles ">
       <div *ngIf="article.imageURL!='default.jpg';else noImage">
         <img src="{{article.imageURL}}"> <br>
       </div>

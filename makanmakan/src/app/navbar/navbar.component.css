@@ -2,10 +2,12 @@
 	font-family: 'Montserrat', sans-serif
 }
 
+nav{
+
+}
 
 .navbar {
    background-color: #ff6200 !important;
-   height: 70px;
 }
 
 .navbar-brand{
@@ -114,8 +116,97 @@ form button:hover{
 
 @media (max-width: 767px) {
 	.dropdown-menu.multi-column {
-		min-width: 240px !important;
+		min-width: 100px !important;
 		overflow-x: hidden;
 	}
 }
 
+/* Extra small devices (portrait phones, less than 576px)*/
+@media (max-width: 575.98px) {
+
+.hidden-small{
+	display: none;
+}
+
+.nav-link{
+	font-size:20px;
+	margin: 0 5px;
+	font-weight: 500;
+}
+
+.container{
+	margin-top:10vh;
+}
+
+form button{
+	background-color: #FF6200 !important;
+	width: 50vw;
+	font-weight: 700 !important;
+	color: white !important;
+	border: 2px solid white;
+}
+
+.dropdown-menu.columns-3 {
+	width: 90vw;
+}
+.dropdown-menu li a {
+	padding: 5px 15px;
+	font-weight: 300;
+}
+.multi-column-dropdown {
+	list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+#showAll{
+	text-align: center;
+}
+
+.showAll a{
+	color:#ff6200;
+	font-weight: 700 !important;
+	font-size: 25px;
+}
+
+.btn-login{
+	width: 250px !important;
+	font-weight: 700;
+	background-color: #ff6200 !important;
+	color: white !important;
+	border: none !important;
+	text-align: right !important;
+}
+
+.btn-login:active, .btn-login:hover, .btn-login:focus{
+	border:none !important;
+	box-shadow: none !important;
+}
+
+.dropdown-login{
+	width: 250px;
+}
+
+.dropdown-login li{
+	padding: 5px 0;
+	margin: 0;
+}
+
+.dropdown-login li a{
+	color: black;
+	font-weight: 500;
+}
+
+.dropdown-login li a:hover{
+	cursor: pointer;
+	text-decoration-line: none;
+}}
+
+/* Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) { ... }
+
+/* Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) { ... }
+
+/* Large devices (desktops, less than 1200px)
+@media (max-width: 1199.98px) { ... }*/

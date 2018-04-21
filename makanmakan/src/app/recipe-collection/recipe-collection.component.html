@@ -9,18 +9,18 @@
   <div class="row" id="row-article">
     <div class="col-12 recipe-col" id="personal-article" *ngIf="isRecipeAvailable; else noRecipe">
       <div class="row" id="recipe-collection-all" *ngFor="let recipe of recipes">
-        <div class="col-2" *ngIf="recipe.pictureURL!='default.jpg'; else noImage">
+        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xs-12" *ngIf="recipe.pictureURL!='default.jpg'; else noImage">
           <img src="{{recipe.pictureURL}}">
         </div>
         <ng-template #noImage>
           <img src="../../assets/default.jpg">
         </ng-template>
-        <div class="col-9" id="recipe-collection-data">
+        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-xs-12" id="recipe-collection-data">
           <h3><a routerLink="/recipe/{{recipe.id}}">{{recipe.title}}</a></h3>
           <h4>{{recipe.username}}</h4>
           <h4>{{recipe.dateCreated | date:'longDate' }}</h4>
         </div>
-        <div class="col-1" id="recipe-button">
+        <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12 col-xs-12" id="recipe-button">
           <button type="button" class="btn btn-success" routerLink="/update-recipe/{{recipe.id}}">Update</button>
           <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" (click)="setSelectedRecipe(recipe.id)">Delete</button>
         </div>
