@@ -14,7 +14,7 @@ const httpOptions = {
 
 @Injectable()
 export class RecipeService {
-	private recipesUrl = 'http://localhost:8000/api/Recipe';
+	private recipesUrl = 'https://api.makanmakan.me/api/Recipe';
 
 	constructor(private http: HttpClient) { }
 

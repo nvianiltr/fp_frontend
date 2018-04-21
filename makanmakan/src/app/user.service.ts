@@ -26,7 +26,7 @@ const httpOptions = {
 
 @Injectable()
 export class UserService {
-  private url = 'http://localhost:8000/api';  // URL to web api
+  private url = 'https://api.makanmakan.me/api';  // URL to web api
   private token: string;
   private user: User;
 

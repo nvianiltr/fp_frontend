@@ -19,7 +19,7 @@ const httpOptions = {
 
 @Injectable()
 export class ArticleService {
-  private articlesUrl = 'http://localhost:8000/api/Article';  // URL to web api
+  private articlesUrl = 'https://api.makanmakan.me/api/Article';  // URL to web api
 
   constructor(private http: HttpClient) { }
 
