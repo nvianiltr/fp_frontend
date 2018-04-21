@@ -69,5 +69,10 @@ a {
 }
 
 @media (max-width: 575.98px) {
-	
+	.form-group input{
+		width: 85vw;
+	}
+	.jumbotron h1{
+		font-size: 50px;
+	}
 }
