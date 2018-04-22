@@ -472,7 +472,7 @@ export class RecipeEditorComponent implements OnInit {
       if (this.ingredients.length == 0) {
         reject('Please enter ingredients ❤');
       }
-      else if ($('#image')[0].files[0] == null || this.recipe.title == null || this.recipe.preparation == null) {
+      else if (($('#image')[0].files[0] == null && this.recipe.id == null) || this.recipe.title == null || this.recipe.preparation == null) {
         resolve('default.jpg');
       }
       else {
