@@ -475,6 +475,9 @@ export class RecipeEditorComponent implements OnInit {
       else if (($('#image')[0].files[0] == null && this.recipe.id == null) || this.recipe.title == null || this.recipe.preparation == null) {
         resolve('default.jpg');
       }
+      else if ($('#image')[0].files[0] == null && this.recipe.id != null) {
+        resolve(this.recipe.pictureURL);
+      }
       else {
         resolve(this.uploadImage().then((res) => {
           resolve(res); // RETURNS THE FULL IMAGE URL IN FIREBASE STORAGE THAT WILL BE STORED IN DATABASE
