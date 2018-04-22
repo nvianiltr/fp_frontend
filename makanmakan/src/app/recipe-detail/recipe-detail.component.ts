@@ -20,7 +20,7 @@ export class RecipeDetailComponent implements OnInit {
 
   recipe: Recipe = new Recipe();
   isLoggedIn: boolean;
-  reviewErrorMessage: string = null ;
+  reviewErrorMessage: string = null;
   reportedReviewErrorMessage: string = null;
   isReviewAvailable: boolean;
   review: Review = new Review();
@@ -36,7 +36,8 @@ export class RecipeDetailComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private recipeService: RecipeService,
-    private datepipe: DatePipe) {}
+    private datepipe: DatePipe) {
+  }
 
   ngOnInit() {
     this.getRecipe();
@@ -83,17 +84,17 @@ export class RecipeDetailComponent implements OnInit {
     });
   }
 
-  getReportedReview(review: any){
+  getReportedReview(review: any) {
     this.reportedReviewErrorMessage = null;
     $('#thankYouMessage').html('');
     $('#reportReason').show();
-    $('#reportReason').val("");
+    $('#reportReason').val('');
     $('#addReportButton').show();
     this.report.review_id = review.id;
     this.report.dateReported = this.datepipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
   }
 
-  addReport(): any{
+  addReport(): any {
     this.report.user_id = this.user.id;
     console.log(this.report);
     this.userService.addReport(this.report).subscribe(res => {
@@ -104,12 +105,12 @@ export class RecipeDetailComponent implements OnInit {
       $('#addReportButton').hide();
     }, err => {
       console.log(err);
-      if(err.error.error === "The reason field is required."){
-        this.reportedReviewErrorMessage = "Please input a valid reason ❤";
+      if (err.error.error === 'The reason field is required.') {
+        this.reportedReviewErrorMessage = 'Please input a valid reason ❤';
       }
-      else{
+      else {
         //console.log(err);
-        this.reportedReviewErrorMessage = "You have already reported this review. Please be patient ❤";
+        this.reportedReviewErrorMessage = 'You have already reported this review. Please be patient ❤';
         $('#reportReason').hide();
         $('#addReportButton').hide();
       }
@@ -122,21 +123,27 @@ export class RecipeDetailComponent implements OnInit {
       'user_id': this.user.id,
       'recipe_id': this.recipe.id
     };
-    this.recipeService.saveRecipe(_obj).subscribe(() => {this.isRecipeSaved = true});
+    this.recipeService.saveRecipe(_obj).subscribe(() => {
+      this.isRecipeSaved = true;
+    });
   }
 
   isSaved() {
     var arr = new Array();
     this.recipeService.getSavedRecipes(this.user.id).subscribe(recipes => {
-      arr = recipes;
-    })
-    var result = arr.filter(x => x.id == this.recipe.id);
-    if(result.length == 0){
-      this.isRecipeSaved = false;
-    }
-    else {
-      this.isRecipeSaved = true;
-    }
+        arr = recipes;
+      }, () => {
+      },
+      () => {
+        var result = arr.filter(x => x.id == this.recipe.id);
+        if (result.length == 0) {
+          this.isRecipeSaved = false;
+        }
+        else {
+          this.isRecipeSaved = true;
+        }
+      });
+
   }
 
   unsaveRecipe() {
@@ -144,7 +151,9 @@ export class RecipeDetailComponent implements OnInit {
       'user_id': this.user.id,
       'recipe_id': this.recipe.id
     };
-    this.recipeService.removeSavedRecipe(_obj).subscribe(() => {this.isRecipeSaved = false});
+    this.recipeService.removeSavedRecipe(_obj).subscribe(() => {
+      this.isRecipeSaved = false;
+    });
   }
 }
 
