@@ -37,7 +37,7 @@ export class RecipeService {
 
   /* GET ALL RECIPE TAGS / CATEGORIES */
   getTags() {
-    const url = 'http://localhost:8000/api/TagCategory'
+    const url = 'https://api.makanmakan.me/api/TagCategory'
     return this.http.get(url).map(res => {return res});
   }
 
