@@ -23,7 +23,7 @@ export class RecipeEditorComponent implements OnInit {
 
   private user: User; // HOLDS CURRENT LOGGED IN USER'S DETAILS
   private _ingredients: Ingredient[] = new Array(); // HOLDS OLD INGREDIENTS' DETAILS
-  private _tagDetails: any = new Array(); // HOLDS OLD TAG DETAILS
+  _tagDetails: any = new Array(); // HOLDS OLD TAG DETAILS
 
   @Input() recipe: Recipe;
   message: string = null; // HOLDS UNPROCESSABLE ENTITY MESSAGE. E.G.: WHEN USER LEFT NAME FIELD EMPTY, "THE NAME FIELD IS REQUIRED" WILL SHOW UP IN THE ALERT BOX
@@ -47,7 +47,7 @@ export class RecipeEditorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.element = document.getElementById("saveButton");
+    this.element = document.getElementById('saveButton');
     this.getTags(); // GET TAG DETAILS FOR <SELECT> TAG
     this.user = this.userService.getUser(); // GET USER'S DETAILS
 
@@ -61,49 +61,52 @@ export class RecipeEditorComponent implements OnInit {
       var id = +params['id'];
       if (params.id != null) {
         this.recipeService.getRecipe(id).subscribe(recipe => {
-          this.recipe = recipe;
-          this.recipe.user_id = this.user.id;
-          this.ingredients = this.recipe.ingredient_details;
+            this.recipe = recipe;
+            this.recipe.user_id = this.user.id;
+            this.ingredients = this.recipe.ingredient_details;
 
-          /* GET OLD INGREDIENTS - FOR COMPARING IT WITH NEWEST INGREDIENTS IF USER'S UPDATING THE INGREDIENTS LATER */
-          this.recipeService.getIngredients(this.recipe.id).subscribe(res => {
-            this._ingredients = res;
-          });
+            /* GET OLD INGREDIENTS - FOR COMPARING IT WITH NEWEST INGREDIENTS IF USER'S UPDATING THE INGREDIENTS LATER */
+            this.recipeService.getIngredients(this.recipe.id).subscribe(res => {
+              this._ingredients = res;
+            });
 
-          if (this.recipe.servingUnit == null) {
-            this.recipe.servingUnit = 'select';
-          }
-
-          for (var i = 0; i < this.ingredients.length; i++) {
-            if (this.ingredients[i].unit == null) {
-              this.ingredients[i].unit = 'select';
+            if (this.recipe.servingUnit == null) {
+              this.recipe.servingUnit = 'select';
             }
-          }
 
-          /* GET TAG DETAILS' ID FOR <SELECT> TAG*/
-          var arr = new Array();
-          for (var i = 0; i < this.recipe.tag_details.length; i++) {
-            arr.push(this.recipe.tag_details[i].tag_id);
-          }
-          this._tagDetails = arr.map(function (e) {
-            return e.toString();
+            for (var i = 0; i < this.ingredients.length; i++) {
+              if (this.ingredients[i].unit == null) {
+                this.ingredients[i].unit = 'select';
+              }
+            }
+
+            /* GET TAG DETAILS' ID FOR <SELECT> TAG*/
+            // var arr = new Array();
+            for (var i = 0; i < this.recipe.tag_details.length; i++) {
+              this._tagDetails.push(this.recipe.tag_details[i].tag_id.toString());
+              //$("#recipeDetails option[value='" + this.recipe.tag_details[i].tag_id + "']").prop('selected', true);
+
+            }
+
+            /* SET UPLOADED IMAGE PATH  */
+            if (this.recipe.pictureURL != 'default.jpg') {
+              var tempurl = this.recipe.pictureURL;
+              tempurl = tempurl.substr(75, 40);
+              $('p#filename').text(tempurl);
+            }
+            else {
+              $('p#filename').text('No file chosen');
+            }
+          }, () => {
+          },
+          () => {
+            console.log($('#recipeDetails').val());
+
           });
-          /* SET SELECTED RECIPE'S TAG DETAILS */
-          $('#recipeDetails').val(arr);
-
-          /* SET UPLOADED IMAGE PATH  */
-          if (this.recipe.pictureURL != 'default.jpg') {
-            var tempurl = this.recipe.pictureURL;
-            tempurl = tempurl.substr(75, 40);
-            $('p#filename').text(tempurl);
-          }
-          else {
-            $('p#filename').text('No file chosen');
-          }
-        });
       }
     });
   }
+
 
   /* GET TAG DETAILS FOR <SELECT> TAG */
   getTags() {
@@ -225,7 +228,7 @@ export class RecipeEditorComponent implements OnInit {
           resolve(res);
         }, err => {
           // console.log(this.res);
-          this.element.classList.remove("running");
+          this.element.classList.remove('running');
           this.message = err.error.error;
           window.scrollTo(0, 0);
         });
@@ -237,7 +240,7 @@ export class RecipeEditorComponent implements OnInit {
           this.recipe = res;
           resolve(res);
         }, err => {
-          this.element.classList.remove("running");
+          this.element.classList.remove('running');
           this.message = err.error.error;
           window.scrollTo(0, 0);
         });
@@ -267,8 +270,10 @@ export class RecipeEditorComponent implements OnInit {
       if (i < this.ingredients.length) {
         this.updateIngredient(this.ingredients[i]).then(() => {
           resolve(this.addIngredients(i + 1).then(
-            () => {resolve(true);}
-            ));
+            () => {
+              resolve(true);
+            }
+          ));
         });
       }
       else {
@@ -467,7 +472,7 @@ export class RecipeEditorComponent implements OnInit {
 
   /* WHEN USER CLICKS SAVE BUTTON */
   save() {
-    this.element.classList.add("running");
+    this.element.classList.add('running');
     const p = new Promise((resolve, reject) => {
       if (this.ingredients.length == 0) {
         reject('Please enter ingredients ❤');
@@ -476,6 +481,7 @@ export class RecipeEditorComponent implements OnInit {
         resolve('default.jpg');
       }
       else if ($('#image')[0].files[0] == null && this.recipe.id != null) {
+        // console.log('he');
         resolve(this.recipe.pictureURL);
       }
       else {
@@ -487,7 +493,7 @@ export class RecipeEditorComponent implements OnInit {
 
     p.catch((res) => {
       this.message = res;
-      this.element.classList.remove("running");
+      this.element.classList.remove('running');
       window.scrollTo(0, 0);
     });
 

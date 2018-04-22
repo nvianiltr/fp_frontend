@@ -95,9 +95,10 @@ export class RecipeDetailComponent implements OnInit {
 
   addReport(): any{
     this.report.user_id = this.user.id;
+    console.log(this.report);
     this.userService.addReport(this.report).subscribe(res => {
-
       this.reportedReviewErrorMessage = null;
+      this.report.reason = null;
       $('#thankYouMessage').html('Review has been reported. Our team will immediately check on that.');
       $('#reportReason').hide();
       $('#addReportButton').hide();
@@ -107,10 +108,12 @@ export class RecipeDetailComponent implements OnInit {
         this.reportedReviewErrorMessage = "Please input a valid reason ❤";
       }
       else{
+        //console.log(err);
         this.reportedReviewErrorMessage = "You have already reported this review. Please be patient ❤";
         $('#reportReason').hide();
         $('#addReportButton').hide();
       }
+      this.report.reason = null;
     });
   }
 

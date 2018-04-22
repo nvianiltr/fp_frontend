@@ -40,7 +40,6 @@ export class SignupComponent implements OnInit {
         this.isError = true;
         this.error = this.res.error.message;
         this.element.classList.remove('running');
-
         // console.log(this.message);
         // console.error(err); alert(this.res.error.message);
       }

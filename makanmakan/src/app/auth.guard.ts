@@ -15,11 +15,11 @@ export class AuthGuard implements CanActivate {
 
   canActivate() {
     if (this.userService.isLogin()) {
-
       if(window.location.pathname.includes('update')){
         var _user_id = this.userService.getUser().id;
         var user_id;
         var id =  parseInt(window.location.href.substr(window.location.href.lastIndexOf('/') + 1));
+
         if(window.location.pathname.includes('article')){
           this.articleService.getArticleByID(id).subscribe(res => {user_id = res.user_id});
         }
