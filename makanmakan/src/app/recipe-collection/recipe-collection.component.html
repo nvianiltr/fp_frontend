@@ -9,11 +9,13 @@
   <div class="row" id="row-article">
     <div class="col-12 recipe-col" id="personal-article" *ngIf="isRecipeAvailable; else noRecipe">
       <div class="row" id="recipe-collection-all" *ngFor="let recipe of recipes">
-        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xs-12" *ngIf="recipe.pictureURL!='default.jpg'; else noImage" id="images">
+        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xs-12 images" *ngIf="recipe.pictureURL!='default.jpg'; else noImage">
           <img src="{{recipe.pictureURL}}">
         </div>
         <ng-template #noImage>
-          <img src="../../assets/default.jpg">
+          <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xs-12 images">
+            <img src="../../assets/default.jpg">
+          </div>
         </ng-template>
         <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-xs-12" id="recipe-collection-data">
           <h3><a routerLink="/recipe/{{recipe.id}}">{{recipe.title}}</a></h3>

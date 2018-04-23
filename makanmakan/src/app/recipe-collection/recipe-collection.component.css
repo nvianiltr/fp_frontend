@@ -47,7 +47,7 @@ h1{
   font-weight: 800;
 }
 
-#images{
+.images{
   height: 20vh;
 }
 
@@ -80,7 +80,7 @@ a {
 }
 
 @media (max-width: 575.98px){
-  #images{
+  .images{
     height: 30vh;
   }
 
