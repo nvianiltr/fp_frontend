@@ -2,6 +2,10 @@
 	font-family: 'Montserrat', sans-serif
 }
 
+.container{
+	min-height: 87vh;
+}
+
 /*.container{*/
 	/*margin-top:15vh;*/
 	/*margin-bottom: 10vh;*/

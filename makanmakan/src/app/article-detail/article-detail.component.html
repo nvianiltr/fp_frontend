@@ -3,6 +3,9 @@
 <div class="container" *ngIf="article">
   <div class="row">
     <div class="col-12" id="article">
+      <div *ngIf="article.imageURL!='default.jpg'" id="images">
+        <img src="{{article.imageURL}}"> <br>
+      </div>
       <h1>{{article.title}}</h1>
       <h6>created by <a routerLink="/{{article.username}}">{{ article.username }}</a> at {{ article.dateCreated | date:'longDate' }}</h6>
       <div *ngIf="isLoggedIn; else disabledSaveButton">
@@ -22,9 +25,6 @@
         <button type="button" class="btn btn-warning" title="You need to log in first :(" disabled>SAVE ARTICLE</button>
       </ng-template>
       <br>
-      <div *ngIf="article.imageURL!='default.jpg'">
-        <img src="{{article.imageURL}}"> <br>
-      </div>
       <hr>
       <div class="white-space-pre">{{ article.content }}</div>
       <br>

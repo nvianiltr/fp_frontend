@@ -7,21 +7,26 @@
 }
 
 .recipe-collection-topic{
-  background-color: #ff6200;
+  background-color: white;
   min-height: 10vh;
   text-align: center;
+  border-bottom: 5px solid #ff6200;
 }
 
-.recipe-collection-topic h3{
-  color:white;
-  font-weight: 500;
-  display: inline;
+.recipe-collection-topic h1{
+  color:#ff6200;
+  font-weight: 800;
 }
 
 #row-article{
   margin-top:1vw;
   margin-left: 5vw;
   margin-right: 5vw;
+}
+
+#recipe-collection-all{
+  padding-top:10px;
+  padding-bottom: 10px;
 }
 
 #recipe-collection-all col-2, #recipe-collection-all col-10{
@@ -42,10 +47,20 @@ h1{
   font-weight: 800;
 }
 
+#images{
+  height: 20vh;
+}
+
 img{
-  max-width: 13vw;
-  max-height: 20vh;
-  margin:auto;
+  /*max-width: 52vw;
+  height: auto;*/
+  width: 100%;
+  height: 100%;
+  object-fit: cover
+}
+
+#recipe-collection-data{
+  padding-left:20px;
 }
 
 #recipe-collection-data h3{
@@ -55,21 +70,18 @@ img{
 }
 
 #recipe-button button{
-  margin: 10px 0;
   width: 100px;
+  margin: 5px 0;
 }
 
 a {
   text-decoration: none;
   color: #ff6200;
-
 }
-@media (max-width: 575.98px) {
-  img{
-    max-width: 80vw;
-    max-height: 40vh;
+
+@media (max-width: 575.98px){
+  #images{
+    height: 30vh;
   }
-  #recipe-button button{
-    display: inline-block;
-  }
+
 }
