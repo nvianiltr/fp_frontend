@@ -5,6 +5,7 @@ import {Location} from '@angular/common';
 import {Recipe} from '../models/Recipe';
 import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../models/User';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-saved-recipe',
@@ -17,6 +18,7 @@ export class SavedRecipeComponent implements OnInit {
   user: User;
   isRecipeAvailable: boolean = true;
   selectedRecipe: number = null;
+  private _recipes: Recipe[] = null;
 
   constructor(
     private router: Router,
@@ -29,6 +31,16 @@ export class SavedRecipeComponent implements OnInit {
   public ngOnInit() {
     this.user = this.userService.getUser();
     this.getSavedRecipes();
+  }
+
+  search() {
+    var string = $('#searchField').val().toLowerCase();
+    if(string == ""){
+      this.recipes = this._recipes;
+    }
+    this.recipes = this._recipes.filter(function (element) {
+      return element.title.toLowerCase().includes(string);
+    });
   }
 
   deleteRecipe(){
@@ -46,7 +58,7 @@ export class SavedRecipeComponent implements OnInit {
   getSavedRecipes(): void {
     this.recipeService.getSavedRecipes(this.user.id).subscribe(recipes => {
       if (recipes.length != 0) {
-        this.recipes = recipes;
+        this.recipes = this._recipes = recipes;
         this.isRecipeAvailable = true;
       }
       else {

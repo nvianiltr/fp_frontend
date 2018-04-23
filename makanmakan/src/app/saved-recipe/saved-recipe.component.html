@@ -5,11 +5,13 @@
     </div>
   </div>
 
-
   <div class="row" id="row-article">
     <div class="col-12 recipe-col" id="personal-article" *ngIf="isRecipeAvailable; else noRecipe">
+      <input type="text" class="form-control" id="searchField" placeholder="Search recipes..." (keyup)="search()"/>
+      <br>
       <div class="row" id="recipe-collection-all" *ngFor="let recipe of recipes">
-        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xs-12" *ngIf="recipe.pictureURL!='default.jpg'; else noImage" id="images">
+        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xs-12"
+             *ngIf="recipe.pictureURL!='default.jpg'; else noImage" id="images">
           <img src="{{recipe.pictureURL}}">
         </div>
         <ng-template #noImage>
@@ -20,7 +22,9 @@
           <h4>{{recipe.username}}</h4>
         </div>
         <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12 col-xs-12" id="recipe-button">
-          <button type="button" class="btn btn-danger" (click)="setSelectedRecipe(recipe.id)" data-toggle="modal" data-target="#exampleModal">Delete</button>
+          <button type="button" class="btn btn-danger" (click)="setSelectedRecipe(recipe.id)" data-toggle="modal"
+                  data-target="#exampleModal">Delete
+          </button>
         </div>
       </div>
     </div>
@@ -36,11 +40,11 @@
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-        <div class="modal-body" style="text-align: center">
-          <p>Are you sure you want to remove this recipe?</p>
-          <button type="button" class="btn" data-dismiss="modal">No</button>
-          <button type="button" class="btn btn-danger" (click)="deleteRecipe()">Yes</button>
-        </div>
+      <div class="modal-body" style="text-align: center">
+        <p>Are you sure you want to remove this recipe?</p>
+        <button type="button" class="btn" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-danger" (click)="deleteRecipe()">Yes</button>
+      </div>
     </div>
   </div>
 </div>

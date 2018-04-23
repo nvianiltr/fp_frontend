@@ -8,8 +8,12 @@
 
   <div class="row" id="row-article">
     <div class="col-12 recipe-col" id="personal-article" *ngIf="isRecipeAvailable; else noRecipe">
+
+      <input type="text" class="form-control" id="searchField" placeholder="Search articles..." (keyup)="search()"/>
+      <br>
       <div class="row" id="recipe-collection-all" *ngFor="let recipe of recipes">
-        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xs-12" *ngIf="recipe.pictureURL!='default.jpg'; else noImage" id="images">
+        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xs-12"
+             *ngIf="recipe.pictureURL!='default.jpg'; else noImage" id="images">
           <img src="{{recipe.pictureURL}}">
         </div>
         <ng-template #noImage>
@@ -22,7 +26,9 @@
         </div>
         <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12 col-xs-12" id="recipe-button">
           <button type="button" class="btn btn-success" routerLink="/update-recipe/{{recipe.id}}">Update</button>
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" (click)="setSelectedRecipe(recipe.id)">Delete</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"
+                  (click)="setSelectedRecipe(recipe.id)">Delete
+          </button>
         </div>
       </div>
     </div>
