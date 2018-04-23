@@ -30,7 +30,9 @@
 			    <label for="signup-password">Password *</label>
 			    <input [(ngModel)]="signup.password" name="password" type="password" class="form-control form-control-lg" id="signup-password" placeholder="Password" required>
 			</div>
-			<button type="submit" class="btn btn-lg btn-warning hvr-sweep-to-right"  (click)="register()" data-toggle="modal" data-target="#myModal" >Sign Up</button>
+      <div id="saveButton" class="btn btn-warning ld-over-full" (click)="register()"> Register
+        <div class="ld ld-ring ld-spin"></div>
+      </div>
 		</form>
 		</div>
     <p>Have an account?  <span><a routerLink="/login">Log in!</a></span></p>

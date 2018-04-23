@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {UserService} from '../user.service';
 import {User} from '../models/User';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-recipe-collection',
@@ -20,6 +21,7 @@ export class RecipeCollectionComponent implements OnInit {
   user: User;
   isRecipeAvailable: boolean = true;
   selectedRecipe: number;
+  private _recipes: Recipe[] = null;
 
   constructor(
     private router: Router,
@@ -35,6 +37,16 @@ export class RecipeCollectionComponent implements OnInit {
     this.getPersonalRecipes();
   }
 
+  search() {
+    var string = $('#searchField').val().toLowerCase();
+    if(string == ""){
+      this.recipes = this._recipes;
+    }
+    this.recipes = this._recipes.filter(function (element) {
+      return element.title.toLowerCase().includes(string);
+    });
+  }
+
   setSelectedRecipe(id: any) {
     this.selectedRecipe = id;
   }
@@ -48,7 +60,7 @@ export class RecipeCollectionComponent implements OnInit {
   getPersonalRecipes(): void {
     this.recipeService.getPersonalRecipe(this.user.id).subscribe(recipes => {
       if (recipes.length != 0) {
-        this.recipes = recipes;
+        this.recipes = this._recipes = recipes;
         this.isRecipeAvailable = true;
       }
       else {

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
-import { Article } from '../models/Article';
-import { ArticleService } from '../article.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
+import {Article} from '../models/Article';
+import {ArticleService} from '../article.service';
 import {UserService} from '../user.service';
 import {User} from '../models/User';
 
@@ -20,12 +20,13 @@ export class ArticleDetailComponent implements OnInit {
   isArticleSaved: boolean = false;
 
   constructor(
-    private route:ActivatedRoute,
+    private route: ActivatedRoute,
     private articleService: ArticleService,
     private userService: UserService
-  ) { }
+  ) {
+  }
 
-  ngOnInit():void {
+  ngOnInit(): void {
     this.getArticle();
     if (localStorage.getItem('token')) {
       this.isLoggedIn = true;
@@ -37,9 +38,10 @@ export class ArticleDetailComponent implements OnInit {
     }
   }
 
-  getArticle():void {
+  getArticle(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.articleService.getArticleByID(id).subscribe(article => {this.article = article;
+    this.articleService.getArticleByID(id).subscribe(article => {
+      this.article = article;
     });
   }
 
@@ -48,21 +50,25 @@ export class ArticleDetailComponent implements OnInit {
       'user_id': this.user.id,
       'article_id': this.article.id
     };
-    this.articleService.saveArticle(_obj).subscribe(() => {this.isArticleSaved = true});
+    this.articleService.saveArticle(_obj).subscribe(() => {
+      this.isArticleSaved = true;
+    });
   }
 
   isSaved() {
     var arr = new Array();
     this.articleService.getSavedArticles(this.user.id).subscribe(articles => {
       arr = articles;
-    })
-    var result = arr.filter(x => x.id == this.article.id);
-    if(result.length == 0){
-      this.isArticleSaved = false;
-    }
-    else {
-      this.isArticleSaved = true;
-    }
+    },() => {},
+      () => {
+        var result = arr.filter(x => x.id == this.article.id);
+        if (result.length == 0) {
+          this.isArticleSaved = false;
+        }
+        else {
+          this.isArticleSaved = true;
+        }
+      });
   }
 
   unsaveArticle() {
@@ -70,6 +76,8 @@ export class ArticleDetailComponent implements OnInit {
       'user_id': this.user.id,
       'article_id': this.article.id
     };
-    this.articleService.removeSavedArticle(_obj).subscribe(() => {this.isArticleSaved = false});
+    this.articleService.removeSavedArticle(_obj).subscribe(() => {
+      this.isArticleSaved = false;
+    });
   }
 }

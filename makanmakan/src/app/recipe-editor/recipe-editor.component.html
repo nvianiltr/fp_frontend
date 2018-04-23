@@ -89,7 +89,7 @@
       <br>
       <select class="form-control" style="width:100%;height: 150px;" multiple id="recipeDetails" tabindex="5">
         <optgroup *ngFor="let tag of tags" label={{tag.name}}>
-          <option *ngFor="let detail of tag.tag_header" value="{{detail.id}}">{{detail.name}}</option>
+          <option *ngFor="let detail of tag.tag_header" value="{{detail.id}}" [selected]="_tagDetails.includes(detail.id.toString())">{{detail.name}}</option>
         </optgroup>
       </select>
     </div>

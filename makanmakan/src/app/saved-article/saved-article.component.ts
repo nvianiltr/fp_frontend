@@ -4,6 +4,7 @@ import {ArticleService} from '../article.service';
 import {UserService} from '../user.service';
 import {User} from '../models/User';
 import {Article} from '../models/Article';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-saved-article',
@@ -16,6 +17,7 @@ export class SavedArticleComponent implements OnInit {
   user: User;
   isArticleAvailable: boolean = true;
   selectedArticle: number = null;
+  private _articles: Article[] = null;
 
   constructor(
     private router: Router,
@@ -27,6 +29,16 @@ export class SavedArticleComponent implements OnInit {
   public ngOnInit() {
     this.user = this.userService.getUser();
     this.getSavedArticles();
+  }
+
+  search() {
+    var string = $('#searchField').val().toLowerCase();
+    if(string == ""){
+      this.articles = this._articles;
+    }
+    this.articles = this._articles.filter(function (element) {
+      return element.title.toLowerCase().includes(string);
+    });
   }
 
   deleteArticle(){
@@ -44,7 +56,7 @@ export class SavedArticleComponent implements OnInit {
   getSavedArticles(): void {
     this.articleService.getSavedArticles(this.user.id).subscribe(articles => {
       if (articles.length != 0) {
-        this.articles = articles;
+        this.articles = this._articles = articles;
         this.isArticleAvailable = true;
       }
       else {

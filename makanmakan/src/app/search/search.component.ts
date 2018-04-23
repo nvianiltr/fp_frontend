@@ -20,7 +20,7 @@ export class SearchComponent implements OnInit {
   }
 
   searchRecipe(): void {
-   this.name = window.location.href.substr(window.location.href.lastIndexOf('/') + 1);
+   this.name = decodeURI(window.location.href.substr(window.location.href.lastIndexOf('/') + 1));
     this.recipeService.searchRecipe(this.name)
       .subscribe(recipes => {
         if(recipes.length != 0) {
