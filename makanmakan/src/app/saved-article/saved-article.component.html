@@ -16,7 +16,9 @@
           <img src="{{article.imageURL}}">
         </div>
         <ng-template #noImage>
-          <img src="../../assets/default.jpg">
+          <div id="images" class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xs-12">
+            <img src="../../assets/default.jpg">
+          </div>
         </ng-template>
         <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-xs-12" id="recipe-collection-data">
           <h3><a routerLink="/article/{{article.id}}">{{article.title}}</a></h3>
