@@ -2,8 +2,14 @@
   font-family: 'Montserrat', sans-serif
 }
 
+.container{
+  min-height: 87vh;
+}
+
 /*.container{*/
-/*margin-top:10vh;*/
+  /*margin-top:15vh;*/
+  /*margin-bottom: 10vh;*/
+  /*min-height: 75vh;*/
 /*}*/
 
 #article-container h1{
@@ -31,6 +37,7 @@ img {
   margin: 5px 0 0 !important;
   display: block;
 }
+
 
 h4{
   margin-bottom: 0;

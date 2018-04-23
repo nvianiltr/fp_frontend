@@ -9,7 +9,7 @@
   <div class="row" id="row-article">
     <div class="col-12 recipe-col" id="personal-article" *ngIf="isRecipeAvailable; else noRecipe">
       <div class="row" id="recipe-collection-all" *ngFor="let recipe of recipes">
-        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xs-12" *ngIf="recipe.pictureURL!='default.jpg'; else noImage">
+        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xs-12" *ngIf="recipe.pictureURL!='default.jpg'; else noImage" id="images">
           <img src="{{recipe.pictureURL}}">
         </div>
         <ng-template #noImage>

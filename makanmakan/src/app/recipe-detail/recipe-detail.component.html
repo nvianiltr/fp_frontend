@@ -1,6 +1,9 @@
 <div class="container" *ngIf="recipe">
   <div class="row">
     <div class="col-12" id="recipe">
+      <div *ngIf="recipe.pictureURL != 'default.jpg'" id="images">
+        <img src="{{recipe.pictureURL}}"> <br>
+      </div>
       <h1>{{recipe.title}}</h1>
       <h6>created by <a routerLink="/{{recipe.username}}">{{ recipe.username }}</a> at {{ recipe.dateCreated |date:'longDate'}}</h6>
       <div *ngIf="isLoggedIn; else disabledSaveButton">
@@ -20,9 +23,6 @@
         <button type="button" class="btn btn-warning" title="You need to log in first :(" disabled>SAVE RECIPE</button>
       </ng-template>
       <br>
-      <div *ngIf="recipe.pictureURL != 'default.jpg'">
-        <img src="{{recipe.pictureURL}}"> <br>
-      </div>
       <div *ngIf="recipe.servingQty != null">
         <h6><b>Servings:</b> {{recipe.servingQty}} {{recipe.servingUnit}}</h6>
       </div>
